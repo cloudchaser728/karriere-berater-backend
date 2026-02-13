@@ -12,7 +12,10 @@ const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use('/webhook', express.raw({type: 'application/json'}));
 app.use(express.json());
-app.use(express.static('public'));
+
+// Serve static files from public folder
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Anthropic Client
 const anthropic = new Anthropic({

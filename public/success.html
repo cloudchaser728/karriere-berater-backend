@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weiterleitung...</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a4d2e 0%, #2d6a4f 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+        .loading {
+            text-align: center;
+        }
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top: 4px solid white;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session_id');
+            
+            if (sessionId) {
+                // Redirect to index with session_id
+                window.location.href = '/index.html?session_id=' + sessionId;
+            } else {
+                // No session_id, go to homepage
+                window.location.href = '/';
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="loading">
+        <div class="spinner"></div>
+        <h2>Zahlung erfolgreich!</h2>
+        <p>Sie werden weitergeleitet...</p>
+    </div>
+</body>
+</html>

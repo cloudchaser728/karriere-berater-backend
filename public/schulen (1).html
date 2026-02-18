@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karriereweg für Schulen - Schüler-Zugang</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a4d2e;
+            --primary-light: #2d6a4f;
+            --accent: #f77f00;
+            --bg-cream: #faf8f3;
+            --text-dark: #1e1e1e;
+            --text-gray: #666;
+            --shadow: rgba(26, 77, 46, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+        }
+
+        h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        main {
+            flex: 1;
+            padding: 60px 20px;
+        }
+
+        .info-box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .info-box h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .info-box p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .code-input-box {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%);
+            padding: 40px;
+            border-radius: 12px;
+            border-left: 5px solid var(--accent);
+            text-align: center;
+        }
+
+        .code-input-box h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .submit-button {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(247, 127, 0, 0.3);
+        }
+
+        .submit-button:hover {
+            background: #ff8f1a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(247, 127, 0, 0.4);
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .school-list {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px var(--shadow);
+            margin-top: 30px;
+        }
+
+        .school-list h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .school-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .school-item:last-child {
+            border-bottom: none;
+        }
+
+        .school-item:hover {
+            background: var(--bg-cream);
+        }
+
+        .school-name {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .school-code {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .error-message {
+            color: #c62828;
+            background: #ffebee;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🏫 Karriereweg für Schulen</h1>
+            <p class="tagline">Schüler-Zugang</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="info-box">
+                <h2>Willkommen!</h2>
+                <p>Deine Schule arbeitet mit Karriereweg zusammen, um dir bei deiner Studien- und Berufswahl zu helfen.</p>
+                <p>Um die Karriere-Analyse zu starten, benötigst du den <strong>Schulcode</strong>, den du von deinem Lehrer oder deiner Lehrerin erhalten hast.</p>
+            </div>
+
+            <div class="code-input-box">
+                <h3>Gib deinen Schulcode ein:</h3>
+                
+                <form id="schoolCodeForm">
+                    <div class="input-group">
+                        <label for="schoolCode">Schulcode:</label>
+                        <input 
+                            type="text" 
+                            id="schoolCode" 
+                            name="schoolCode" 
+                            placeholder="z.B. GYMKOELN2024"
+                            required
+                            autocomplete="off"
+                        >
+                    </div>
+                    
+                    <div class="error-message" id="errorMessage">
+                        Ungültiger Code. Bitte überprüfe die Eingabe oder wende dich an deine Lehrkraft.
+                    </div>
+
+                    <button type="submit" class="submit-button">Weiter zur Analyse</button>
+                </form>
+
+                <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-gray);">
+                    Du hast keinen Code? Frage deine Lehrkraft oder 
+                    <a href="/" style="color: var(--primary); font-weight: 600;">klicke hier für den normalen Zugang</a>.
+                </p>
+            </div>
+
+            <!-- Optional: Liste der teilnehmenden Schulen (später) -->
+            <div class="school-list" style="display: none;">
+                <h3>Teilnehmende Schulen:</h3>
+                <div class="school-item">
+                    <div class="school-name">Beispiel Gymnasium Köln</div>
+                    <div class="school-code">Code: GYMKOELN2024</div>
+                </div>
+                <!-- Weitere Schulen werden hier dynamisch hinzugefügt -->
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="/" class="back-link">← Zurück zur Startseite</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Karriereweg | <a href="mailto:kontakt@dein-karriereweg.com">kontakt@dein-karriereweg.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Schulcode Validierung & Weiterleitung
+        document.getElementById('schoolCodeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const code = document.getElementById('schoolCode').value.trim().toUpperCase();
+            const errorMsg = document.getElementById('errorMessage');
+            
+            // Hier kannst du später echte Codes validieren
+            // Für jetzt: Beispiel-Codes
+            const validCodes = {
+                'GYMKOELN2024': 'gymnasium-koeln',
+                'REALKOELN2024': 'realschule-koeln',
+                'TEST': 'test-schule'
+                // Weitere Schulen hier hinzufügen
+            };
+
+            if (validCodes[code]) {
+                // Code ist gültig - weiterleiten zur Analyse
+                // Mit Schulcode als Parameter, damit du später trackst welche Schule
+                window.location.href = `/?school=${validCodes[code]}&ref=school`;
+            } else {
+                // Code ungültig
+                errorMsg.style.display = 'block';
+                setTimeout(() => {
+                    errorMsg.style.display = 'none';
+                }, 5000);
+            }
+        });
+
+        // Code aus URL parameter vorausfüllen (falls direkt geteilt)
+        const urlParams = new URLSearchParams(window.location.search);
+        const prefilledCode = urlParams.get('code');
+        if (prefilledCode) {
+            document.getElementById('schoolCode').value = prefilledCode;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner- & Institutionen-Portal - Karriereweg</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f7fa;
+            color: #1e293b;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            padding: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            max-width: 480px;
+            width: 100%;
+            padding: 48px;
+        }
+
+        .portal-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .portal-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: #64748b;
+            font-weight: 400;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            border-left: 3px solid #3b82f6;
+            padding: 16px 20px;
+            margin-bottom: 32px;
+            border-radius: 6px;
+        }
+
+        .info-box p {
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 8px;
+            letter-spacing: 0.2px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+            background: #ffffff;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        input[type="text"]::placeholder {
+            color: #94a3b8;
+        }
+
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(30, 41, 59, 0.2);
+            letter-spacing: 0.3px;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(30, 41, 59, 0.3);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: #dc2626;
+            background: #fef2f2;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border-left: 3px solid #dc2626;
+            margin-top: 16px;
+            font-size: 0.875rem;
+            display: none;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 32px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .divider span {
+            padding: 0 16px;
+            color: #94a3b8;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .alternative-link {
+            text-align: center;
+        }
+
+        .alternative-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .alternative-link a:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+        .help-text {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .help-text p {
+            font-size: 0.875rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .help-text a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .help-text a:hover {
+            text-decoration: underline;
+        }
+
+        .privacy-note {
+            margin-top: 20px;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .privacy-note p {
+            font-size: 0.8rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        footer {
+            background: #1e293b;
+            color: #94a3b8;
+            text-align: center;
+            padding: 24px 20px;
+            font-size: 0.875rem;
+        }
+
+        footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .security-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .login-container {
+                padding: 32px 24px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div>
+                <div class="logo">Karriereweg</div>
+                <div class="logo-subtitle">KI-gestützte Karriereberatung</div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="login-container">
+            <div class="portal-header">
+                <div class="portal-icon">🔓</div>
+                <h1>Partner- & Institutionen-Portal</h1>
+                <p class="subtitle">Lizenz-Zugang für autorisierte Partner</p>
+            </div>
+
+            <div class="info-box">
+                <p>Ihre Institution arbeitet mit Karriereweg zusammen. Für den Zugang benötigen Sie einen gültigen Lizenzcode, den Sie von Ihrer Verwaltung erhalten haben.</p>
+            </div>
+
+            <form id="partnerForm" onsubmit="return false;">
+                <div class="form-group">
+                    <label for="licenseCode">Lizenzcode</label>
+                    <input 
+                        type="text" 
+                        id="licenseCode" 
+                        name="licenseCode" 
+                        placeholder="Lizenzcode eingeben"
+                        required
+                        autocomplete="off"
+                    >
+                </div>
+                
+                <div class="error-message" id="errorMessage">
+                    Ungültiger Lizenzcode. Bitte überprüfen Sie die Eingabe oder kontaktieren Sie Ihre Verwaltung.
+                </div>
+
+                <button type="submit" class="submit-button">Zugang freischalten</button>
+
+                <div class="security-badge">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                    <span>Sichere Verbindung</span>
+                </div>
+            </form>
+
+            <div class="divider">
+                <span>oder</span>
+            </div>
+
+            <div class="alternative-link">
+                <a href="/">← Regulärer Zugang (4,99€)</a>
+            </div>
+
+            <div class="privacy-note">
+                <p>🔒 Ihre Daten werden ausschließlich zur KI-gestützten Karriereanalyse erhoben und verarbeitet. Keine Weitergabe an Dritte. SSL-verschlüsselt & DSGVO-konform.</p>
+            </div>
+
+            <div class="help-text">
+                <p>
+                    Noch kein Lizenzcode? <a href="mailto:info@dein-karriereweg.com">Kontaktieren Sie uns</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Karriereweg | <a href="mailto:info@dein-karriereweg.com">info@dein-karriereweg.com</a></p>
+    </footer>
+
+    <script>
+        console.log('✅ Script loaded!');
+        
+        // Lizenzcode Validierung & Weiterleitung
+        document.getElementById('partnerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('✅ Form submitted!');
+            
+            const code = document.getElementById('licenseCode').value.trim().toUpperCase();
+            const errorMsg = document.getElementById('errorMessage');
+            
+            console.log('🔍 Code entered:', code);
+            
+            // Validierung - Hier werden Partner-Codes verwaltet
+            const validCodes = {
+                // Format: 'CODE': 'partner-slug'
+                'DANIEL1403': 'admin-daniel'
+                // Weitere Partner-Codes hier hinzufügen wenn du mit Schulen arbeitest
+            };
+
+            if (validCodes[code]) {
+                console.log('✅ Code is valid! Redirecting...');
+                // Code ist gültig - weiterleiten zur Analyse
+                // Mit Partner-Code als Parameter für Tracking
+                window.location.href = `/?partner=${validCodes[code]}&source=institution`;
+            } else {
+                console.log('❌ Code is invalid!');
+                // Code ungültig
+                errorMsg.style.display = 'block';
+                setTimeout(() => {
+                    errorMsg.style.display = 'none';
+                }, 5000);
+            }
+        });
+        
+        console.log('✅ Event listener attached!');
+    </script>
+</body>
+</html>

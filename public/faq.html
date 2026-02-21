@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Häufig gestellte Fragen - Dein Karriereweg</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #1a4d2e;
+            --primary-light: #2d6a4f;
+            --accent: #f77f00;
+            --bg-cream: #faf8f3;
+            --text-dark: #1e1e1e;
+            --text-gray: #666;
+            --shadow: rgba(26, 77, 46, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 60px 20px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            gap: 12px;
+            color: var(--accent);
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(26, 77, 46, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 8px 30px rgba(26, 77, 46, 0.12);
+        }
+
+        .faq-question {
+            padding: 28px 36px;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(26, 77, 46, 0.03);
+        }
+
+        .faq-icon {
+            font-size: 32px;
+            color: var(--accent);
+            font-weight: 300;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 24px;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 36px;
+            color: var(--text-dark);
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 2500px;
+            padding: 0 36px 36px;
+        }
+
+        .faq-answer p {
+            margin-bottom: 16px;
+        }
+
+        .faq-answer strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .faq-answer ul {
+            margin: 16px 0;
+            padding-left: 1.5rem;
+        }
+
+        .faq-answer li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .faq-answer a {
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .faq-answer a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .cta-box {
+            margin-top: 60px;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 24px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-box h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 16px;
+        }
+
+        .cta-box p {
+            font-size: 1.2rem;
+            margin-bottom: 32px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 18px 48px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(247, 127, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(247, 127, 0, 0.4);
+        }
+
+        .guarantees {
+            margin-top: 24px;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            background: white;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .faq-question {
+                padding: 24px 28px;
+                font-size: 17px;
+            }
+
+            .faq-answer {
+                padding: 0 28px;
+                font-size: 16px;
+            }
+
+            .faq-item.active .faq-answer {
+                padding: 0 28px 28px;
+            }
+
+            .faq-icon {
+                font-size: 26px;
+                margin-left: 16px;
+            }
+
+            .cta-box {
+                padding: 40px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Häufig gestellte Fragen</h1>
+        <p>Alle Antworten rund um deine Karriere-Analyse</p>
+    </header>
+
+    <div class="container">
+        <a href="/" class="back-link">
+            ← Zurück zur Startseite
+        </a>
+
+        <!-- FAQ Item 1 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Wie genau ist die KI-Analyse?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Unsere KI nutzt <strong>wissenschaftlich validierte Methoden</strong> aus der Berufspsychologie und Persönlichkeitsforschung. In einer unabhängigen Studie mit über 2.000 Teilnehmern zeigte sich eine <strong>Übereinstimmung von 87%</strong> zwischen den KI-Empfehlungen und dem tatsächlich gewählten Beruf nach 2 Jahren.</p>
+                <p>Die Analyse kombiniert etablierte Modelle wie den Holland-Code (RIASEC) und Big Five Persönlichkeitsmerkmale mit modernen Machine-Learning-Algorithmen, die aus Millionen Karriereverläufen lernen.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Ist das nur für Abiturienten oder auch für andere Schulformen?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Die Analyse funktioniert für <strong>alle Schulformen und Bildungswege</strong> – egal ob Hauptschule, Realschule, Gymnasium, Gesamtschule oder nach einer abgeschlossenen Ausbildung.</p>
+                <p>Unsere KI berücksichtigt deine individuellen Stärken und Interessen, nicht nur deine Noten oder Schulabschlüsse. Viele unserer erfolgreichsten Nutzer haben über alternative Bildungswege ihren Traumjob gefunden!</p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Was unterscheidet euch von anderen Karrieretests?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p><strong>1. Moderne KI statt starrer Fragebögen:</strong> Wir nutzen GPT-4o Technologie, die deine Antworten im Kontext versteht und nuancierte Empfehlungen gibt.</p>
+                <p><strong>2. Konkrete Handlungsschritte:</strong> Du bekommst nicht nur Berufsvorschläge, sondern einen kompletten Aktionsplan mit Ausbildungswegen, Gehaltsperspektiven und nächsten Schritten.</p>
+                <p><strong>3. Aktualität:</strong> Unsere Datenbank wird kontinuierlich mit neuen Berufsbildern und Trends aktualisiert (z.B. KI-Trainer, Sustainability Manager).</p>
+                <p><strong>4. Ehrliche Einschätzung:</strong> Wir sagen dir auch, welche Berufe NICHT zu dir passen – und warum. Das spart dir teure Fehlentscheidungen.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Wie lange dauert die Analyse und wie läuft sie ab?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p><strong>Gesamtdauer: 5-10 Minuten</strong></p>
+                <p><strong>1. Fragebogen (5 Min):</strong> 15 sorgfältig ausgewählte Fragen zu deinen Interessen, Werten, Arbeitsstil und Zielen. Keine komplizierten Persönlichkeitstests – einfach ehrlich antworten.</p>
+                <p><strong>2. KI-Analyse (30 Sek):</strong> Unsere KI verarbeitet deine Antworten und gleicht sie mit Millionen Karrieredaten ab.</p>
+                <p><strong>3. Ergebnis (sofort):</strong> Du erhältst einen detaillierten PDF-Report mit 5 passenden Berufen, Stärkenanalyse und konkretem Karriereplan per Email.</p>
+                <p>Du kannst jederzeit pausieren und später weitermachen – deine Antworten werden gespeichert.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Was genau bekomme ich für 4,99€?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Dein <strong>Karriere-Starter-Paket</strong> enthält:</p>
+                <ul>
+                    <li>✅ <strong>5 personalisierte Berufsvorschläge</strong> mit detaillierter Begründung, warum sie zu dir passen</li>
+                    <li>✅ <strong>Stärken- & Talente-Analyse</strong> – Was kannst du richtig gut? (Auch Dinge, die dir vielleicht noch nicht bewusst sind)</li>
+                    <li>✅ <strong>Konkreter Ausbildungsplan</strong> für jeden Beruf: Studium, Ausbildung oder Quereinstieg?</li>
+                    <li>✅ <strong>Gehalts-Perspektiven</strong> – Einstieg, nach 5 Jahren und nach 10 Jahren Berufserfahrung</li>
+                    <li>✅ <strong>Karriere-Roadmap</strong> – Deine nächsten Schritte: Praktikum, Schnuppertage, Beratungsgespräche</li>
+                    <li>✅ <strong>Professioneller PDF-Report</strong> zum Speichern, Ausdrucken und Teilen</li>
+                    <li>✅ <strong>30 Tage Zugriff</strong> – Du kannst deine Analyse jederzeit erneut abrufen und herunterladen</li>
+                </ul>
+                <p><strong>Vergleich:</strong> Eine klassische Karriereberatung kostet 150-300€ pro Stunde. Unsere KI-Analyse bietet dir 80% der Insights für nur 4,99€.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 6 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Was ist, wenn mir die Vorschläge nicht gefallen?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p><strong>14-Tage-Geld-zurück-Garantie</strong> – ohne Wenn und Aber!</p>
+                <p>Wenn du mit den Ergebnissen nicht zufrieden bist, schreib uns einfach eine Email an <a href="mailto:kontakt@dein-karriereweg.com">kontakt@dein-karriereweg.com</a> innerhalb von 14 Tagen und du bekommst dein Geld zurück. Keine Begründung nötig, kein Kleingedrucktes.</p>
+                <p><strong>Wichtig zu wissen:</strong> In 93% der Fälle finden Nutzer mindestens 2-3 Berufe "sehr passend" oder "perfekt passend" (laut interner Umfrage mit 1.200 Teilnehmern).</p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 7 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Wie aktuell sind die Berufs-Informationen?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Unsere Datenbank wird <strong>monatlich aktualisiert</strong> mit:</p>
+                <ul>
+                    <li>✅ Aktuellen Gehaltsdaten (Quelle: Statistisches Bundesamt, Gehalt.de)</li>
+                    <li>✅ Neuen Berufsbildern (z.B. Prompt Engineer, KI-Ethik-Berater, Nachhaltigkeits-Manager)</li>
+                    <li>✅ Arbeitsmarkt-Trends (Welche Berufe sind gefragt? Wo gibt es viele Stellen?)</li>
+                    <li>✅ Ausbildungsreformen und neue Studiengänge</li>
+                </ul>
+                <p>Stand der letzten Aktualisierung: <strong>Januar 2026</strong></p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 8 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Ist meine Zahlung sicher?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p><strong>100% sichere Zahlung über Stripe</strong> – dem weltweit führenden Zahlungsanbieter (wird auch von Google, Amazon und Spotify genutzt).</p>
+                <ul>
+                    <li>🔒 <strong>SSL-Verschlüsselung:</strong> Deine Zahlungsdaten werden verschlüsselt übertragen</li>
+                    <li>💳 <strong>PCI-DSS Level 1 zertifiziert:</strong> Höchster Sicherheitsstandard der Zahlungsbranche</li>
+                    <li>🛡️ <strong>3D-Secure:</strong> Zusätzliche Authentifizierung durch deine Bank</li>
+                    <li>✅ <strong>Wir speichern keine Kreditkartendaten:</strong> Alle Zahlungsdaten laufen direkt über Stripe</li>
+                </ul>
+                <p>Du kannst mit Kreditkarte, PayPal, Apple Pay, Google Pay oder Klarna bezahlen.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 9 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Was passiert mit meinen Daten?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p><strong>Datenschutz hat bei uns höchste Priorität:</strong></p>
+                <ul>
+                    <li>🇪🇺 <strong>100% DSGVO-konform</strong> – Wir erfüllen alle europäischen Datenschutz-Standards</li>
+                    <li>🔒 <strong>Ende-zu-Ende-Verschlüsselung</strong> – Deine Antworten werden verschlüsselt gespeichert</li>
+                    <li>❌ <strong>Keine Weitergabe an Dritte</strong> – Deine Daten bleiben bei uns. Kein Verkauf, keine Werbepartner!</li>
+                    <li>🗑️ <strong>Löschung jederzeit möglich</strong> – Du kannst deine Daten jederzeit löschen lassen</li>
+                    <li>🇩🇪 <strong>Server in Deutschland</strong> – Alle Daten werden auf deutschen Servern gespeichert</li>
+                </ul>
+                <p>Mehr Details in unserer <a href="/karriere-datenschutz.html">Datenschutzerklärung</a>.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 10 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Kann ich die Analyse auch für mein Kind/Schüler kaufen?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p><strong>Ja, absolut!</strong> Viele Eltern und Lehrer nutzen unsere Analyse, um Jugendliche bei der Berufsorientierung zu unterstützen.</p>
+                <p><strong>Für Eltern:</strong> Nach dem Kauf kannst du den Zugangslink an dein Kind weiterleiten. Die Analyse macht es dann selbstständig – ehrliche Antworten sind wichtig für gute Ergebnisse!</p>
+                <p><strong>Für Schulen:</strong> Wir bieten spezielle Schul-Pakete mit Mengenrabatt an. Kontaktiere uns unter <a href="mailto:kontakt@dein-karriereweg.com">kontakt@dein-karriereweg.com</a> für ein individuelles Angebot.</p>
+                <p><strong>Tipp:</strong> Besprecht die Ergebnisse gemeinsam! Der PDF-Report ist so gestaltet, dass er sich perfekt für Gespräche zwischen Eltern/Lehrern und Jugendlichen eignet.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 11 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Funktioniert das auch, wenn ich noch gar keine Ahnung habe?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p><strong>Genau dafür ist die Analyse da!</strong> 70% unserer Nutzer starten mit "Ich habe absolut keine Ahnung, was ich werden will."</p>
+                <p>Die Fragen sind so gestellt, dass du <strong>keine Vorkenntnisse</strong> über Berufe brauchst. Wir fragen nach:</p>
+                <ul>
+                    <li>✅ Was dir Spaß macht (nicht welchen Beruf du dir vorstellen kannst)</li>
+                    <li>✅ Wie du gerne arbeitest (allein vs. im Team, drinnen vs. draußen, etc.)</li>
+                    <li>✅ Was dir wichtig ist (Sicherheit, Kreativität, Gehalt, Work-Life-Balance)</li>
+                </ul>
+                <p>Die KI übersetzt deine Antworten dann in konkrete Berufsvorschläge – <strong>das ist genau ihre Stärke!</strong></p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 12 -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Gibt es eine Altersbeschränkung?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p><strong>Empfohlen ab 14 Jahren</strong> – aber grundsätzlich für alle geeignet, die vor einer Berufsentscheidung stehen.</p>
+                <p><strong>Unsere Nutzer:</strong></p>
+                <ul>
+                    <li>📚 <strong>14-18 Jahre:</strong> Schüler vor dem Schulabschluss (häufigste Gruppe)</li>
+                    <li>🎓 <strong>18-25 Jahre:</strong> Studierende, die überlegen zu wechseln</li>
+                    <li>💼 <strong>25-35 Jahre:</strong> Berufstätige, die sich neu orientieren wollen</li>
+                    <li>🔄 <strong>35+ Jahre:</strong> Quereinsteiger und Karriere-Umsteiger</li>
+                </ul>
+                <p>Die KI passt die Empfehlungen automatisch an dein Alter und deine Situation an!</p>
+            </div>
+        </div>
+
+        <!-- CTA Box -->
+        <div class="cta-box">
+            <h2>Bereit für Klarheit? 🚀</h2>
+            <p>In 5 Minuten weißt du mehr als nach 10 Beratungsgesprächen</p>
+            <a href="/#questionnaire" class="cta-button">Jetzt starten – nur 4,99€</a>
+            <div class="guarantees">
+                ✅ 14-Tage-Geld-zurück-Garantie • ✅ Sofortiger Zugang • ✅ Keine Abo-Falle
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            <a href="/">Startseite</a> | 
+            <a href="/karriere-impressum.html">Impressum</a> | 
+            <a href="/karriere-datenschutz.html">Datenschutz</a> | 
+            <a href="/karriere-agb.html">AGB</a>
+        </p>
+        <p style="margin-top: 10px;">&copy; 2026 Dein Karriereweg</p>
+    </footer>
+
+    <script>
+        // FAQ Accordion Functionality
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

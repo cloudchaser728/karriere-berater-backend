@@ -1,3 +1,5 @@
+
+
 require('dotenv').config();
 
 const express = require('express');
@@ -24,16 +26,6 @@ const openai = new OpenAI({
 
 // Temporary storage for analysis results
 const analysisResults = new Map();
-
-// Auto-cleanup: Analysen nach 30 Tagen löschen
-setInterval(() => {
-    const now = Date.now();
-    for (const [key, value] of analysisResults.entries()) {
-        if (now - value.createdAt > 30 * 24 * 60 * 60 * 1000) {
-            analysisResults.delete(key);
-        }
-    }
-}, 60 * 60 * 1000); // Stündlich prüfen
 
 // Root route - serve HTML file from public folder
 app.get('/', (req, res) => {
@@ -813,12 +805,8 @@ EXTREM WICHTIG - AUSGABE-FORMAT:
         const analysis = completion.choices[0].message.content;
 
         // Store result
-        const shareToken = require('crypto').randomBytes(16).toString('hex');
-        analysisResults.set('token_' + shareToken, sessionId);
         analysisResults.set(sessionId, {
             analysis: analysis,
-            createdAt: Date.now(),
-            shareToken: shareToken,
             timestamp: new Date(),
             formData: formData
         });
@@ -846,124 +834,12 @@ app.get('/get-analysis/:sessionId', async (req, res) => {
             });
         }
 
-        const DOMAIN = process.env.DOMAIN || 'https://karriere-berater-backend-production.up.railway.app';
-        const shareLink = `${DOMAIN}/analyse/${result.shareToken}`;
-        const expiresAt = new Date(result.createdAt + 30 * 24 * 60 * 60 * 1000).toLocaleDateString('de-DE');
-        
         res.json({
             status: 'complete',
-            analysis: result.analysis,
-            shareToken: result.shareToken,
-            shareLink: shareLink,
-            expiresAt: expiresAt
+            analysis: result.analysis
         });
     } catch (error) {
         console.error('Get Analysis Error:', error);
-        res.status(500).json({ error: error.message });
-    }
-});
-
-// 4. SHARE LINK - Analyse über Token abrufen (30 Tage gültig)
-app.get('/analyse/:token', async (req, res) => {
-    const { token } = req.params;
-    
-    try {
-        const sessionId = analysisResults.get('token_' + token);
-        if (!sessionId) {
-            return res.status(404).send(`
-                <!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">
-                <title>Analyse nicht gefunden</title>
-                <style>body{font-family:sans-serif;text-align:center;padding:60px;background:#faf8f3;}
-                h1{color:#1a4d2e;}p{color:#666;}a{color:#f77f00;font-weight:bold;}</style>
-                </head><body>
-                <h1>⚠️ Analyse nicht mehr verfügbar</h1>
-                <p>Dieser Link ist abgelaufen oder ungültig. Analysen sind 30 Tage gültig.</p>
-                <a href="/">Neue Analyse starten</a>
-                </body></html>
-            `);
-        }
-        
-        const result = analysisResults.get(sessionId);
-        if (!result) {
-            return res.status(404).send(`
-                <!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">
-                <title>Analyse nicht gefunden</title>
-                <style>body{font-family:sans-serif;text-align:center;padding:60px;background:#faf8f3;}
-                h1{color:#1a4d2e;}p{color:#666;}a{color:#f77f00;font-weight:bold;}</style>
-                </head><body>
-                <h1>⚠️ Analyse abgelaufen</h1>
-                <p>Dieser Link ist abgelaufen. Analysen sind 30 Tage gültig.</p>
-                <a href="/">Neue Analyse starten</a>
-                </body></html>
-            `);
-        }
-
-        const expiresAt = new Date(result.createdAt + 30 * 24 * 60 * 60 * 1000).toLocaleDateString('de-DE');
-        
-        // Serve the full analysis as a beautiful HTML page
-        res.send(`
-            <!DOCTYPE html>
-            <html lang="de">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Deine Karriere-Analyse | Dein Karriereweg</title>
-                <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-                <style>
-                    :root { --primary: #1a4d2e; --accent: #f77f00; --bg-cream: #faf8f3; }
-                    * { margin: 0; padding: 0; box-sizing: border-box; }
-                    body { font-family: 'Work Sans', sans-serif; background: var(--bg-cream); color: #1e1e1e; line-height: 1.6; }
-                    .header { background: linear-gradient(135deg, #1a4d2e, #2d6a4f); color: white; padding: 30px 20px; text-align: center; }
-                    .header h1 { font-family: 'Crimson Pro', serif; font-size: 2rem; margin-bottom: 8px; }
-                    .expiry { background: rgba(255,255,255,0.2); display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; margin-top: 10px; }
-                    .container { max-width: 900px; margin: 30px auto; padding: 0 20px 60px; }
-                    .share-bar { background: white; border-radius: 12px; padding: 20px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-                    .share-bar p { color: #666; font-size: 0.95rem; flex: 1; }
-                    .btn { display: inline-block; padding: 10px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.95rem; cursor: pointer; border: none; }
-                    .btn-wa { background: #25D366; color: white; }
-                    .btn-print { background: #1a4d2e; color: white; }
-                    .btn-new { background: #f77f00; color: white; }
-                    .analysis-content { background: white; border-radius: 12px; padding: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-                    .career-path-card { background: white; border: 2px solid #e0e0e0; border-radius: 12px; padding: 30px; margin: 30px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-                    .career-path-card h3 { color: #1a4d2e; font-family: 'Crimson Pro', serif; font-size: 1.8rem; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 3px solid #f77f00; }
-                    .career-path-card h4 { color: #2d6a4f; font-family: 'Crimson Pro', serif; font-size: 1.3rem; margin-top: 25px; margin-bottom: 12px; }
-                    .info-box { border-left: 4px solid #1e1e1e; padding: 16px; margin: 16px 0; border-radius: 4px; background: white; }
-                    .salary-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-                    .salary-table th { background: #1a4d2e; color: white; padding: 12px; text-align: left; }
-                    .salary-table td { padding: 12px; border-bottom: 1px solid #e0e0e0; }
-                    .salary-table .highlight-row { background: #fff5e6; font-weight: 600; }
-                    .career-badge { display: inline-block; background: #f77f00; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin: 4px; }
-                    .section-container { background: white; border: 2px solid #e0e0e0; border-radius: 12px; padding: 30px; margin: 30px 0; }
-                    .section-container h3 { color: #1a4d2e; font-family: 'Crimson Pro', serif; font-size: 1.6rem; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 3px solid #f77f00; }
-                    h3 { color: #1a4d2e; font-family: 'Crimson Pro', serif; }
-                    h4 { color: #2d6a4f; font-family: 'Crimson Pro', serif; }
-                    p { margin-bottom: 12px; }
-                    @media print { .share-bar { display: none; } }
-                </style>
-            </head>
-            <body>
-                <div class="header">
-                    <h1>✨ Deine persönliche Karriere-Analyse</h1>
-                    <p>Dein Karriereweg – KI-gestützte Tiefenanalyse</p>
-                    <span class="expiry">🗓️ Gültig bis: ${expiresAt}</span>
-                </div>
-                <div class="container">
-                    <div class="share-bar">
-                        <p>📤 Teile deine Analyse oder speichere sie:</p>
-                        <a href="https://wa.me/?text=Schau%20dir%20meine%20Karriere-Analyse%20an%3A%20${encodeURIComponent(`https://karriere-berater-backend-production.up.railway.app/analyse/${token}`)}" 
-                           target="_blank" class="btn btn-wa">💬 WhatsApp</a>
-                        <button onclick="window.print()" class="btn btn-print">📄 Als PDF</button>
-                        <a href="/" class="btn btn-new">🔄 Neue Analyse</a>
-                    </div>
-                    <div class="analysis-content">
-                        ${result.analysis}
-                    </div>
-                </div>
-            </body>
-            </html>
-        `);
-    } catch (error) {
-        console.error('Share Link Error:', error);
         res.status(500).json({ error: error.message });
     }
 });

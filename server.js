@@ -1,3 +1,5 @@
+Server.js 
+
 require('dotenv').config();
 
 const express = require('express');
@@ -422,44 +424,6 @@ ${formData.education === 'abitur' || formData.education === 'fachabitur' || form
   <p><strong>Gehaltssprung:</strong> [Z.B. von 3.500 € auf 5.000 €]</p>
   <p><strong>Dauer:</strong> [Z.B. 2 Jahre berufsbegleitend]</p>
   
-  <h4>🔭 Wie sicher ist dieser Beruf in der Zukunft?</h4>
-  <div class="info-box" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-left: 4px solid #16a34a;">
-    <p><strong>📈 Jobmarkt-Trend (2025–2035):</strong><br>
-    [Konkrete Einschätzung ob der Beruf wächst, stagniert oder schrumpft – mit Zahlen! Z.B.: "Der Bedarf an Fachinformatiker*innen wächst um ca. 25% bis 2030 – aktuell 150.000 offene Stellen in Deutschland."]</p>
-    <p><strong>🤖 KI & Automatisierungs-Risiko: [GERING / MITTEL / HOCH]</strong><br>
-    [Klare Begründung. Z.B.: "GERING – Kreative und soziale Aspekte dieses Berufs sind schwer zu automatisieren. KI wird als Werkzeug eingesetzt, ersetzt aber nicht den Menschen."]</p>
-    <p><strong>🚀 So entwickelt sich der Beruf in 5–10 Jahren:</strong><br>
-    [Neue Technologien, neue Anforderungen, neue Spezialisierungen die entstehen werden]</p>
-    <p><strong>🌍 Branchen mit dem größten Bedarf:</strong><br>
-    [3–4 konkrete Wachstumsbranchen für diesen Beruf nennen]</p>
-  </div>
-
-  <h4>📋 DEIN persönlicher Steckbrief</h4>
-  <div style="background: white; border: 2px solid #1a4d2e; border-radius: 12px; padding: 24px; margin: 16px 0;">
-    <div style="background: linear-gradient(135deg, #1a4d2e 0%, #2d6a4f 100%); color: white; padding: 16px 20px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
-      <h3 style="color: white; margin: 0; font-size: 1.3rem; border: none; padding: 0;">[Berufsbezeichnung]</h3>
-      <p style="margin: 6px 0 0; opacity: 0.9; font-size: 0.9rem;">DEIN persönlicher Karriere-Steckbrief</p>
-    </div>
-    <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
-      <tr style="background: #f8fafc;"><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; width: 42%; border-bottom: 1px solid #e2e8f0;">📚 Bildungsweg</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[Ausbildung / Duales Studium / Studium / Quereinstieg]</td></tr>
-      <tr><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">⏱️ Dauer</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[X Jahre]</td></tr>
-      <tr style="background: #f8fafc;"><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">🎓 Voraussetzung</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[Welcher Schulabschluss wird benötigt]</td></tr>
-      <tr><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">💰 Gehalt Einstieg</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[X.XXX – X.XXX €/Monat]</td></tr>
-      <tr style="background: #f8fafc;"><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">📈 Gehalt nach 5 Jahren</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[X.XXX – X.XXX €/Monat]</td></tr>
-      <tr><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">🔭 Zukunftssicherheit</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[⭐⭐⭐⭐⭐ Sehr sicher / ⭐⭐⭐⭐ Sicher / ⭐⭐⭐ Mittel] – [1 Satz Begründung]</td></tr>
-      <tr style="background: #f8fafc;"><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">🤖 KI-Risiko</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[🟢 Gering / 🟡 Mittel / 🔴 Hoch]</td></tr>
-      <tr><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">📋 Was kommt auf DICH zu?</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[3–4 konkrete ehrliche Dinge. Z.B.: "Viel Theorie im 1. Jahr, danach Betriebspraxis, IHK-Prüfung am Ende, frühe Verantwortung"]</td></tr>
-      <tr style="background: #f8fafc;"><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">✅ Passt zu DIR weil</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[2–3 Punkte direkt bezogen auf die Antworten des Users – nicht generisch!]</td></tr>
-      <tr><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">⚠️ Herausforderungen</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[1–2 ehrliche Herausforderungen – nicht schönreden!]</td></tr>
-      <tr style="background: #f8fafc;"><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e;">🎯 DEIN erster Schritt</td><td style="padding: 10px 14px;">[Ein einziger, sehr konkreter nächster Schritt]</td></tr>
-    </table>
-    <div style="margin-top: 16px; text-align: center;">
-      <button onclick="window.print()" style="background: linear-gradient(135deg, #1a4d2e 0%, #2d6a4f 100%); color: white; border: none; padding: 12px 28px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer;">
-        📄 Steckbrief als PDF speichern
-      </button>
-    </div>
-  </div>
-  
   <h4>📍 Freie Stellen ${formData.location === 'Deutschlandweit' ? 'deutschlandweit' : `in ${formData.location}`}:</h4>
   <div class="job-search-buttons">
     ${formData.location === 'Deutschlandweit' ? `
@@ -570,44 +534,6 @@ Wenn Situation = "Berufstätig (will mich umorientieren)" oder "Arbeitslos/Arbei
   <p><strong>Gehaltssprung:</strong> [Z.B. +10.000-15.000 €/Jahr]</p>
   <p><strong>Dauer:</strong> [Z.B. 2 Jahre Master]</p>
   
-  <h4>🔭 Wie sicher ist dieser Beruf in der Zukunft?</h4>
-  <div class="info-box" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-left: 4px solid #16a34a;">
-    <p><strong>📈 Jobmarkt-Trend (2025–2035):</strong><br>
-    [Konkrete Einschätzung ob der Beruf wächst, stagniert oder schrumpft – mit Zahlen! Z.B.: "Der Bedarf an Fachinformatiker*innen wächst um ca. 25% bis 2030 – aktuell 150.000 offene Stellen in Deutschland."]</p>
-    <p><strong>🤖 KI & Automatisierungs-Risiko: [GERING / MITTEL / HOCH]</strong><br>
-    [Klare Begründung. Z.B.: "GERING – Kreative und soziale Aspekte dieses Berufs sind schwer zu automatisieren. KI wird als Werkzeug eingesetzt, ersetzt aber nicht den Menschen."]</p>
-    <p><strong>🚀 So entwickelt sich der Beruf in 5–10 Jahren:</strong><br>
-    [Neue Technologien, neue Anforderungen, neue Spezialisierungen die entstehen werden]</p>
-    <p><strong>🌍 Branchen mit dem größten Bedarf:</strong><br>
-    [3–4 konkrete Wachstumsbranchen für diesen Beruf nennen]</p>
-  </div>
-
-  <h4>📋 DEIN persönlicher Steckbrief</h4>
-  <div style="background: white; border: 2px solid #1a4d2e; border-radius: 12px; padding: 24px; margin: 16px 0;">
-    <div style="background: linear-gradient(135deg, #1a4d2e 0%, #2d6a4f 100%); color: white; padding: 16px 20px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
-      <h3 style="color: white; margin: 0; font-size: 1.3rem; border: none; padding: 0;">[Berufsbezeichnung]</h3>
-      <p style="margin: 6px 0 0; opacity: 0.9; font-size: 0.9rem;">DEIN persönlicher Karriere-Steckbrief</p>
-    </div>
-    <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
-      <tr style="background: #f8fafc;"><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; width: 42%; border-bottom: 1px solid #e2e8f0;">📚 Bildungsweg</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[Ausbildung / Duales Studium / Studium / Quereinstieg]</td></tr>
-      <tr><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">⏱️ Dauer</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[X Jahre]</td></tr>
-      <tr style="background: #f8fafc;"><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">🎓 Voraussetzung</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[Welcher Schulabschluss wird benötigt]</td></tr>
-      <tr><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">💰 Gehalt Einstieg</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[X.XXX – X.XXX €/Monat]</td></tr>
-      <tr style="background: #f8fafc;"><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">📈 Gehalt nach 5 Jahren</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[X.XXX – X.XXX €/Monat]</td></tr>
-      <tr><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">🔭 Zukunftssicherheit</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[⭐⭐⭐⭐⭐ Sehr sicher / ⭐⭐⭐⭐ Sicher / ⭐⭐⭐ Mittel] – [1 Satz Begründung]</td></tr>
-      <tr style="background: #f8fafc;"><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">🤖 KI-Risiko</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[🟢 Gering / 🟡 Mittel / 🔴 Hoch]</td></tr>
-      <tr><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">📋 Was kommt auf DICH zu?</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[3–4 konkrete ehrliche Dinge. Z.B.: "Viel Theorie im 1. Jahr, danach Betriebspraxis, IHK-Prüfung am Ende, frühe Verantwortung"]</td></tr>
-      <tr style="background: #f8fafc;"><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">✅ Passt zu DIR weil</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[2–3 Punkte direkt bezogen auf die Antworten des Users – nicht generisch!]</td></tr>
-      <tr><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e; border-bottom: 1px solid #e2e8f0;">⚠️ Herausforderungen</td><td style="padding: 10px 14px; border-bottom: 1px solid #e2e8f0;">[1–2 ehrliche Herausforderungen – nicht schönreden!]</td></tr>
-      <tr style="background: #f8fafc;"><td style="padding: 10px 14px; font-weight: 600; color: #1a4d2e;">🎯 DEIN erster Schritt</td><td style="padding: 10px 14px;">[Ein einziger, sehr konkreter nächster Schritt]</td></tr>
-    </table>
-    <div style="margin-top: 16px; text-align: center;">
-      <button onclick="window.print()" style="background: linear-gradient(135deg, #1a4d2e 0%, #2d6a4f 100%); color: white; border: none; padding: 12px 28px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer;">
-        📄 Steckbrief als PDF speichern
-      </button>
-    </div>
-  </div>
-  
   <h4>📍 Studiengänge finden ${formData.location === 'Deutschlandweit' ? 'deutschlandweit' : `in ${formData.location}`}:</h4>
   <div class="job-search-buttons">
     ${formData.location === 'Deutschlandweit' ? `
@@ -688,7 +614,7 @@ Sei KONKRET und REALISTISCH! Keine schwammigen Aussagen! Berücksichtige STRIKT 
                 }
             ],
             temperature: 0.7,
-            max_tokens: 5500,
+            max_tokens: 4000,
         });
 
         const analysis = completion.choices[0].message.content;
@@ -751,7 +677,7 @@ app.post('/api/chatbot', async (req, res) => {
                     content: `Du bist ein freundlicher Karriereberater. 
                     
 Der User hat gerade diese Karriere-Analyse bekommen:
-\${analysisContext}
+${analysisContext}
 
 Deine Aufgabe:
 - Beantworte Fragen zur Analyse konkret und präzise
@@ -799,8 +725,6 @@ app.listen(PORT, () => {
     console.log('🆕 Partner-Endpoint aktiv!');
     console.log('🤖 Chatbot-Endpoint aktiv!');
     console.log('🎨 Verbesserter Prompt (DU + Fahrplan)');
-    console.log('🔭 Zukunftsperspektive NEU aktiv!');
-    console.log('📋 Steckbrief-PDF NEU aktiv!');
     console.log('=================================');
 });
 

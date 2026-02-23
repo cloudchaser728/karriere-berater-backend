@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -691,87 +693,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         }
 
         /* ==========================================
-           FAQ STYLES
-           ========================================== */
-        .faq-section {
-            padding: 70px 0 40px;
-        }
-
-        .faq-section h2 {
-            font-family: 'Crimson Pro', serif;
-            font-size: 2.2rem;
-            text-align: center;
-            color: var(--primary);
-            margin-bottom: 0.75rem;
-        }
-
-        .faq-section .faq-subtitle {
-            text-align: center;
-            color: var(--text-gray);
-            margin-bottom: 2.5rem;
-            font-size: 1.05rem;
-        }
-
-        .faq-item {
-            background: white;
-            border-radius: 12px;
-            margin-bottom: 14px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(26, 77, 46, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .faq-item:hover { box-shadow: 0 8px 25px rgba(26, 77, 46, 0.12); }
-
-        .faq-question {
-            padding: 22px 28px;
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: var(--primary);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            user-select: none;
-            transition: background 0.3s ease;
-        }
-
-        .faq-question:hover { background: rgba(26, 77, 46, 0.03); }
-
-        .faq-icon {
-            font-size: 26px;
-            color: var(--accent);
-            font-weight: 300;
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
-            margin-left: 20px;
-        }
-
-        .faq-item.active .faq-icon { transform: rotate(45deg); }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.4s ease;
-            padding: 0 28px;
-            color: var(--text-dark);
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-
-        .faq-item.active .faq-answer { max-height: 2000px; padding: 0 28px 28px; }
-        .faq-answer p { margin-bottom: 12px; }
-        .faq-answer strong { color: var(--primary); font-weight: 600; }
-        .faq-answer ul { margin: 12px 0; padding-left: 1.5rem; }
-        .faq-answer li { margin-bottom: 8px; line-height: 1.6; }
-
-        @media (max-width: 768px) {
-            .faq-question { padding: 18px 20px; font-size: 0.98rem; }
-            .faq-answer { padding: 0 20px; }
-            .faq-item.active .faq-answer { padding: 0 20px 20px; }
-        }
-
-        /* ==========================================
            CHATBOT STYLES
            ========================================== */
         .chatbot-section {
@@ -1344,85 +1265,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <section id="results">
             <div id="results-content"></div>
         </section>
-        <!-- FAQ SECTION -->
-        <section class="faq-section">
-            <h2>Häufig gestellte Fragen</h2>
-            <p class="faq-subtitle">Die wichtigsten Antworten auf einen Blick</p>
-
-            <div class="faq-item">
-                <div class="faq-question"><span>Wie genau ist die KI-Analyse?</span><span class="faq-icon">+</span></div>
-                <div class="faq-answer">
-                    <p>Unsere KI nutzt <strong>wissenschaftlich validierte Methoden</strong> aus der Berufspsychologie und Persönlichkeitsforschung. In einer unabhängigen Studie mit über 2.000 Teilnehmer*innen zeigte sich eine <strong>Übereinstimmung von 87%</strong> zwischen den KI-Empfehlungen und dem tatsächlich gewählten Beruf nach 2 Jahren.</p>
-                    <p>Die Analyse kombiniert etablierte Modelle wie den Holland-Code (RIASEC) und Big Five Persönlichkeitsmerkmale mit modernen Machine-Learning-Algorithmen.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question"><span>Ist das nur für Abiturient*innen oder auch für andere Schulformen?</span><span class="faq-icon">+</span></div>
-                <div class="faq-answer">
-                    <p>Die Analyse funktioniert für <strong>alle Schulformen und Bildungswege</strong> – egal ob Hauptschule, Realschule, Gymnasium, Gesamtschule oder nach einer abgeschlossenen Ausbildung.</p>
-                    <p>Unsere KI berücksichtigt DEINE individuellen Stärken und Interessen, nicht nur DEINE Noten oder Schulabschlüsse.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question"><span>Was unterscheidet euch von anderen Karrieretests?</span><span class="faq-icon">+</span></div>
-                <div class="faq-answer">
-                    <p><strong>1. Moderne KI statt starrer Fragebögen:</strong> Wir nutzen GPT-4o-Technologie, die DEINE Antworten im Kontext versteht.</p>
-                    <p><strong>2. Konkrete Handlungsschritte:</strong> DU bekommst nicht nur Berufsvorschläge, sondern einen kompletten Aktionsplan.</p>
-                    <p><strong>3. Aktualität:</strong> Unsere Datenbank wird kontinuierlich mit neuen Berufsbildern und Trends aktualisiert.</p>
-                    <p><strong>4. Ehrliche Einschätzung:</strong> Wir sagen DIR auch, welche Berufe NICHT zu DIR passen – und warum.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question"><span>Wie lange dauert die Analyse und wie läuft sie ab?</span><span class="faq-icon">+</span></div>
-                <div class="faq-answer">
-                    <p><strong>Gesamtdauer: 5–10 Minuten</strong></p>
-                    <p><strong>1. Fragebogen (5 Min):</strong> 13 sorgfältig ausgewählte Fragen zu DEINEN Interessen, Werten, Arbeitsstil und Zielen.</p>
-                    <p><strong>2. KI-Analyse (30 Sek):</strong> Unsere KI verarbeitet DEINE Antworten und gleicht sie mit Millionen Karrieredaten ab.</p>
-                    <p><strong>3. Ergebnis (sofort):</strong> DU erhältst einen detaillierten Report direkt auf der Seite.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question"><span>Was genau bekomme ich für 4,99€?</span><span class="faq-icon">+</span></div>
-                <div class="faq-answer">
-                    <p>DEIN <strong>Karriere-Starter-Paket</strong> enthält:</p>
-                    <ul>
-                        <li>✅ <strong>Top 3 personalisierte Karrierewege</strong> mit detaillierter Begründung</li>
-                        <li>✅ <strong>Steckbrief</strong> für jeden Weg – Fächer, Alltag, Bewerbung</li>
-                        <li>✅ <strong>Zukunftsprognose & Jobmarkt-Trend</strong> für jeden Karriereweg</li>
-                        <li>✅ <strong>Gehalts-Perspektiven</strong> – Einstieg und nach 5 Jahren</li>
-                        <li>✅ <strong>3 Alternativen</strong> pro Karriereweg</li>
-                        <li>✅ <strong>Konkrete nächste Schritte</strong> als Aktionsplan</li>
-                    </ul>
-                    <p><strong>Vergleich:</strong> Eine klassische Karriereberatung kostet 150–300€ pro Stunde. Unsere KI-Analyse bietet DIR 80% der Insights für nur 4,99€.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question"><span>Was ist, wenn mir die Vorschläge nicht gefallen?</span><span class="faq-icon">+</span></div>
-                <div class="faq-answer">
-                    <p><strong>14-Tage-Geld-zurück-Garantie</strong> – ohne Wenn und Aber!</p>
-                    <p>Wenn DU mit den Ergebnissen nicht zufrieden bist, schreib uns einfach eine E-Mail innerhalb von 14 Tagen und DU bekommst DEIN Geld zurück. Keine Begründung nötig.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question"><span>Was passiert mit MEINEN Daten?</span><span class="faq-icon">+</span></div>
-                <div class="faq-answer">
-                    <ul>
-                        <li>🇪🇺 <strong>100% DSGVO-konform</strong></li>
-                        <li>🔒 <strong>Ende-zu-Ende-Verschlüsselung</strong></li>
-                        <li>❌ <strong>Keine Weitergabe an Dritte</strong></li>
-                        <li>🗑️ <strong>Löschung jederzeit möglich</strong></li>
-                        <li>🇩🇪 <strong>Server in Deutschland</strong></li>
-                    </ul>
-                    <p>Mehr Details in unserer <a href="/karriere-datenschutz.html" style="color: var(--accent); font-weight: 600;">Datenschutzerklärung</a>.</p>
-                </div>
-            </div>
-        </section>
     </div>
 
     <footer>
@@ -1449,7 +1291,12 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
         const BACKEND_URL = 'https://karriere-berater-backend-production.up.railway.app';
 
-
+        document.getElementById('startBtn').addEventListener('click', function() {
+            document.getElementById('intro-section').style.display = 'none';
+            document.getElementById('questionnaire').style.display = 'block';
+            document.getElementById('questionnaire').classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
 
         function updateProgress() {
             const form = document.getElementById('career-form');
@@ -1477,30 +1324,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Hilfsfunktion: Fragebogen öffnen
-            function openQuestionnaire() {
-                document.getElementById('intro-section').style.display = 'none';
-                var q = document.getElementById('questionnaire');
-                q.style.display = 'block';
-                q.classList.add('active');
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            }
-            // FAQ Accordion
-            document.querySelectorAll('.faq-question').forEach(function(question) {
-                question.addEventListener('click', function() {
-                    var faqItem = this.parentElement;
-                    var isActive = faqItem.classList.contains('active');
-                    document.querySelectorAll('.faq-item').forEach(function(item) {
-                        item.classList.remove('active');
-                    });
-                    if (!isActive) faqItem.classList.add('active');
-                });
-            });
-
-            // Start Button
-            document.getElementById('startBtn').addEventListener('click', function() {
-                openQuestionnaire();
-            });
             const form = document.getElementById('career-form');
             if (form) {
                 form.addEventListener('change', updateProgress);
@@ -1616,7 +1439,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                     const result = await response.json();
 
                     if (result.analysis) {
-                        displayResults(result.analysis, result.shareLink, result.expiresAt);
+                        displayResults(result.analysis);
                         sessionStorage.removeItem('isPartner');
                         sessionStorage.removeItem('partnerCode');
                     } else {
@@ -1687,7 +1510,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
                     if (result.status === 'complete') {
                         clearInterval(checkAnalysis);
-                        displayResults(result.analysis, result.shareLink, result.expiresAt);
+                        displayResults(result.analysis);
                     } else if (attempts >= maxAttempts) {
                         clearInterval(checkAnalysis);
                         document.getElementById('results-content').innerHTML = `
@@ -1703,7 +1526,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             }, 2000);
         }
 
-        function displayResults(analysisHtml, shareLink, expiresAt) {
+        function displayResults(analysisHtml) {
             const header = document.getElementById('main-header');
             const priceTag = document.getElementById('price-tag');
             
@@ -1772,25 +1595,129 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                 
                 <div style="text-align: center; margin-top: 50px; padding: 30px; background: var(--bg-cream); border-radius: 12px;">
                     <h3 style="color: var(--primary); margin-bottom: 15px;">💾 Sichere deine Analyse</h3>
-                    <p style="margin-bottom: 20px; color: var(--text-gray);">Deine Analyse ist <strong>30 Tage</strong> über deinen persönlichen Link abrufbar!</p>
-                    
-                    ${shareLink ? `
-                    <div style="background: white; border: 2px solid var(--primary); border-radius: 12px; padding: 20px; margin-bottom: 20px; text-align: left;">
-                        <p style="font-weight: 600; color: var(--primary); margin-bottom: 10px;">🔗 Dein persönlicher Analyse-Link:</p>
-                        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                            <input type="text" id="shareLinkInput" value="${shareLink}" readonly 
-                                style="flex: 1; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 0.9rem; min-width: 200px; background: #f9f9f9; cursor: pointer;">
-                            <button onclick="copyShareLink()" class="btn" style="white-space: nowrap;">📋 Kopieren</button>
-                        </div>
-                        <p style="font-size: 0.85rem; color: var(--text-gray); margin-top: 8px;">🗓️ Gültig bis: <strong>${expiresAt}</strong></p>
-                    </div>
-                    ` : ''}
-                    
-                    <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-                        <button class="btn" onclick="window.print()">📄 Als PDF speichern</button>
-                        <button class="btn btn-accent" onclick="location.href=\'mailto:kontakt@dein-karriereweg.com?subject=Meine Karriereweg Analyse\'">📧 Per Email teilen</button>
-                        ${shareLink ? `<a href="https://wa.me/?text=Schau%20dir%20meine%20Karriere-Analyse%20an%3A%20${encodeURIComponent(shareLink)}" target="_blank" class="btn" style="background: #25D366; color: white; text-decoration: none; display:inline-block;">💬 WhatsApp teilen</a>` : ''}
-                    </div>
+                    <p style="margin-bottom: 20px; color: var(--text-gray);">Speichere deine Analyse als PDF, damit du sie jederzeit griffbereit hast!</p>
+                    <button class="btn" onclick="window.print()" style="margin-right: 10px;">📄 Als PDF speichern</button>
+                    <button class="btn btn-accent" onclick="location.href='mailto:?subject=Meine Karriereweg Analyse&body=Schau dir meine Karriere-Analyse an!'">📧 Per Email teilen</button>
                 </div>
             `;
+            document.getElementById('results-content').innerHTML = html;
             
+            window.analysisContext = analysisHtml;
+            
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // ==========================================
+        // CHATBOT FUNCTIONS
+        // ==========================================
+        
+        let questionsAsked = 0;
+        const maxFreeQuestions = 5;
+
+        function openChatbot() {
+            document.querySelector('.chatbot-intro').style.display = 'none';
+            document.getElementById('chatbotWindow').style.display = 'block';
+            document.getElementById('chatbotInput').focus();
+        }
+
+        async function sendChatMessage() {
+            const input = document.getElementById('chatbotInput');
+            const question = input.value.trim();
+            
+            if (!question) return;
+            
+            if (questionsAsked >= maxFreeQuestions) {
+                showLimitReached();
+                return;
+            }
+            
+            addMessage(question, 'user');
+            input.value = '';
+            
+            const loadingId = addLoadingMessage();
+            
+            questionsAsked++;
+            updateQuestionsRemaining();
+            
+            try {
+                const response = await fetch('/api/chatbot', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        question: question,
+                        analysisContext: window.analysisContext,
+                        sessionId: sessionStorage.getItem('sessionId')
+                    })
+                });
+                
+                const data = await response.json();
+                
+                document.getElementById(loadingId).remove();
+                
+                addMessage(data.answer, 'bot');
+                
+                if (questionsAsked >= maxFreeQuestions) {
+                    setTimeout(() => showLimitReached(), 1000);
+                }
+                
+            } catch (error) {
+                console.error('Chatbot error:', error);
+                document.getElementById(loadingId).remove();
+                addMessage('Entschuldigung, da ist etwas schief gelaufen. Bitte versuche es nochmal.', 'bot');
+            }
+        }
+
+        function addMessage(text, type) {
+            const messagesDiv = document.getElementById('chatbotMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type === 'user' ? 'user-message' : 'bot-message';
+            
+            if (type === 'bot') {
+                messageDiv.innerHTML = `<strong>🤖 AI Coach:</strong><br>${text}`;
+            } else {
+                messageDiv.innerHTML = text;
+            }
+            
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function addLoadingMessage() {
+            const messagesDiv = document.getElementById('chatbotMessages');
+            const loadingDiv = document.createElement('div');
+            const loadingId = 'loading-' + Date.now();
+            loadingDiv.id = loadingId;
+            loadingDiv.className = 'bot-message loading-dots';
+            loadingDiv.innerHTML = '<span>●</span><span>●</span><span>●</span>';
+            messagesDiv.appendChild(loadingDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            return loadingId;
+        }
+
+        function updateQuestionsRemaining() {
+            const remaining = maxFreeQuestions - questionsAsked;
+            document.getElementById('questionsRemaining').textContent = 
+                `${remaining} von ${maxFreeQuestions} Fragen`;
+        }
+
+        function showLimitReached() {
+            const messagesDiv = document.getElementById('chatbotMessages');
+            const limitDiv = document.createElement('div');
+            limitDiv.className = 'info-message';
+            limitDiv.innerHTML = `
+                <h4>ℹ️ Limit erreicht</h4>
+                <p>Du hast alle 5 kostenlosen Fragen gestellt.</p>
+                <p>Vielen Dank für dein Interesse! 😊</p>
+            `;
+            messagesDiv.appendChild(limitDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            
+            document.getElementById('chatbotInput').disabled = true;
+            document.querySelector('.btn-send').disabled = true;
+            document.getElementById('chatbotInput').placeholder = 'Limit erreicht';
+        }
+    </script>
+</body>
+</html>

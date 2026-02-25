@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -59,17 +61,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             --text-dark: #1e1e1e;
             --text-gray: #666;
             --shadow: rgba(26, 77, 46, 0.1);
-            --font-main: 'Work Sans', sans-serif;
-            --font-heading: 'Crimson Pro', serif;
-        }
-        
-        /* Einheitliche Schriftarten überall */
-        input, textarea, select, button {
-            font-family: var(--font-main) !important;
-        }
-        
-        h1, h2, h3, h4, .benefit-card h3, .intro h2 {
-            font-family: var(--font-heading) !important;
         }
 
         * {
@@ -1079,90 +1070,16 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                 <!-- Frage 3: Schulabschluss -->
                 <div class="question">
                     <label>3. Welchen Schulabschluss hast DU oder strebst DU an?</label>
-                    <div class="radio-group">
-                        
-                        <label class="radio-option" onclick="toggleUnterpunkte('schule-sub')">
-                            <input type="radio" name="education" value="" id="edu-schule" onchange="showUnterpunkte('schule-sub'); updateNotenFrage();">
-                            <span>🏫 Noch in der Schule</span>
-                        </label>
-                        <div id="schule-sub" style="display:none; margin-left: 32px; margin-top: -6px; margin-bottom: 8px;">
-                            <div class="radio-group" style="gap: 8px;">
-                                <label class="radio-option" style="background: #f0ede4; padding: 10px 15px; font-size: 0.95rem;">
-                                    <input type="radio" name="education" value="realschule" onchange="updateNotenFrage()">
-                                    <span>Realschule / Gesamtschule (Klasse 5–10)</span>
-                                </label>
-                                <label class="radio-option" style="background: #f0ede4; padding: 10px 15px; font-size: 0.95rem;">
-                                    <input type="radio" name="education" value="hauptschule" onchange="updateNotenFrage()">
-                                    <span>Hauptschule (Klasse 5–9)</span>
-                                </label>
-                                <label class="radio-option" style="background: #f0ede4; padding: 10px 15px; font-size: 0.95rem;">
-                                    <input type="radio" name="education" value="abitur" onchange="updateNotenFrage()">
-                                    <span>Gymnasium / Auf dem Weg zum Abitur</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <label class="radio-option">
-                            <input type="radio" name="education" value="hauptschule" onchange="hideAlle(); updateNotenFrage();">
-                            <span>Hauptschulabschluss</span>
-                        </label>
-
-                        <label class="radio-option">
-                            <input type="radio" name="education" value="realschule" onchange="hideAlle(); updateNotenFrage();">
-                            <span>Realschulabschluss / Mittlere Reife</span>
-                        </label>
-
-                        <label class="radio-option">
-                            <input type="radio" name="education" value="fachabitur" onchange="hideAlle(); updateNotenFrage();">
-                            <span>Fachabitur / Fachhochschulreife</span>
-                        </label>
-
-                        <label class="radio-option">
-                            <input type="radio" name="education" value="abitur" onchange="hideAlle(); updateNotenFrage();">
-                            <span>Abitur / Allgemeine Hochschulreife</span>
-                        </label>
-
-                        <label class="radio-option" onclick="toggleUnterpunkte('studium-sub')">
-                            <input type="radio" name="education" value="" id="edu-studium" onchange="showUnterpunkte('studium-sub'); updateNotenFrage();">
-                            <span>🎓 Studium / Bereits studiert</span>
-                        </label>
-                        <div id="studium-sub" style="display:none; margin-left: 32px; margin-top: -6px; margin-bottom: 8px;">
-                            <div class="radio-group" style="gap: 8px;">
-                                <label class="radio-option" style="background: #f0ede4; padding: 10px 15px; font-size: 0.95rem;">
-                                    <input type="radio" name="education" value="bachelor" onchange="updateNotenFrage()">
-                                    <span>Bachelor abgeschlossen</span>
-                                </label>
-                                <label class="radio-option" style="background: #f0ede4; padding: 10px 15px; font-size: 0.95rem;">
-                                    <input type="radio" name="education" value="master" onchange="updateNotenFrage()">
-                                    <span>Master / Diplom abgeschlossen</span>
-                                </label>
-                                <label class="radio-option" style="background: #f0ede4; padding: 10px 15px; font-size: 0.95rem;">
-                                    <input type="radio" name="education" value="bachelor" onchange="updateNotenFrage()">
-                                    <span>Aktuell im Studium</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <label class="radio-option">
-                            <input type="radio" name="education" value="ausbildung" onchange="hideAlle(); updateNotenFrage();">
-                            <span>Ausbildung abgeschlossen</span>
-                        </label>
-
-                    </div>
-                    
-                    <input type="hidden" id="educationSelect" value="">
-                    
-                    <script>
-                    function showUnterpunkte(id) {
-                        document.getElementById('schule-sub').style.display = 'none';
-                        document.getElementById('studium-sub').style.display = 'none';
-                        document.getElementById(id).style.display = 'block';
-                    }
-                    function hideAlle() {
-                        document.getElementById('schule-sub').style.display = 'none';
-                        document.getElementById('studium-sub').style.display = 'none';
-                    }
-                    </script>
+                    <select name="education" id="educationSelect" required onchange="updateNotenFrage()">
+                        <option value="">Bitte wählen...</option>
+                        <option value="hauptschule">Hauptschulabschluss</option>
+                        <option value="realschule">Realschulabschluss</option>
+                        <option value="fachabitur">Fachabitur / Fachgebundene Hochschulreife</option>
+                        <option value="abitur">Abitur / Allgemeine Hochschulreife</option>
+                        <option value="ausbildung">Ausbildung abgeschlossen</option>
+                        <option value="bachelor">Bachelor</option>
+                        <option value="master">Master/Diplom</option>
+                    </select>
                 </div>
 
                 <!-- Frage 4: Noten (dynamisch) -->
@@ -1183,78 +1100,41 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
                 <!-- Frage 3: FLOW -->
                 <div class="question">
-                    <label>5. Bei welcher Aufgabe fühlst DU DICH sicher und kompetent?</label>
+                    <label>5. ⚡ Bei welcher Aufgabe fühlst DU DICH sicher und kompetent? Wo siehst DU DEINE Stärke?</label>
                     <textarea name="flow_activity" required placeholder="z.B. Probleme lösen, kreativ sein, organisieren, mit Menschen reden, Dinge bauen, programmieren..."></textarea>
-                    <div style="margin-top: 15px;">
-                        <label style="font-size: 1.1rem; color: var(--primary); font-weight: 600; display: block; margin-bottom: 10px;">Was schätzen DEINE Freunde an DIR? (Mehrfachauswahl)</label>
-                        <div class="radio-group" style="gap: 8px;">
-                            <label class="radio-option">
-                                <input type="checkbox" name="strengths" value="zuhoeren">
-                                <span>DU hörst gut zu und gibst gute Ratschläge</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="checkbox" name="strengths" value="organisieren">
-                                <span>DU bringst Ordnung und hast immer einen Plan</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="checkbox" name="strengths" value="loesungen">
-                                <span>DU findest immer eine Lösung, wenn etwas nicht klappt</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="checkbox" name="strengths" value="kreativ">
-                                <span>DU hast immer kreative Ideen</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="checkbox" name="strengths" value="erklaeren">
-                                <span>DU kannst Dinge gut erklären</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="checkbox" name="strengths" value="motivieren">
-                                <span>DU motivierst andere und bringst gute Stimmung</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="checkbox" name="strengths" value="technik">
-                                <span>DU löst technische Probleme – der Handy-/PC-Spezialist</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="checkbox" name="strengths" value="zuverlaessig">
-                                <span>DU bist zuverlässig – auf DICH kann man sich verlassen</span>
-                            </label>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Frage 4: ANTI-BERUF -->
                 <div class="question">
-                    <label>6. Was möchtest DU auf keinen Fall in DEINEM Beruf haben?</label>
+                    <label>6. ⛔ Welche Tätigkeiten oder Arbeitsumfelder sind für DICH ein absolutes No-Go?</label>
                     <div class="radio-group">
                         <label class="radio-option">
                             <input type="checkbox" name="anti_job" value="blood">
-                            <span>Medizinische Situationen und Blut</span>
+                            <span>Kein Blut sehen / medizinische Situationen</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="anti_job" value="sitting">
-                            <span>Stundenlang am Schreibtisch sitzen</span>
+                            <span>Stundenlanges Sitzen am Schreibtisch</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="anti_job" value="phone">
-                            <span>Ständig telefonieren und Kundengespräche führen</span>
+                            <span>Viel Telefonieren / Kundenkontakt</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="anti_job" value="physical">
-                            <span>Körperlich anstrengende Arbeit im Freien oder auf Baustellen</span>
+                            <span>Körperlich anstrengende Arbeit</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="anti_job" value="monotone">
-                            <span>Immer die gleichen Aufgaben, kein Abwechslung</span>
+                            <span>Monotone, sich wiederholende Aufgaben</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="anti_job" value="public">
-                            <span>Vor großen Gruppen auftreten und präsentieren</span>
+                            <span>Vor großen Gruppen sprechen / Präsentationen</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="anti_job" value="none">
-                            <span>Keines davon – ich bin flexibel</span>
+                            <span>Nichts davon stört mich</span>
                         </label>
                     </div>
                 </div>
@@ -1265,27 +1145,27 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                     <div class="radio-group">
                         <label class="radio-option">
                             <input type="checkbox" name="interests" value="technology">
-                            <span>Technologie und Computer</span>
+                            <span>💻 Technologie & Computer</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="interests" value="creative">
-                            <span>Kreativität und Design</span>
+                            <span>🎨 Kreativität & Design</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="interests" value="people">
-                            <span>Arbeit mit Menschen</span>
+                            <span>👥 Arbeit mit Menschen</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="interests" value="business">
-                            <span>Wirtschaft und Finanzen</span>
+                            <span>💼 Business & Finanzen</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="interests" value="health">
-                            <span>Gesundheit und Medizin</span>
+                            <span>⚕️ Gesundheit & Medizin</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="interests" value="hands-on">
-                            <span>Handwerklich arbeiten</span>
+                            <span>🔧 Handwerklich arbeiten</span>
                         </label>
                     </div>
                 </div>
@@ -1294,143 +1174,117 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
                 <!-- Frage 7-12 continue... -->
                 <div class="question">
-                    <label>8. Wie arbeitest DU am liebsten? (Mehrfachauswahl möglich)</label>
+                    <label>12. 🗂️ Struktur vs. Chaos – Wie arbeitest DU am besten? (Mehrfachauswahl möglich)</label>
                     <div class="radio-group">
                         <label class="radio-option">
                             <input type="checkbox" name="work_style" value="structure">
-                            <span>Klare Vorgaben und feste Abläufe</span>
+                            <span>Ich brauche klare Anweisungen und feste Strukturen</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="work_style" value="freedom">
-                            <span>Freiheit und eigene Einteilung meiner Arbeit</span>
+                            <span>Ich brauche Freiheit und möchte meinen Tag selbst gestalten</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="work_style" value="mixed">
-                            <span>Eine Mischung aus beidem</span>
+                            <span>Eine gute Mischung aus beidem</span>
                         </label>
                     </div>
                 </div>
 
                 <div class="question">
-                    <label>9. Was liegt DIR mehr? (Mehrfachauswahl möglich)</label>
+                    <label>13. 💻 vs. 🔨 Digital oder Physisch? (Mehrfachauswahl möglich)</label>
                     <div class="radio-group">
                         <label class="radio-option">
                             <input type="checkbox" name="work_type" value="digital">
-                            <span>Am Computer arbeiten – Software, Daten, digitale Inhalte</span>
+                            <span>Digitale Welt – Software, Daten, Online-Content</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="work_type" value="physical">
-                            <span>Mit den Händen arbeiten – sichtbare, greifbare Ergebnisse</span>
+                            <span>Physische Welt – sichtbare, greifbare Ergebnisse</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="work_type" value="both">
-                            <span>Beides – mal digital, mal praktisch</span>
+                            <span>Beides ist mir wichtig</span>
                         </label>
                     </div>
                 </div>
 
                 <div class="question">
-                    <label>10. Was gibt DIR Energie? (Mehrfachauswahl möglich)</label>
+                    <label>12. ⚡ Was gibt DIR Energie? (Mehrfachauswahl möglich)</label>
                     <div class="radio-group">
                         <label class="radio-option">
-                            <input type="checkbox" name="energy" value="people" onchange="toggleEnergySub(this)">
-                            <span>Menschen – ich arbeite gerne mit anderen zusammen</span>
+                            <input type="checkbox" name="energy" value="people">
+                            <span>🗣️ Menschen – Teamarbeit, Kundenkontakt, Präsentationen</span>
                         </label>
-                        <div id="energy-people-sub" style="display:none; margin-left: 32px; margin-bottom: 8px;">
-                            <div class="radio-group" style="gap: 8px;">
-                                <label class="radio-option" style="background: #f0ede4; padding: 10px 15px; font-size: 0.95rem;">
-                                    <input type="checkbox" name="energy_sub" value="teamwork">
-                                    <span>Im Team arbeiten und gemeinsam Ziele erreichen</span>
-                                </label>
-                                <label class="radio-option" style="background: #f0ede4; padding: 10px 15px; font-size: 0.95rem;">
-                                    <input type="checkbox" name="energy_sub" value="customers">
-                                    <span>Kundenkontakt und anderen direkt helfen</span>
-                                </label>
-                                <label class="radio-option" style="background: #f0ede4; padding: 10px 15px; font-size: 0.95rem;">
-                                    <input type="checkbox" name="energy_sub" value="presentations">
-                                    <span>Vor Gruppen sprechen und präsentieren</span>
-                                </label>
-                                <label class="radio-option" style="background: #f0ede4; padding: 10px 15px; font-size: 0.95rem;">
-                                    <input type="checkbox" name="energy_sub" value="teaching">
-                                    <span>Anderen etwas erklären und beibringen</span>
-                                </label>
-                            </div>
-                        </div>
                         <label class="radio-option">
                             <input type="checkbox" name="energy" value="alone">
-                            <span>Alleine arbeiten – fokussiert, ruhig und konzentriert</span>
+                            <span>🧘 Ruhe – Fokusarbeit, Recherche, konzentriertes Arbeiten</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="energy" value="mix">
-                            <span>Beides – mal mit Menschen, mal alleine</span>
+                            <span>🔄 Beides im Wechsel</span>
                         </label>
                     </div>
-                    <script>
-                    function toggleEnergySub(cb) {
-                        var sub = document.getElementById('energy-people-sub');
-                        if (sub) sub.style.display = cb.checked ? 'block' : 'none';
-                    }
-                    </script>
                 </div>
 
                 <div class="question">
-                    <label>11. Was ist DIR in DEINEM Beruf am wichtigsten? (Mehrfachauswahl möglich)</label>
+                    <label>13. Was ist DIR in einem Job am wichtigsten? (Mehrfachauswahl möglich)</label>
                     <div class="radio-group">
                         <label class="radio-option">
                             <input type="checkbox" name="priority" value="money">
-                            <span>Ein gutes Gehalt</span>
+                            <span>💰 Gutes Gehalt</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="priority" value="balance">
-                            <span>Genug Freizeit neben dem Job</span>
+                            <span>⚖️ Work-Life-Balance</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="priority" value="purpose">
-                            <span>Sinnvolle Arbeit, die etwas verändert</span>
+                            <span>🌍 Sinnvolle Arbeit mit Impact</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="priority" value="career">
-                            <span>Aufstiegsmöglichkeiten und Karrierechancen</span>
+                            <span>📈 Karrierechancen</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="priority" value="security">
-                            <span>Einen sicheren Job mit stabilem Einkommen</span>
+                            <span>🛡️ Sicherheit & Stabilität</span>
                         </label>
                     </div>
                 </div>
 
                 <div class="question">
-                    <label>12. Wie gehst DU mit Risiken um? (Mehrfachauswahl möglich)</label>
+                    <label>12. 🎲 Wie stehst DU zu Risiken? (Mehrfachauswahl möglich)</label>
                     <div class="radio-group">
                         <label class="radio-option">
                             <input type="checkbox" name="risk" value="safe">
-                            <span>Ich will einen sicheren Job mit festem Gehalt</span>
+                            <span>🛡️ Ich will einen sicheren Job mit festem Gehalt</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="risk" value="risk">
-                            <span>Ich gehe gerne Risiken ein, wenn die Belohnung stimmt</span>
+                            <span>🎲 Ich gehe gerne Risiken ein, wenn die Chance groß ist</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="risk" value="calculated">
-                            <span>Ein überschaubares Risiko ist für mich in Ordnung</span>
+                            <span>⚖️ Kalkuliertes Risiko ist in Ordnung</span>
                         </label>
                     </div>
                 </div>
 
                 <div class="question">
-                    <label>13. Routine oder Abwechslung? (Mehrfachauswahl möglich)</label>
+                    <label>13. 🔁 Routine oder Abwechslung? (Mehrfachauswahl möglich)</label>
                     <div class="radio-group">
                         <label class="radio-option">
                             <input type="checkbox" name="routine" value="routine">
-                            <span>Ich mag Routine – gleiche Aufgaben, fester Rhythmus</span>
+                            <span>🔁 Ich mag Routine – gleiche Aufgaben, gleicher Rhythmus</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="routine" value="variety">
-                            <span>Jeden Tag etwas anderes – ich brauche Abwechslung</span>
+                            <span>🎭 Jeden Tag etwas Neues – ich brauche Abwechslung</span>
                         </label>
                         <label class="radio-option">
                             <input type="checkbox" name="routine" value="mix">
-                            <span>Eine Mischung aus beidem</span>
+                            <span>🔀 Gute Mischung aus beidem</span>
                         </label>
                     </div>
                 </div>
@@ -1438,7 +1292,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
 
                 <div class="question">
-                    <label>14. In welcher Stadt oder Region suchst DU?</label>
+                    <label>14. 📍 In welcher Stadt/Region suchst DU?</label>
                     <input 
                         type="text" 
                         name="location" 
@@ -1598,8 +1452,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             <div class="faq-item">
                 <div class="faq-question"><span>Was ist, wenn mir die Vorschläge nicht gefallen?</span><span class="faq-icon">+</span></div>
                 <div class="faq-answer">
-                    <p>Unsere KI erstellt DEINE Analyse auf Basis DEINER eigenen Antworten – je ehrlicher DU antwortest, desto besser passen die Empfehlungen.</p>
-                    <p>Falls DU Fragen zu DEINER Analyse hast, kannst DU unseren KI-Chatbot direkt in der Ergebnisseite nutzen oder uns per E-Mail kontaktieren.</p>
+                    <p><strong>14-Tage-Geld-zurück-Garantie</strong> – ohne Wenn und Aber!</p>
+                    <p>Wenn DU mit den Ergebnissen nicht zufrieden bist, schreib uns einfach eine E-Mail innerhalb von 14 Tagen und DU bekommst DEIN Geld zurück. Keine Begründung nötig.</p>
                 </div>
             </div>
 
@@ -1749,53 +1603,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             }
         });
 
-        // Formular-Fehler Hilfsfunktionen
-        function showFormError(id, msg) {
-            clearFormErrors();
-            var el = document.getElementById(id);
-            if (el) { el.textContent = msg; el.style.display = 'block'; return; }
-            // Fallback: generische Meldung oben im Formular
-            var box = document.createElement('div');
-            box.id = 'generic-form-error';
-            box.style.cssText = 'background:#fff0f0;border-left:4px solid #e53e3e;padding:15px 20px;border-radius:8px;margin-bottom:20px;color:#c53030;font-weight:600;';
-            box.textContent = msg;
-            var form = document.getElementById('career-form');
-            form.insertBefore(box, form.firstChild);
-        }
-        function clearFormErrors() {
-            var old = document.getElementById('generic-form-error');
-            if (old) old.remove();
-        }
-
         document.getElementById('career-form').addEventListener('submit', async function(e) {
             e.preventDefault();
-
-            // Custom Validierung - keine Browser-Fehlermeldungen
-            const educationChecked = document.querySelector('input[name="education"]:checked');
-            if (!educationChecked || !educationChecked.value) {
-                showFormError('education-error', 'Bitte wähle DEINEN Schulabschluss aus.');
-                document.querySelector('.question:nth-child(3)').scrollIntoView({behavior:'smooth', block:'center'});
-                return;
-            }
-            const flowVal = document.querySelector('textarea[name="flow_activity"]');
-            if (!flowVal || !flowVal.value.trim()) {
-                showFormError('flow-error', 'Bitte beschreibe kurz, wobei DU DICH sicher fühlst.');
-                flowVal.scrollIntoView({behavior:'smooth', block:'center'});
-                return;
-            }
-            const locationVal = document.getElementById('locationInput');
-            if (!locationVal || !locationVal.value.trim()) {
-                showFormError('location-error', 'Bitte gib DEINEN Standort ein.');
-                locationVal.scrollIntoView({behavior:'smooth', block:'center'});
-                return;
-            }
-            const consentVal = document.getElementById('consentCheckbox');
-            if (!consentVal || !consentVal.checked) {
-                showFormError('consent-error', 'Bitte stimme der Datenschutzerklärung zu.');
-                consentVal.scrollIntoView({behavior:'smooth', block:'center'});
-                return;
-            }
-            clearFormErrors();
 
             const formData = new FormData(e.target);
             const data = {};
@@ -1824,15 +1633,14 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                     document.getElementById('results').classList.add('active');
                     document.getElementById('results-content').innerHTML = `
                         <div style="text-align: center; padding: 40px;">
-                            <h2 style="color: var(--primary); margin-bottom: 10px;">KI analysiert DEIN Profil...</h2>
-                            <p style="font-size: 1.1rem; margin-bottom: 30px; color: var(--text-gray);">DEINE persönliche Karriere-Analyse wird erstellt</p>
-                            <div style="width: 100%; height: 12px; background: #e0e0e0; border-radius: 10px; overflow: hidden; margin: 20px 0;">
-                                <div id="loadingBar" style="height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); width: 0%; transition: width 0.5s ease; border-radius: 10px;"></div>
+                            <h2 style="color: var(--primary); margin-bottom: 20px;">Analyse wird erstellt... ✅</h2>
+                            <p style="font-size: 1.2rem; margin-bottom: 30px;">DEINE Karriere-Analyse wird jetzt generiert</p>
+                            <div style="width: 100%; height: 8px; background: #e0e0e0; border-radius: 10px; overflow: hidden;">
+                                <div style="height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); animation: loading 2s ease-in-out infinite;"></div>
                             </div>
-                            <p id="loadingStatus" style="margin-top: 15px; color: var(--text-gray); font-size: 1rem;">🔍 Profil wird ausgewertet...</p>
+                            <p style="margin-top: 20px; color: var(--text-gray);">Dies kann 20-40 Sekunden dauern</p>
                         </div>
                     `;
-                    startLoadingAnimation();
 
                     const response = await fetch(`${BACKEND_URL}/create-partner-analysis`, {
                         method: 'POST',
@@ -1899,16 +1707,15 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             document.getElementById('questionnaire').style.display = 'none';
             document.getElementById('results').classList.add('active');
             document.getElementById('results-content').innerHTML = `
-            <div style="text-align: center; padding: 40px;">
-                <h2 style="color: var(--primary); margin-bottom: 10px;">Zahlung erfolgreich! ✅</h2>
-                <p style="font-size: 1.1rem; margin-bottom: 30px; color: var(--text-gray);">DEINE persönliche Karriere-Analyse wird erstellt</p>
-                <div style="width: 100%; height: 12px; background: #e0e0e0; border-radius: 10px; overflow: hidden; margin: 20px 0;">
-                    <div id="loadingBar" style="height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); width: 0%; transition: width 0.5s ease; border-radius: 10px;"></div>
+                <div style="text-align: center; padding: 40px;">
+                    <h2 style="color: var(--primary); margin-bottom: 20px;">Zahlung erfolgreich! ✅</h2>
+                    <p style="font-size: 1.2rem; margin-bottom: 30px;">DEINE Karriere wird jetzt analysiert...</p>
+                    <div style="width: 100%; height: 8px; background: #e0e0e0; border-radius: 10px; overflow: hidden;">
+                        <div style="height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); animation: loading 2s ease-in-out infinite;"></div>
+                    </div>
+                    <p style="margin-top: 20px; color: var(--text-gray);">Dies kann 20-40 Sekunden dauern</p>
                 </div>
-                <p id="loadingStatus" style="margin-top: 15px; color: var(--text-gray); font-size: 1rem;">🔍 Profil wird ausgewertet...</p>
-            </div>
-        `;
-        startLoadingAnimation();
+            `;
 
             let attempts = 0;
             const maxAttempts = 30;
@@ -1937,36 +1744,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             }, 2000);
         }
 
-        function startLoadingAnimation() {
-            var seconds = 0;
-            var maxSeconds = 35;
-            var statusMessages = [
-                "🔍 Profil wird ausgewertet...",
-                "🧠 Stärken & Interessen werden analysiert...",
-                "💼 Passende Karrierewege werden gesucht...",
-                "📊 Jobmarkt-Daten werden abgerufen...",
-                "🔮 Zukunftsprognosen werden erstellt...",
-                "✍️ Analyse wird geschrieben...",
-                "✅ Fast fertig..."
-            ];
-            window._loadingTimer = setInterval(function() {
-                seconds++;
-                var progress = Math.min((seconds / maxSeconds) * 95, 95);
-                var barEl = document.getElementById('loadingBar');
-                if (barEl) barEl.style.width = progress + '%';
-                var msgIndex = Math.min(Math.floor(seconds / 5), statusMessages.length - 1);
-                var statusEl = document.getElementById('loadingStatus');
-                if (statusEl) statusEl.textContent = statusMessages[msgIndex];
-                if (seconds >= 120) clearInterval(window._loadingTimer);
-            }, 1000);
-        }
-
-                function displayResults(analysisHtml) {
-            if (window._loadingTimer) { clearInterval(window._loadingTimer); }
-            var _bar = document.getElementById('loadingBar');
-            if (_bar) { _bar.style.width = '100%'; }
-            var _status = document.getElementById('loadingStatus');
-            if (_status) { _status.textContent = '✅ Analyse fertig!'; }
+        function displayResults(analysisHtml) {
             const header = document.getElementById('main-header');
             const priceTag = document.getElementById('price-tag');
             

@@ -34,13 +34,15 @@ app.get('/', (req, res) => {
 app.post('/create-checkout-session', async (req, res) => {
     try {
         const { formData } = req.body;
-
-        // Store formData temporarily to avoid Stripe 500-error (metadata has a size limit)
-        const tempId = `temp_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-        analysisResults.set(tempId, { formData, timestamp: new Date() });
-
+        
+        // Wir erstellen die Session mit der automatischen Methode
         const session = await stripe.checkout.sessions.create({
-            automatic_payment_methods: { enabled: true },
+            // ✅ NUR DIESE ZEILE FÜR DIE ZAHLUNGSARTEN NUTZEN
+            automatic_payment_methods: {
+                enabled: true,
+            },
+            // KEIN "payment_method_types" hier verwenden!
+
             line_items: [{
                 price_data: {
                     currency: 'eur',
@@ -48,17 +50,33 @@ app.post('/create-checkout-session', async (req, res) => {
                         name: 'KI-Karriereanalyse',
                         description: 'Personalisierte Karriereberatung mit KI',
                     },
-                    unit_amount: 499,
+                    unit_amount: 499, // 4.99 EUR
                 },
                 quantity: 1,
             }],
             mode: 'payment',
             success_url: process.env.SUCCESS_URL,
             cancel_url: process.env.CANCEL_URL,
-            metadata: {
-                tempId: tempId,
-            },
+            metadata: {}, // Wir nutzen session.id als Key, daher bleibt metadata leer
         });
+
+        // WICHTIG: formData speichern, BEVOR wir die Antwort senden
+        pendingFormData[session.id] = formData;
+
+        // Start analysis im Hintergrund
+        analyzeCareerWithAI(formData, session.id).catch(err => {
+            console.error('Analysis error:', err);
+        });
+
+        // Sende die ID an das Frontend
+        res.json({ sessionId: session.id });
+
+    } catch (error) {
+        // Wenn hier ein Fehler geloggt wird, siehst du ihn in deinem Terminal/Konsole
+        console.error('❌ STRIPE FEHLER:', error.message);
+        res.status(500).json({ error: error.message });
+    }
+});
 
         analyzeCareerWithAI(formData, session.id).catch(err => {
             console.error('Analysis error:', err);

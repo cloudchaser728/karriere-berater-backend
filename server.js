@@ -40,7 +40,7 @@ app.post('/create-checkout-session', async (req, res) => {
         analysisResults.set(tempId, { formData, timestamp: new Date() });
 
         const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
+            payment_method_types: ['card', 'paypal', 'sepa_debit', 'klarna'],
             line_items: [{
                 price_data: {
                     currency: 'eur',

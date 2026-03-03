@@ -35,14 +35,11 @@ app.post('/create-checkout-session', async (req, res) => {
     try {
         const { formData } = req.body;
         
-        // Wir erstellen die Session mit der automatischen Methode
+        // Session erstellen mit automatischen Zahlungsmethoden
         const session = await stripe.checkout.sessions.create({
-            // ✅ NUR DIESE ZEILE FÜR DIE ZAHLUNGSARTEN NUTZEN
             automatic_payment_methods: {
                 enabled: true,
             },
-            // KEIN "payment_method_types" hier verwenden!
-
             line_items: [{
                 price_data: {
                     currency: 'eur',
@@ -50,41 +47,32 @@ app.post('/create-checkout-session', async (req, res) => {
                         name: 'KI-Karriereanalyse',
                         description: 'Personalisierte Karriereberatung mit KI',
                     },
-                    unit_amount: 499, // 4.99 EUR
+                    unit_amount: 499,
                 },
                 quantity: 1,
             }],
             mode: 'payment',
             success_url: process.env.SUCCESS_URL,
             cancel_url: process.env.CANCEL_URL,
-            metadata: {}, // Wir nutzen session.id als Key, daher bleibt metadata leer
+            metadata: {
+                // Wir speichern hier nur eine ID, keine großen Daten (Stripe-Limit!)
+                timestamp: Date.now().toString()
+            },
         });
 
-        // WICHTIG: formData speichern, BEVOR wir die Antwort senden
-        pendingFormData[session.id] = formData;
+        // WICHTIG: Nutze den Namen deines Speichers aus server (4).js -> analysisResults
+        analysisResults.set(session.id, { formData, timestamp: new Date() });
 
-        // Start analysis im Hintergrund
+        // Analyse im Hintergrund starten
         analyzeCareerWithAI(formData, session.id).catch(err => {
-            console.error('Analysis error:', err);
+            console.error('Analyse-Fehler:', err);
         });
 
-        // Sende die ID an das Frontend
+        // ID ans Frontend senden
         res.json({ sessionId: session.id });
 
     } catch (error) {
-        // Wenn hier ein Fehler geloggt wird, siehst du ihn in deinem Terminal/Konsole
         console.error('❌ STRIPE FEHLER:', error.message);
-        res.status(500).json({ error: error.message });
-    }
-});
-
-        analyzeCareerWithAI(formData, session.id).catch(err => {
-            console.error('Analysis error:', err);
-        });
-
-        res.json({ sessionId: session.id });
-    } catch (error) {
-        console.error('Stripe Error:', error);
         res.status(500).json({ error: error.message });
     }
 });
@@ -100,7 +88,7 @@ app.post('/create-partner-analysis', async (req, res) => {
         
         const analysis = await analyzeCareerWithAI(formData, analysisId);
         
-        console.log(`✅ Partner-Analyse generiert: ${partnerCode} (${new Date().toISOString()})`);
+        console.log(`✅ Partner-Analyse generiert: ${partnerCode}`);
         
         res.json({ 
             status: 'complete',

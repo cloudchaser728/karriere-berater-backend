@@ -34,12 +34,13 @@ app.get('/', (req, res) => {
 app.post('/create-checkout-session', async (req, res) => {
     try {
         const { formData } = req.body;
-        
-        // Session erstellen mit automatischen Zahlungsmethoden
+
+        // Store formData temporarily to avoid Stripe 500-error (metadata has a size limit)
+        const tempId = `temp_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        analysisResults.set(tempId, { formData, timestamp: new Date() });
+
         const session = await stripe.checkout.sessions.create({
-            automatic_payment_methods: {
-                enabled: true,
-            },
+            payment_method_types: ['card'],
             line_items: [{
                 price_data: {
                     currency: 'eur',
@@ -55,24 +56,17 @@ app.post('/create-checkout-session', async (req, res) => {
             success_url: process.env.SUCCESS_URL,
             cancel_url: process.env.CANCEL_URL,
             metadata: {
-                // Wir speichern hier nur eine ID, keine großen Daten (Stripe-Limit!)
-                timestamp: Date.now().toString()
+                tempId: tempId,
             },
         });
 
-        // WICHTIG: Nutze den Namen deines Speichers aus server (4).js -> analysisResults
-        analysisResults.set(session.id, { formData, timestamp: new Date() });
-
-        // Analyse im Hintergrund starten
         analyzeCareerWithAI(formData, session.id).catch(err => {
-            console.error('Analyse-Fehler:', err);
+            console.error('Analysis error:', err);
         });
 
-        // ID ans Frontend senden
         res.json({ sessionId: session.id });
-
     } catch (error) {
-        console.error('❌ STRIPE FEHLER:', error.message);
+        console.error('Stripe Error:', error);
         res.status(500).json({ error: error.message });
     }
 });
@@ -88,7 +82,7 @@ app.post('/create-partner-analysis', async (req, res) => {
         
         const analysis = await analyzeCareerWithAI(formData, analysisId);
         
-        console.log(`✅ Partner-Analyse generiert: ${partnerCode}`);
+        console.log(`✅ Partner-Analyse generiert: ${partnerCode} (${new Date().toISOString()})`);
         
         res.json({ 
             status: 'complete',

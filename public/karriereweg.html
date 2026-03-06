@@ -48,23 +48,39 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Work Sans', sans-serif; background: var(--bg-cream); color: var(--text-dark); line-height: 1.6; }
-        .container { max-width: 100%; margin: 0 auto; padding: 20px 40px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
 
         header {
             text-align: left;
-            padding: 60px 40px 100px;
+            padding: 60px 40px 140px;
+            min-height: 56vw;
             background: linear-gradient(180deg, #0f1f3d 0%, #1a3a6b 55%, #2a5298 75%, #f7f8fc 100%);
             color: white;
             position: relative;
+        }
+        header .header-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
             overflow: hidden;
         }
+        header .header-bg video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: auto;
+            opacity: 0.38;
+        }
         header .header-inner {
-            max-width: 1100px;
+            max-width: 100%;
+            width: 100%;
             margin: 0 auto;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 40px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
         }
         header .header-text {
             flex: 1;
@@ -78,6 +94,16 @@
             height: 500px;
             background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
             pointer-events: none;
+            z-index: 2;
+        }
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 180px;
+            background: linear-gradient(to bottom, transparent 0%, #f7f8fc 100%);
+            pointer-events: none;
+            z-index: 2;
         }
         .school-button {
             position: absolute; top: 20px; right: 20px;
@@ -129,9 +155,9 @@
         .hc-label {
             position:absolute; font-size:0.62rem; font-weight:700;
             letter-spacing:.1em; text-transform:uppercase;
-            color:rgba(201,168,76,0.85); pointer-events:none;
+            color:rgba(201,168,76,1); pointer-events:none;
         }
-        .hcl-top    { top:6%;  left:50%; transform:translateX(-50%); font-size:.7rem; color:rgba(255,255,255,0.85); letter-spacing:.15em; }
+        .hcl-top    { top:6%;  left:50%; transform:translateX(-50%); font-size:.7rem; color:#0f1f3d; letter-spacing:.15em; }
         .hcl-re     { top:35%; left:4%; }
         .hcl-gt     { top:35%; right:4%; }
         .hcl-sc     { bottom:18%; left:4%; }
@@ -142,10 +168,10 @@
         .hc-path { display:flex; align-items:center; gap:8px; opacity:0; animation:hcArrow .6s ease forwards; }
         .hc-path:nth-child(1){animation-delay:.9s;} .hc-path:nth-child(2){animation-delay:1.2s;} .hc-path:nth-child(3){animation-delay:1.5s;}
         @keyframes hcArrow { from{opacity:0;transform:translateX(-8px);} to{opacity:1;transform:translateX(0);} }
-        .hc-path-icon { width:36px; height:36px; background:rgba(15,31,61,0.8); border:1px solid rgba(201,168,76,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.95rem; flex-shrink:0; }
+        .hc-path-icon { width:36px; height:36px; background:rgba(15,31,61,0.1); border:1px solid rgba(201,168,76,0.6); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.95rem; flex-shrink:0; }
         .hc-path-line { width:40px; height:2px; background:linear-gradient(90deg, rgba(201,168,76,.5), rgba(201,168,76,.1)); position:relative; }
         .hc-path-line::after { content:''; position:absolute; right:-5px; top:-4px; border:5px solid transparent; border-left-color:rgba(201,168,76,.45); }
-        .hc-path-lbl { font-size:.65rem; color:rgba(255,255,255,.5); white-space:nowrap; }
+        .hc-path-lbl { font-size:.65rem; color:#0f1f3d; font-weight:600; white-space:nowrap; }
         /* Floating dots */
         .hc-dp { position:absolute; width:6px; height:6px; border-radius:50%; background:#c9a84c; box-shadow:0 0 10px rgba(201,168,76,.8),0 0 18px rgba(201,168,76,.3); animation:hcFloat 3.5s ease-in-out infinite; }
         @keyframes hcFloat { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-7px) scale(1.3);} }
@@ -163,24 +189,12 @@
 
         @media (max-width: 900px) {
             header { text-align: center; padding: 60px 20px 100px; }
-            header .header-inner { flex-direction: column; align-items: center; }
+            header .header-inner { flex-direction: column; }
             header .header-text { max-width: 100%; }
-            .header-cube-wrap {
-                display: block !important;
-                width: 260px !important;
-                height: 260px !important;
-                margin: 30px auto 0 !important;
-                position: relative !important;
-                left: auto !important;
-                top: auto !important;
-                transform: scale(0.78) !important;
-                transform-origin: center top !important;
-                flex-shrink: 0;
-            }
         }
 
         /* INTRO */
-        .intro { background: white; padding: 50px 40px; margin: 40px auto; border-radius: 12px; box-shadow: 0 10px 40px var(--shadow); max-width: 960px; }
+        .intro { background: white; padding: 50px 40px; margin: 40px auto; border-radius: 12px; box-shadow: 0 10px 40px var(--shadow); }
         .intro h2 { font-family: 'Crimson Pro', serif; font-size: 2rem; color: var(--primary); margin-bottom: 20px; }
         .intro p { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 15px; }
         .study-highlight { background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%); padding: 30px; border-radius: 12px; margin: 30px 0; border-left: 5px solid var(--accent); }
@@ -507,19 +521,153 @@
         .info-message p { margin: 8px 0; color: #6b7280; }
         @media print { .chatbot-section { display: none !important; } }
 
+        
+        /* ==========================================
+           UMFASSENDES MOBILE RESPONSIVE DESIGN
+           ========================================== */
+        @media (max-width: 768px) {
+
+            /* HEADER */
+            header {
+                padding: 40px 20px 80px !important;
+                min-height: auto !important;
+            }
+            header .header-bg video {
+                display: block;
+                width: 100% !important;
+                height: auto !important;
+                top: 0 !important;
+                left: 0 !important;
+                transform: none !important;
+                opacity: 0.35;
+            }
+            header .header-inner { max-width: 100%; }
+            header img[alt="Karriereweg Logo"] {
+                height: 50px !important;
+                top: 8px !important;
+                left: 8px !important;
+            }
+            h1 { font-size: 2rem !important; }
+            .tagline { font-size: 1rem !important; }
+            .price-tag { font-size: 0.95rem !important; padding: 8px 16px !important; }
+
+            /* INTRO */
+            .intro { padding: 25px 16px !important; margin: 20px auto !important; }
+            .intro h2 { font-size: 1.5rem !important; }
+            .intro p { font-size: 0.95rem !important; }
+            .study-highlight { padding: 20px 16px !important; }
+            .study-highlight h3 { font-size: 1.2rem !important; }
+            .benefits { grid-template-columns: 1fr !important; grid-template-areas: "a" "b" "c" "d" "e" !important; }
+            .benefit-card { padding: 20px 16px !important; }
+            .btn { padding: 16px 28px !important; font-size: 1rem !important; }
+
+            /* WÜRFEL */
+            .header-cube-wrap { display: block !important; transform: scale(0.75) !important; transform-origin: center center !important; }
+
+            /* FRAGEBOGEN */
+            #questionnaire { padding: 20px 16px !important; margin: 20px auto !important; }
+            .block-progress { padding: 14px 12px !important; top: 8px !important; }
+            .block-step-circle { width: 28px !important; height: 28px !important; font-size: 0.75rem !important; }
+            .block-step-label { font-size: 0.6rem !important; }
+            .block-connector { flex: 0.3 !important; }
+            .block-header h2 { font-size: 1.4rem !important; }
+            .question label { font-size: 1.1rem !important; }
+            .radio-option { padding: 12px !important; font-size: 0.9rem !important; }
+            .radio-option:hover { transform: none !important; }
+            .btn-next, .btn-back { padding: 12px 20px !important; font-size: 0.9rem !important; }
+
+            /* ERGEBNISSE */
+            #results { padding: 25px 16px !important; margin: 20px auto !important; }
+            #results-content h3 { font-size: 1.4rem !important; }
+            #results-content h4 { font-size: 1.15rem !important; }
+            #results-content p { font-size: 0.95rem !important; }
+            .career-path-card { padding: 20px 16px !important; }
+            .career-path-card h3 { font-size: 1.4rem !important; }
+            .salary-table { font-size: 0.85rem !important; }
+            .salary-table th, .salary-table td { padding: 8px 6px !important; }
+            .analysis-header { padding: 20px 16px !important; }
+            .analysis-header h2 { font-size: 1.4rem !important; }
+            .badge-container { gap: 6px !important; }
+            .career-badge { font-size: 0.78rem !important; padding: 6px 10px !important; }
+            .step-item { padding: 10px !important; }
+            .section-container { padding: 20px 16px !important; }
+
+            /* CHATBOT */
+            .chatbot-section { padding: 20px 16px !important; margin: 25px 0 !important; }
+            .chatbot-intro h3 { font-size: 1.3rem !important; }
+            .chatbot-feature-list { gap: 8px !important; }
+            .chatbot-feature-list span { font-size: 0.8rem !important; padding: 6px 10px !important; }
+            .chatbot-messages { min-height: 220px !important; max-height: 350px !important; padding: 14px !important; }
+            .bot-message, .user-message { max-width: 92% !important; font-size: 0.9rem !important; padding: 10px 12px !important; }
+            .chatbot-input-area { padding: 12px !important; gap: 8px !important; }
+            .chatbot-input-area input { padding: 10px 12px !important; font-size: 0.95rem !important; }
+            .btn-send { padding: 10px 16px !important; font-size: 1rem !important; }
+            .chatbot-header { padding: 14px 16px !important; }
+            .chatbot-header h4 { font-size: 1rem !important; }
+
+            /* FAQ */
+            .faq-section { padding: 40px 0 20px !important; }
+            .faq-section h2 { font-size: 1.7rem !important; }
+            .faq-question { padding: 16px !important; font-size: 0.95rem !important; }
+
+            /* FOOTER */
+            footer { padding: 30px 16px !important; }
+            .job-search-buttons a { min-width: 100% !important; }
+            .container { padding: 0 12px !important; }
+        }
+
+        @media (max-width: 400px) {
+            h1 { font-size: 1.7rem !important; }
+            .block-step-label { display: none !important; }
+            .block-step-circle { width: 26px !important; height: 26px !important; }
+        }
+
         </style>
 </head>
 <body>
     <!-- ========== DARK HERO HEADER ========== -->
     <header id="main-header">
+        <div class="header-bg">
+            <video autoplay muted loop playsinline poster="/header-fallback.jpg">
+                <source src="/header-video.mp4" type="video/mp4">
+            </video>
+        </div>
+        <img src="/logo.png" alt="Karriereweg Logo" style="position:absolute; top:12px; left:12px; height:65px; width:auto; filter: drop-shadow(0 2px 12px rgba(0,0,0,0.4)); z-index:10;">
 
         <div class="header-inner">
-            <div class="header-text">
-                <h1>Dein Karriereweg</h1>
-                <p class="tagline" style="margin-top: 25px; margin-bottom: 25px;">Finde DEINEN perfekten Karriereweg mit KI-gestützter Tiefenanalyse</p>
-                <a href="/schulen.html" class="price-tag" id="price-tag" style="text-decoration: none; cursor: pointer;">Für Schulen</a>
+            <div class="header-text" style="text-align:center; width:100%;">
+                <h1 style="text-align:center;">Dein Karriereweg</h1>
+                <p class="tagline" style="margin-top: 25px; margin-bottom: 25px; text-align:center;">Finde DEINEN perfekten Karriereweg mit KI-gestützter Tiefenanalyse</p>
+                <div style="text-align:center;"><a href="/schulen.html" class="price-tag" id="price-tag" style="text-decoration: none; cursor: pointer;">Für Schulen</a></div>
             </div>
-            <div class="header-cube-wrap">
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="intro" id="intro-section">
+            <h2>Karriereentscheidungen waren noch nie so präzise</h2>
+            <p>Während DU noch überlegst, bauen andere bereits ihre Zukunft. 4,99€ für Klarheit über DEINEN perfekten Karriereweg</p>
+            <div class="study-highlight">
+                <h3>Wissenschaftlich fundiert, persönlich zugeschnitten</h3>
+                <ul>
+                    <li>Flow-basierte Analyse DEINER intrinsischen Motivation</li>
+                    <li>Ausschlussprinzip: Was DU NICHT willst ist genauso wichtig</li>
+                    <li>Arbeitsweise-Matching: Struktur vs. Chaos, Digital vs. Physisch</li>
+                    <li>Konkrete Uni-/Hochschul-Empfehlungen mit NC-Alternativen</li>
+                    <li>Realistische Gehalts- und Jobmarkt-Perspektiven</li>
+                </ul>
+            </div>
+            <div class="benefits">
+                <div class="benefit-card"><h3>Tiefenanalyse</h3><p>Bewährte Berufspsychologie. Nur präziser, weil die KI keine Vorurteile hat.</p></div>
+                <div class="benefit-card"><h3>KI die DICH wirklich versteht</h3><p>Analysiert Persönlichkeit, Denkweise und Stärken. Nicht nur „Was interessiert DICH?"</p></div>
+                <div class="benefit-card"><h3>Wissenschaftlich validiert</h3><p>Basiert auf Holland-Code &amp; Big Five. Die meistgenutzten Persönlichkeitsmodelle der Welt.</p></div>
+                <div class="benefit-card benefit-card-wide"><h3>Ergebnis in 30 Sekunden</h3><p>Modernste GPT-4 KI erstellt DEINE persönliche Analyse. Schneller als jeder Berufsberater-Termin.</p></div>
+                <div class="benefit-card benefit-card-wide"><h3>Übertrifft klassische Berufsberatung</h3><p>Unsere KI-Empfehlungen stimmen häufiger mit dem tatsächlich gewählten Beruf überein. Persönlichkeit, Stärken und Arbeitsweise kombiniert.</p></div>
+            </div>
+            
+            <div style="display:flex; justify-content:center; margin: -20px 0 30px;">
+                <div style="position:relative; width:560px; height:420px; max-width:100%; overflow:visible;">
+                    <div class="header-cube-wrap" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:340px; height:340px;">
                 <div class="hc-orbit hc-orbit-1"><div class="hc-orbit-dot"></div></div>
                 <div class="hc-orbit hc-orbit-2"></div>
                 <div class="hc-glow"></div>
@@ -585,34 +733,12 @@
                         <div class="hc-face hcf-left"></div>
                         <div class="hc-face hcf-top"></div>
                         <div class="hc-face hcf-bottom"></div>
+                </div>
+            </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
-
-    <div class="container">
-        <section class="intro" id="intro-section">
-            <h2>Karriereentscheidungen waren noch nie so präzise</h2>
-            <p>Während DU noch überlegst, bauen andere bereits ihre Zukunft. 4,99€ für Klarheit über DEINEN perfekten Karriereweg</p>
-            <div class="study-highlight">
-                <h3>Wissenschaftlich fundiert, persönlich zugeschnitten</h3>
-                <ul>
-                    <li>Flow-basierte Analyse DEINER intrinsischen Motivation</li>
-                    <li>Ausschlussprinzip: Was DU NICHT willst ist genauso wichtig</li>
-                    <li>Arbeitsweise-Matching: Struktur vs. Chaos, Digital vs. Physisch</li>
-                    <li>Konkrete Uni-/Hochschul-Empfehlungen mit NC-Alternativen</li>
-                    <li>Realistische Gehalts- und Jobmarkt-Perspektiven</li>
-                </ul>
-            </div>
-            <div class="benefits">
-                <div class="benefit-card"><h3>Tiefenanalyse</h3><p>Bewährte Berufspsychologie. Nur präziser, weil die KI keine Vorurteile hat.</p></div>
-                <div class="benefit-card"><h3>KI die DICH wirklich versteht</h3><p>Analysiert Persönlichkeit, Denkweise und Stärken. Nicht nur „Was interessiert DICH?"</p></div>
-                <div class="benefit-card"><h3>Wissenschaftlich validiert</h3><p>Basiert auf Holland-Code &amp; Big Five. Die meistgenutzten Persönlichkeitsmodelle der Welt.</p></div>
-                <div class="benefit-card benefit-card-wide"><h3>Ergebnis in 30 Sekunden</h3><p>Modernste GPT-4 KI erstellt DEINE persönliche Analyse. Schneller als jeder Berufsberater-Termin.</p></div>
-                <div class="benefit-card benefit-card-wide"><h3>Übertrifft klassische Berufsberatung</h3><p>Unsere KI-Empfehlungen stimmen häufiger mit dem tatsächlich gewählten Beruf überein. Persönlichkeit, Stärken und Arbeitsweise kombiniert.</p></div>
-            </div>
-            <div class="btn-container">
+<div class="btn-container">
                 <button class="btn btn-accent" id="startBtn">Jetzt starten – Nur 4,99€</button>
             </div>
         </section>
@@ -956,12 +1082,12 @@
                     <div class="question" id="frage-menschen-art" style="display:none; margin-top: -15px; padding: 20px; background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%); border-radius: 10px; border-left: 4px solid var(--primary-light);">
                         <label style="font-size: 1.1rem;">Mit welchen Menschen möchtest DU arbeiten? <span style="font-size: 0.85rem; color: var(--text-gray); font-weight: 400;">(Mehrfachauswahl möglich)</span></label>
                         <div class="radio-group" style="margin-top: 10px;">
-                            <label class="radio-option"><input type="checkbox" name="menschen_art" value="kinder"><span>👶 Kleine Kinder (Kita, Krippe, Grundschule)</span></label>
-                            <label class="radio-option"><input type="checkbox" name="menschen_art" value="jugendliche"><span>🧑 Jugendliche (Schule, Jugendarbeit, Sozialarbeit)</span></label>
-                            <label class="radio-option"><input type="checkbox" name="menschen_art" value="aeltere"><span>👴 Ältere Menschen (Seniorenpflege, Begleitung)</span></label>
-                            <label class="radio-option"><input type="checkbox" name="menschen_art" value="behinderte"><span>♿ Menschen mit Behinderung (Eingliederungshilfe)</span></label>
-                            <label class="radio-option"><input type="checkbox" name="menschen_art" value="kranke"><span>🏥 Kranke Menschen (Pflege, Klinik, Therapie)</span></label>
-                            <label class="radio-option"><input type="checkbox" name="menschen_art" value="allgemein"><span>🤝 Allgemein (Beratung, Verkauf, HR, Kundenkontakt)</span></label>
+                            <label class="radio-option"><input type="checkbox" name="menschen_art" value="kinder"><span>Kleine Kinder (Kita, Krippe, Grundschule)</span></label>
+                            <label class="radio-option"><input type="checkbox" name="menschen_art" value="jugendliche"><span>Jugendliche (Schule, Jugendarbeit, Sozialarbeit)</span></label>
+                            <label class="radio-option"><input type="checkbox" name="menschen_art" value="aeltere"><span>Ältere Menschen (Seniorenpflege, Begleitung)</span></label>
+                            <label class="radio-option"><input type="checkbox" name="menschen_art" value="behinderte"><span>Menschen mit Behinderung (Eingliederungshilfe)</span></label>
+                            <label class="radio-option"><input type="checkbox" name="menschen_art" value="kranke"><span>Kranke Menschen (Pflege, Klinik, Therapie)</span></label>
+                            <label class="radio-option"><input type="checkbox" name="menschen_art" value="allgemein"><span>Allgemein (Beratung, Verkauf, HR, Kundenkontakt)</span></label>
                         </div>
                     </div>
 
@@ -969,12 +1095,12 @@
                     <div class="question" id="frage-tiere-natur" style="display:none; margin-top: -15px; padding: 20px; background: linear-gradient(135deg, #f0faf0 0%, #e8f5e8 100%); border-radius: 10px; border-left: 4px solid #4caf50;">
                         <label style="font-size: 1.1rem;">Was interessiert DICH bei Natur, Tieren &amp; Umwelt? <span style="font-size: 0.85rem; color: var(--text-gray); font-weight: 400;">(Mehrfachauswahl möglich)</span></label>
                         <div class="radio-group" style="margin-top: 10px;">
-                            <label class="radio-option"><input type="checkbox" name="natur_art" value="tiere_medizin"><span>🐾 Tiermedizin &amp; Tiergesundheit (Tierarzt, Tierarzthelfer)</span></label>
-                            <label class="radio-option"><input type="checkbox" name="natur_art" value="tiere_pflege"><span>🐕 Tierpflege &amp; Betreuung (Tierpfleger, Hundetrainer)</span></label>
-                            <label class="radio-option"><input type="checkbox" name="natur_art" value="landwirtschaft"><span>🌾 Landwirtschaft &amp; Forstwirtschaft</span></label>
-                            <label class="radio-option"><input type="checkbox" name="natur_art" value="umwelt"><span>🌍 Umweltschutz &amp; Nachhaltigkeit</span></label>
-                            <label class="radio-option"><input type="checkbox" name="natur_art" value="garten"><span>🌱 Gartenbau &amp; Landschaftspflege</span></label>
-                            <label class="radio-option"><input type="checkbox" name="natur_art" value="biologie"><span>🔬 Biologie &amp; Naturwissenschaften</span></label>
+                            <label class="radio-option"><input type="checkbox" name="natur_art" value="tiere_medizin"><span>Tiermedizin &amp; Tiergesundheit (Tierarzt, Tierarzthelfer)</span></label>
+                            <label class="radio-option"><input type="checkbox" name="natur_art" value="tiere_pflege"><span>Tierpflege &amp; Betreuung (Tierpfleger, Hundetrainer)</span></label>
+                            <label class="radio-option"><input type="checkbox" name="natur_art" value="landwirtschaft"><span>Landwirtschaft &amp; Forstwirtschaft</span></label>
+                            <label class="radio-option"><input type="checkbox" name="natur_art" value="umwelt"><span>Umweltschutz &amp; Nachhaltigkeit</span></label>
+                            <label class="radio-option"><input type="checkbox" name="natur_art" value="garten"><span>Gartenbau &amp; Landschaftspflege</span></label>
+                            <label class="radio-option"><input type="checkbox" name="natur_art" value="biologie"><span>Biologie &amp; Naturwissenschaften</span></label>
                         </div>
                     </div>
 
@@ -1013,12 +1139,12 @@
                     <div class="question" id="frage-sport-bereich" style="display:none; margin-top: -15px; padding: 20px; background: linear-gradient(135deg, #fff8e6 0%, #fff0cc 100%); border-radius: 10px; border-left: 4px solid var(--accent);">
                         <label style="font-size: 1.1rem;">Welcher Bereich im Sport interessiert DICH? <span style="font-size: 0.85rem; color: var(--text-gray); font-weight: 400;">(Mehrfachauswahl möglich)</span></label>
                         <div class="radio-group" style="margin-top: 10px;">
-                            <label class="radio-option"><input type="checkbox" name="sport_bereich" value="trainer"><span>🏃 Trainer &amp; Coaching (Sportlehrer, Personal Trainer)</span></label>
-                            <label class="radio-option"><input type="checkbox" name="sport_bereich" value="fitness_gesundheit"><span>💪 Fitness &amp; Gesundheit (Physiotherapie, Ernährungsberatung)</span></label>
-                            <label class="radio-option"><input type="checkbox" name="sport_bereich" value="management"><span>🏟️ Sportmanagement &amp; Events (Organisation, Marketing)</span></label>
-                            <label class="radio-option"><input type="checkbox" name="sport_bereich" value="journalismus"><span>📺 Sportjournalismus &amp; Social Media</span></label>
-                            <label class="radio-option"><input type="checkbox" name="sport_bereich" value="wissenschaft"><span>🔬 Sportwissenschaft &amp; Forschung</span></label>
-                            <label class="radio-option"><input type="checkbox" name="sport_bereich" value="medizin"><span>⚕️ Sportmedizin &amp; Therapie</span></label>
+                            <label class="radio-option"><input type="checkbox" name="sport_bereich" value="trainer"><span>Trainer &amp; Coaching (Sportlehrer, Personal Trainer)</span></label>
+                            <label class="radio-option"><input type="checkbox" name="sport_bereich" value="fitness_gesundheit"><span>Fitness &amp; Gesundheit (Physiotherapie, Ernährungsberatung)</span></label>
+                            <label class="radio-option"><input type="checkbox" name="sport_bereich" value="management"><span>Sportmanagement &amp; Events (Organisation, Marketing)</span></label>
+                            <label class="radio-option"><input type="checkbox" name="sport_bereich" value="journalismus"><span>Sportjournalismus &amp; Social Media</span></label>
+                            <label class="radio-option"><input type="checkbox" name="sport_bereich" value="wissenschaft"><span>Sportwissenschaft &amp; Forschung</span></label>
+                            <label class="radio-option"><input type="checkbox" name="sport_bereich" value="medizin"><span>Sportmedizin &amp; Therapie</span></label>
                         </div>
                     </div>
 

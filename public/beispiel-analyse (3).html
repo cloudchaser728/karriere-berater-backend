@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beispiel-Analyse – Dein Karriereweg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Work+Sans:wght@400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-dark: #1a4d2e;
+    --green-mid: #2d7a4f;
+    --orange: #f77f00;
+    --bg: #f5f4f0;
+    --white: #ffffff;
+    --text: #1a1a1a;
+    --text-light: #555;
+    --border: #e0ddd6;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Work Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* PREVIEW BANNER */
+  .preview-banner {
+    background: var(--orange);
+    color: white;
+    text-align: center;
+    padding: 11px 20px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* HEADER */
+  .page-header {
+    position: relative;
+    overflow: hidden;
+    background: #0f1f3d;
+    padding: 48px 32px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23fff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .badge-ki {
+    display: inline-block;
+    background: var(--orange);
+    color: white;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .page-header h1 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -0.5px;
+    position: relative;
+  }
+  .page-header .subtitle {
+    color: rgba(255,255,255,0.75);
+    font-family: 'Work Sans', sans-serif;
+    margin-top: 8px;
+    font-size: 0.95rem;
+    position: relative;
+  }
+
+  .header-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.45; }
+  .header-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(15,31,61,0.75) 0%, rgba(26,77,46,0.65) 100%); z-index: 1; }
+  .page-header .badge-ki, .page-header h1, .page-header .subtitle { position: relative; z-index: 2; }
+
+  /* WRAPPER */
+  .analysis-wrapper {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+  }
+
+  /* TYPOGRAPHY */
+  h3 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  h4 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text);
+    margin: 18px 0 10px;
+  }
+
+  /* PROFIL BOX */
+  .profil-box {
+    background: linear-gradient(135deg, #f0faf4 0%, #e8f5ed 100%);
+    border-radius: 14px;
+    padding: 28px;
+    margin: 24px 0;
+    border-left: 5px solid var(--green-mid);
+    box-shadow: var(--shadow);
+  }
+
+  /* DURCHSCHAUT BLOCK */
+  .durchschaut-block {
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+    border-radius: 14px;
+    padding: 28px;
+    margin: 24px 0;
+    box-shadow: 0 8px 32px rgba(26,77,46,0.25);
+  }
+  .durchschaut-block h3 { color: var(--orange); }
+  .durchschaut-block p {
+    color: rgba(255,255,255,0.92);
+    font-size: 1rem;
+    line-height: 1.85;
+  }
+  .durchschaut-block .note {
+    color: var(--orange);
+    font-weight: 700;
+    font-size: 0.88rem;
+    margin-top: 16px;
+    display: block;
+  }
+
+  /* CAREER CARD */
+  .career-path-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 30px;
+    margin: 28px 0;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .career-path-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--green-dark), var(--orange));
+  }
+  .career-number {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green-dark);
+    color: white;
+    font-family: 'Crimson Pro', serif;
+    font-weight: 900;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .career-path-card > h3 {
+    font-size: 1.3rem;
+    color: var(--green-dark);
+    margin-bottom: 4px;
+  }
+  .career-meta {
+    color: var(--text-light);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.88rem;
+    margin-bottom: 18px;
+  }
+  .career-desc {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+
+  /* SALARY TABLE */
+  .salary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 6px;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.9rem;
+    font-family: 'Work Sans', sans-serif;
+  }
+  .salary-table th {
+    background: var(--green-dark);
+    color: white;
+    padding: 11px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.3px;
+  }
+  .salary-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .salary-table tr:nth-child(even) td { background: #fafafa; }
+  .salary-table .hl td {
+    background: #e8f5ed;
+    font-weight: 700;
+    color: var(--green-dark);
+  }
+
+  /* BUTTONS */
+  .job-btns { margin: 16px 0 20px; }
+  .btn {
+    display: inline-block;
+    padding: 9px 16px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin: 4px 3px;
+    background: var(--green-dark);
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-orange { background: var(--orange); }
+  .btn-blue   { background: #3b82f6; }
+  .btn-teal   { background: #10b981; }
+  .btn-purple { background: #7c3aed; }
+  .btn-gray   { background: #64748b; }
+
+  /* STECKBRIEF */
+  .steckbrief-box {
+    background: #f9fafc;
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin: 20px 0;
+    border: 1px solid var(--border);
+  }
+  .steckbrief-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.92rem;
+    align-items: flex-start;
+  }
+  .steckbrief-item:last-child { border-bottom: none; }
+  .si-icon { flex-shrink: 0; font-size: 1.05rem; margin-top: 1px; }
+
+  /* ZUKUNFT */
+  .zukunft-box {
+    background: linear-gradient(135deg, #e8f5ed, #f0faf4);
+    border: 1.5px solid var(--green-mid);
+    border-radius: 12px;
+    padding: 22px;
+    margin: 20px 0;
+  }
+  .zi {
+    display: flex;
+    gap: 10px;
+    font-size: 0.92rem;
+    margin-bottom: 10px;
+    align-items: flex-start;
+  }
+  .zi:last-child { margin-bottom: 0; }
+
+  /* WARUM */
+  .warum-box {
+    background: #fff8e1;
+    border-left: 4px solid var(--orange);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 22px;
+    margin: 20px 0;
+    font-size: 0.93rem;
+  }
+  .warum-box h3 { color: #e65100; }
+
+  /* ALTERNATIVEN */
+  .alt-box {
+    background: #f0f4ff;
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin: 20px 0;
+    border: 1px solid #c7d2fe;
+  }
+  .alt-box h3 { color: #3730a3; }
+  .alt-item {
+    font-size: 0.92rem;
+    padding: 9px 0;
+    border-bottom: 1px solid #e0e7ff;
+  }
+  .alt-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  /* LOCK SECTION — key fix: wrapper is relative with explicit height */
+  .lock-wrapper {
+    min-height: 600px;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin: 28px 0;
+  }
+  .lock-blur-content {
+    min-height: 600px;
+    filter: blur(4px);
+    opacity: 0.25;
+    pointer-events: none;
+    user-select: none;
+    background: white;
+    padding: 28px;
+  }
+  .lock-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(247,248,252,0.97); border: 1px solid #e0ddd6;
+    text-align: center;
+    padding: 32px 24px;
+    z-index: 10;
+  }
+  .lock-icon { font-size: 2.8rem; margin-bottom: 14px; }
+  .lock-overlay h2 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.55rem;
+    font-weight: 900;
+    color: var(--green-dark);
+    margin-bottom: 10px;
+  }
+  .lock-overlay .lock-sub {
+    color: var(--text-light);
+    font-size: 0.93rem;
+    margin-bottom: 18px;
+    max-width: 400px;
+  }
+  .lock-list {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 22px;
+    display: inline-block;
+  }
+  .lock-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .lock-list li::before {
+    content: '✓';
+    color: var(--green-mid);
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .btn-unlock {
+    background: linear-gradient(135deg, #f77f00, #e86d00);
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 14px 38px;
+    border-radius: 30px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    font-weight: 900;
+    box-shadow: 0 5px 20px rgba(247,127,0,0.5); border: 2px solid #e06000;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-unlock:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(247,127,0,0.45);
+  }
+  .price-note {
+    margin-top: 11px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.83rem;
+    color: var(--text-light);
+  }
+  .price-note strong { color: var(--green-dark); }
+
+  /* BACK */
+  .back-link {
+    text-align: center;
+    margin-top: 8px;
+  }
+  .back-link a {
+    color: var(--green-dark);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .back-link a:hover { text-decoration: underline; }
+
+  .hl-orange { color: var(--orange); font-weight: 700; }
+  .hl-green  { color: var(--green-dark); font-weight: 700; }
+
+  @media (max-width: 600px) {
+    .page-header h1 { font-size: 1.45rem; }
+    .career-path-card { padding: 20px; }
+    .btn { font-size: 0.76rem; padding: 8px 11px; }
+    .lock-overlay { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-banner">📋 BEISPIEL-ANALYSE – So sieht DEINE persönliche Karriere-Analyse aus</div>
+
+<div class="page-header">
+  <video class="header-video" autoplay muted loop playsinline>
+    <source src="header-video-beispiel.mp4" type="video/mp4">
+  </video>
+  <div class="header-overlay"></div>
+  <div class="badge-ki">✨ KI-Karriereanalyse</div>
+  <h1>DEINE persönliche Karriere-Analyse</h1>
+  <p class="subtitle">Basierend auf DEINEM einzigartigen Profil · Reviewed &amp; geprüft durch KI-Review-Loop</p>
+</div>
+
+<div class="analysis-wrapper">
+
+  <!-- PROFIL -->
+  <div class="profil-box">
+    <h3>👤 Dein Profil</h3>
+    <p>DU bist ein <strong>MACHER</strong>, <strong>DENKER</strong> und <strong>KREATIVER</strong>, der sich in der digitalen Welt zu Hause fühlt. Programmieren fällt DIR leicht und ist eine Aktivität, in der DU aufblühst. Deine Arbeitsweise ist strukturiert, und DU bevorzugst es, alleine zu arbeiten, was DIR erlaubt, dich voll auf deine Aufgaben zu konzentrieren. Deine Prioritäten liegen auf finanzieller Sicherheit, einem sinnvollen Beruf und einem sicheren Arbeitsplatz. DU suchst eine Mischung aus Routine und Abwechslung, wobei DU ein sicheres Umfeld bevorzugst.</p>
+  </div>
+
+  <!-- DURCHSCHAUT -->
+  <div class="durchschaut-block">
+    <h3>🔍 Was wir in DIR gesehen haben</h3>
+    <p>Als <strong style="color:white;">MACHER</strong> und <strong style="color:white;">DENKER</strong> mit einer Leidenschaft für das Programmieren hast DU die Fähigkeit, komplexe Probleme zu lösen und kreative Lösungen zu entwickeln. Deine Vorliebe für Struktur und deine Fähigkeit, alleine zu arbeiten, machen DICH zu einem idealen Kandidaten für Berufe im IT-Bereich, wo DU deine analytischen Fähigkeiten voll ausschöpfen kannst. Dass DU keine spezifischen Anti-Jobs angegeben hast, zeigt, dass DU offen für verschiedene Möglichkeiten bist und bereits eine klare Vorstellung davon hast, was DU erreichen möchtest. Deine Energiequelle ist das Arbeiten in Ruhe, was DICH in Berufen, die Konzentration und Präzision erfordern, besonders erfolgreich macht. Diese Kombination aus analytischem Denken und Kreativität ist selten und macht DICH in der IT-Branche besonders wertvoll.</p>
+    <span class="note">💡 Diese Beobachtungen basieren ausschließlich auf DEINEN persönlichen Antworten.</span>
+  </div>
+
+  <!-- KARRIEREWEG 1 -->
+  <div class="career-path-card">
+    <div class="career-number">🥇 Karriereweg 1</div>
+    <h3>💻 Fachinformatiker für Anwendungsentwicklung</h3>
+    <p class="career-meta">Duale Ausbildung · 3 Jahre · IHK-Abschluss · ab Realschulabschluss</p>
+    <p class="career-desc">Als Fachinformatiker für Anwendungsentwicklung wirst DU Softwarelösungen entwickeln und programmieren. Diese Ausbildung dauert drei Jahre und kombiniert theoretisches Wissen mit praktischer Erfahrung in einem Unternehmen.</p>
+
+    <h4>💰 Gehalt &amp; Entwicklung</h4>
+    <table class="salary-table">
+      <tr><th>Ausbildungsjahr</th><th>Vergütung</th></tr>
+      <tr><td>1. Lehrjahr</td><td>ca. <span class="hl-orange">1.000 €</span>/Monat</td></tr>
+      <tr><td>2. Lehrjahr</td><td>ca. <span class="hl-orange">1.100 €</span>/Monat</td></tr>
+      <tr><td>3. Lehrjahr</td><td>ca. <span class="hl-orange">1.200 €</span>/Monat</td></tr>
+      <tr class="hl"><td>Einstiegsgehalt nach Abschluss</td><td>2.500 – 3.000 €/Monat</td></tr>
+      <tr class="hl"><td>Nach 3–5 Jahren</td><td>3.500 – 4.500 €/Monat</td></tr>
+    </table>
+    <p style="font-size:0.82rem;color:#888;margin-bottom:18px;">🎁 In IT-Betrieben oft Standard: Weihnachtsgeld + Urlaubsgeld + Homeoffice</p>
+
+    <h4>📍 Freie Ausbildungsplätze in Köln:</h4>
+    <div class="job-btns">
+      <a href="https://www.google.com/search?q=Fachinformatiker+Anwendungsentwicklung+Ausbildung+K%C3%B6ln&ibp=htl;jobs" target="_blank" class="btn btn-orange">🔍 Google Jobs</a>
+      <a href="https://www.ausbildung.de/suche?what=Fachinformatiker+Anwendungsentwicklung&where=K%C3%B6ln" target="_blank" class="btn btn-blue">📋 Ausbildung.de</a>
+      <a href="https://de.indeed.com/jobs?q=Fachinformatiker+Anwendungsentwicklung&l=K%C3%B6ln" target="_blank" class="btn btn-teal">💼 Indeed</a>
+      <a href="https://www.arbeitsagentur.de/jobsuche/suche?was=Fachinformatiker+Anwendungsentwicklung&wo=K%C3%B6ln" target="_blank" class="btn">🏛️ Arbeitsagentur</a>
+      <a href="https://www.ihk-lehrstellenboerse.de/lehrstellen/suche.html?was=Fachinformatiker&wo=K%C3%B6ln" target="_blank" class="btn btn-purple">🎓 IHK Ausbildungssuche</a>
+      <a href="https://berufenet.arbeitsagentur.de/berufenet/faces/index?path=null/kurzbeschreibung&dkz=1145" target="_blank" class="btn btn-gray">📖 BERUFENET</a>
+    </div>
+
+    <div class="steckbrief-box">
+      <h4 style="margin-top:0;">📋 Steckbrief – Was auf DICH zukommt</h4>
+      <div class="steckbrief-item"><span class="si-icon">🏫</span><span><strong>Lernorte:</strong> Berufsschule 1-2 Tage/Woche + Betrieb 3-4 Tage/Woche</span></div>
+      <div class="steckbrief-item"><span class="si-icon">📚</span><span><strong>Fächer:</strong> Programmierung, Datenbanken, Softwareentwicklung, IT-Sicherheit, Projektmanagement, Mathematik</span></div>
+      <div class="steckbrief-item"><span class="si-icon">📝</span><span><strong>Prüfungen:</strong> Zwischenprüfung im 2. Jahr, Abschlussprüfung am Ende der Ausbildung</span></div>
+      <div class="steckbrief-item"><span class="si-icon">📄</span><span><strong>Bewerbung:</strong> Lebenslauf, Anschreiben, Zeugnisse; Bewerbungszeitraum: meist ein Jahr im Voraus</span></div>
+      <div class="steckbrief-item"><span class="si-icon">💪</span><span><strong>Was DICH erwartet:</strong> Anspruchsvolle Projekte, die Kreativität und analytisches Denken erfordern</span></div>
+      <div class="steckbrief-item"><span class="si-icon">🎓</span><span><strong>Danach:</strong> Möglichkeit zur Weiterbildung zum IT-Projektleiter oder Studium der Informatik</span></div>
+    </div>
+
+    <div class="zukunft-box">
+      <h4 style="margin-top:0;color:var(--green-dark);">🔮 Zukunft &amp; Jobmarkt-Trend</h4>
+      <div class="zi"><span>📈</span><span><strong>Zukunftssicherheit:</strong> 🟢 SEHR SICHER – Die Nachfrage nach IT-Fachkräften wächst stetig bis 2035</span></div>
+      <div class="zi"><span>🌍</span><span><strong>Branchentrend:</strong> Wachstum von 20% in der IT-Branche, insbesondere Softwareentwicklung und IT-Sicherheit</span></div>
+      <div class="zi"><span>🤖</span><span><strong>KI-Sicherheits-Score: 65%</strong> – Dieser Beruf verändert sich durch KI, wird aber nicht ersetzt. DU wirst weniger Routine-Coding machen – dafür mehr Architektur und Design von Softwarelösungen. Wer jetzt Python und Java lernt, wird durch KI stärker – nicht schwächer.</span></div>
+      <div class="zi"><span>🏆</span><span><strong>Sektoren mit größtem Bedarf:</strong> IT-Dienstleister, Softwareunternehmen, Banken, Versicherungen</span></div>
+      <div class="zi"><span>📊</span><span><strong>Arbeitsmarkt-Fakten:</strong> Hohe Nachfrage, niedrige Arbeitslosenquote in der IT-Branche</span></div>
+      <div class="zi"><span>💡</span><span><strong>Zukunfts-Tipp:</strong> Zertifikate in Python und JavaScript, z.B. über Coursera oder edX</span></div>
+    </div>
+
+    <div class="warum-box">
+      <h3>🎯 Warum dieser Weg zu DIR passt:</h3>
+      <p style="margin-top:10px;">Deine Stärken im Programmieren und dein strukturiertes Arbeiten machen DICH ideal für die Anwendungsentwicklung. DU kannst deine Kreativität und dein analytisches Denken in der Softwareentwicklung voll ausleben. Die IT-Branche bietet DIR die finanzielle Sicherheit und den sinnvollen Beruf, den DU suchst.</p>
+    </div>
+
+    <div class="alt-box">
+      <h3>🔀 3 ähnliche Alternativen die ebenfalls passen könnten:</h3>
+      <div class="alt-item" style="padding-top:12px;"><strong>Alternative 1:</strong> Fachinformatiker für Systemintegration – Fokus auf Netzwerke und IT-Infrastruktur</div>
+      <div class="alt-item"><strong>Alternative 2:</strong> IT-System-Kaufmann – Kombination aus IT und kaufmännischen Aufgaben</div>
+      <div class="alt-item"><strong>Alternative 3:</strong> Duales Studium Informatik – Theorie und Praxis kombiniert mit einem akademischen Abschluss</div>
+    </div>
+  </div>
+
+  <!-- LOCK SECTION -->
+  <div class="lock-wrapper">
+    <div class="lock-blur-content">
+      <!-- blurred preview of KW2 -->
+      <div style="background:var(--green-dark);color:white;padding:18px 24px;border-radius:12px;margin-bottom:16px;display:flex;align-items:center;gap:12px;">
+        <span style="background:var(--orange);padding:5px 12px;border-radius:20px;font-family:'Crimson Pro',serif;font-weight:900;font-size:0.78rem;letter-spacing:1px;text-transform:uppercase;">🥈 Karriereweg 2</span>
+        <span style="font-family:'Crimson Pro',serif;font-weight:900;font-size:1.1rem;">Wirtschaftsinformatik – Duales Studium (B.Sc.)</span>
+      </div>
+      <p style="margin-bottom:12px;">Gehalt: 800 € im Studium · Einstieg 3.500–4.500 €/Monat · Nach 5 Jahren bis 6.500 €</p>
+      <p style="margin-bottom:12px;">Steckbrief · Zukunftsprognose · KI-Score · 3 Alternativen · Warum das zu DIR passt</p>
+      <p style="margin-bottom:12px;">🥉 Karriereweg 3 · 5-Stufen-Erfolgsplan · Weiterbildungstipps · AI Career Coach</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptates modi corporis quos laudantium.</p>
+    </div>
+    <div class="lock-overlay">
+      <div class="lock-icon">🔒</div>
+      <h2>Der Rest gehört DIR</h2>
+      <p class="lock-sub">Deine komplette persönliche Analyse enthält noch:</p>
+      <ul class="lock-list">
+        <li>Karriereweg 2 + 3 mit Gehalt &amp; Steckbrief</li>
+        <li>KI-Sicherheits-Score für alle 3 Karrierewege</li>
+        <li>3 Alternativen pro Karriereweg</li>
+        <li>Dein persönlicher 5-Stufen-Erfolgsplan</li>
+        <li>Weiterbildungstipps &amp; Aufstiegspfade</li>
+        <li>AI Career Coach – 5 persönliche Fragen sofort</li>
+      </ul>
+      <a href="/" class="btn-unlock">🎯 Jetzt komplette Analyse holen</a>
+      <p class="price-note">Einmalig <strong>4,99 €</strong> – kein Abo, sofort verfügbar</p>
+    </div>
+  </div>
+
+  <div class="back-link">
+    <a href="/">← Zurück zur Startseite</a>
+  </div>
+
+</div>
+</body>
+</html>

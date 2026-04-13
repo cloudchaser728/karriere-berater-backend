@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berufslexikon – Gehalt, Ausbildung & Karriere | Dein Karriereweg</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+--primary: #0f1f3d;
+--accent: #c9a84c;
+--bg: #f7f8fc;
+--white: #ffffff;
+--gray: #666;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Work Sans', sans-serif; background: var(--bg); color: var(--primary); }
+
+header {
+background: linear-gradient(135deg, #0f1f3d 0%, #1a3a6b 100%);
+padding: 20px 40px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.logo { color: white; font-family: 'Crimson Pro', serif; font-size: 1.4rem; font-weight: 700; text-decoration: none; }
+.back-btn {
+color: rgba(255,255,255,0.7);
+text-decoration: none;
+font-size: 0.9rem;
+transition: color 0.2s;
+}
+.back-btn:hover { color: var(--accent); }
+
+.hero {
+background: linear-gradient(135deg, #0f1f3d 0%, #1a3a6b 60%, #2a5298 100%);
+padding: 70px 20px 80px;
+text-align: center;
+position: relative;
+overflow: hidden;
+}
+.hero::before {
+content: '';
+position: absolute;
+top: -80px; right: -80px;
+width: 400px; height: 400px;
+border-radius: 50%;
+background: rgba(201,168,76,0.07);
+}
+.hero::after {
+content: '';
+position: absolute;
+bottom: -60px; left: -60px;
+width: 300px; height: 300px;
+border-radius: 50%;
+background: rgba(100,160,255,0.05);
+}
+.hero h1 {
+font-family: 'Crimson Pro', serif;
+font-size: 3rem;
+color: white;
+margin-bottom: 12px;
+position: relative;
+z-index: 1;
+}
+.hero p {
+color: rgba(255,255,255,0.75);
+font-size: 1.1rem;
+margin-bottom: 36px;
+position: relative;
+z-index: 1;
+}
+
+.search-wrap {
+max-width: 620px;
+margin: 0 auto;
+position: relative;
+z-index: 1;
+}
+.search-box {
+display: flex;
+background: white;
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.search-box input {
+flex: 1;
+padding: 18px 24px;
+border: none;
+outline: none;
+font-size: 1.05rem;
+font-family: 'Work Sans', sans-serif;
+color: var(--primary);
+}
+.search-box button {
+background: linear-gradient(135deg, #c9a84c, #e8c96a);
+color: #0f1f3d;
+border: none;
+padding: 18px 28px;
+font-size: 1rem;
+font-weight: 700;
+cursor: pointer;
+font-family: 'Work Sans', sans-serif;
+transition: opacity 0.2s;
+white-space: nowrap;
+}
+.search-box button:hover { opacity: 0.9; }
+.search-hint { color: rgba(255,255,255,0.5); font-size: 0.82rem; margin-top: 12px; }
+
+.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+.categories {
+padding: 50px 0 20px;
+}
+.categories h2 {
+font-family: 'Crimson Pro', serif;
+font-size: 1.8rem;
+color: var(--primary);
+margin-bottom: 24px;
+}
+.cat-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 14px;
+}
+.cat-card {
+background: white;
+border-radius: 10px;
+padding: 20px;
+text-align: center;
+cursor: pointer;
+transition: all 0.25s ease;
+border: 2px solid transparent;
+box-shadow: 0 2px 8px rgba(15,31,61,0.06);
+}
+.cat-card:hover {
+border-color: var(--accent);
+transform: translateY(-3px);
+box-shadow: 0 6px 20px rgba(15,31,61,0.12);
+}
+.cat-icon { font-size: 2rem; margin-bottom: 10px; }
+.cat-name { font-weight: 600; font-size: 0.9rem; color: var(--primary); }
+.cat-count { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+
+.popular {
+padding: 40px 0;
+}
+.popular h2 {
+font-family: 'Crimson Pro', serif;
+font-size: 1.8rem;
+color: var(--primary);
+margin-bottom: 24px;
+}
+.berufe-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 14px;
+}
+.beruf-card {
+background: white;
+border-radius: 10px;
+padding: 18px 20px;
+cursor: pointer;
+transition: all 0.25s ease;
+box-shadow: 0 2px 8px rgba(15,31,61,0.06);
+border-left: 3px solid var(--accent);
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.beruf-card:hover {
+transform: translateX(4px);
+box-shadow: 0 4px 16px rgba(15,31,61,0.12);
+}
+.beruf-name { font-weight: 600; font-size: 0.95rem; color: var(--primary); }
+.beruf-gehalt { font-size: 0.82rem; color: #10b981; font-weight: 600; margin-top: 3px; }
+.beruf-arrow { color: var(--accent); font-size: 1.1rem; }
+
+.loading {
+display: none;
+text-align: center;
+padding: 60px 20px;
+}
+.spinner {
+width: 48px; height: 48px;
+border: 4px solid #e0e0e0;
+border-top-color: var(--accent);
+border-radius: 50%;
+animation: spin 0.8s linear infinite;
+margin: 0 auto 20px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.result-section {
+display: none;
+padding: 40px 0;
+}
+
+footer {
+background: var(--primary);
+color: rgba(255,255,255,0.6);
+text-align: center;
+padding: 30px;
+font-size: 0.85rem;
+margin-top: 60px;
+}
+footer a { color: var(--accent); text-decoration: none; }
+
+@media (max-width: 768px) {
+.hero h1 { font-size: 2rem; }
+.cat-grid { grid-template-columns: repeat(2, 1fr); }
+.berufe-grid { grid-template-columns: 1fr; }
+header { padding: 16px 20px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+<a href="/" class="logo">Dein Karriereweg</a>
+<a href="/" class="back-btn">← Zurück zur Startseite</a>
+</header>
+
+<div class="hero">
+<h1>📚 Berufslexikon</h1>
+<p>Gehalt, Ausbildung, Karrierechancen & Zukunftsprognose – für jeden Beruf in Deutschland</p>
+<div class="search-wrap">
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="z.B. Industriekaufmann, Pflegefachmann, Informatiker..." autocomplete="off">
+<button onclick="searchBeruf()">🔍 Beruf suchen</button>
+</div>
+<p class="search-hint">Einfach Beruf eingeben – die KI erstellt sofort alle Infos</p>
+</div>
+</div>
+
+<div class="container">
+
+<div class="categories" id="mainContent">
+<h2>Nach Bereich suchen</h2>
+<div class="cat-grid">
+<div class="cat-card" onclick="searchByCategory('Kaufmännisch & Verwaltung')">
+<div class="cat-icon">💼</div>
+<div class="cat-name">Kaufmännisch</div>
+<div class="cat-count">Büro, Handel, Verwaltung</div>
+</div>
+<div class="cat-card" onclick="searchByCategory('IT & Technologie')">
+<div class="cat-icon">💻</div>
+<div class="cat-name">IT & Technologie</div>
+<div class="cat-count">Software, Netzwerke, KI</div>
+</div>
+<div class="cat-card" onclick="searchByCategory('Gesundheit & Pflege')">
+<div class="cat-icon">🏥</div>
+<div class="cat-name">Gesundheit & Pflege</div>
+<div class="cat-count">Medizin, Pflege, Therapie</div>
+</div>
+<div class="cat-card" onclick="searchByCategory('Handwerk & Technik')">
+<div class="cat-icon">🔧</div>
+<div class="cat-name">Handwerk & Technik</div>
+<div class="cat-count">Elektro, Bau, Metall</div>
+</div>
+<div class="cat-card" onclick="searchByCategory('Soziales & Bildung')">
+<div class="cat-icon">👶</div>
+<div class="cat-name">Soziales & Bildung</div>
+<div class="cat-count">Erziehung, Sozialarbeit</div>
+</div>
+<div class="cat-card" onclick="searchByCategory('Wirtschaft & Finanzen')">
+<div class="cat-icon">📊</div>
+<div class="cat-name">Wirtschaft & Finanzen</div>
+<div class="cat-count">Banking, Controlling, BWL</div>
+</div>
+<div class="cat-card" onclick="searchByCategory('Kreativ & Medien')">
+<div class="cat-icon">🎨</div>
+<div class="cat-name">Kreativ & Medien</div>
+<div class="cat-count">Design, Marketing, Film</div>
+</div>
+<div class="cat-card" onclick="searchByCategory('Öffentlicher Dienst & Sicherheit')">
+<div class="cat-icon">🏛️</div>
+<div class="cat-name">Öffentlicher Dienst</div>
+<div class="cat-count">Polizei, Verwaltung, Bundeswehr</div>
+</div>
+</div>
+
+<div class="popular" style="margin-top: 20px;">
+<h2>Beliebteste Berufe</h2>
+<div class="berufe-grid" id="berufeGrid">
+<div class="beruf-card" onclick="goToBeruf('Industriekaufmann')"><div><div class="beruf-name">Industriekaufmann/-frau</div><div class="beruf-gehalt">2.800 – 5.500€/Monat</div></div><div class="beruf-arrow">→</div></div>
+<div class="beruf-card" onclick="goToBeruf('Pflegefachmann')"><div><div class="beruf-name">Pflegefachmann/-frau</div><div class="beruf-gehalt">2.800 – 4.200€/Monat</div></div><div class="beruf-arrow">→</div></div>
+<div class="beruf-card" onclick="goToBeruf('Fachinformatiker Anwendungsentwicklung')"><div><div class="beruf-name">Fachinformatiker/-in</div><div class="beruf-gehalt">3.200 – 6.000€/Monat</div></div><div class="beruf-arrow">→</div></div>
+<div class="beruf-card" onclick="goToBeruf('Kfz-Mechatroniker')"><div><div class="beruf-name">Kfz-Mechatroniker/-in</div><div class="beruf-gehalt">2.400 – 4.000€/Monat</div></div><div class="beruf-arrow">→</div></div>
+<div class="beruf-card" onclick="goToBeruf('Erzieher')"><div><div class="beruf-name">Erzieher/-in</div><div class="beruf-gehalt">2.800 – 4.000€/Monat</div></div><div class="beruf-arrow">→</div></div>
+<div class="beruf-card" onclick="goToBeruf('Bankkaufmann')"><div><div class="beruf-name">Bankkaufmann/-frau</div><div class="beruf-gehalt">2.600 – 5.000€/Monat</div></div><div class="beruf-arrow">→</div></div>
+<div class="beruf-card" onclick="goToBeruf('Elektroniker für Energie und Gebäudetechnik')"><div><div class="beruf-name">Elektroniker/-in</div><div class="beruf-gehalt">2.500 – 4.500€/Monat</div></div><div class="beruf-arrow">→</div></div>
+<div class="beruf-card" onclick="goToBeruf('Kaufmann im Einzelhandel')"><div><div class="beruf-name">Kaufmann/-frau Einzelhandel</div><div class="beruf-gehalt">2.000 – 3.500€/Monat</div></div><div class="beruf-arrow">→</div></div>
+<div class="beruf-card" onclick="goToBeruf('Medizinische Fachangestellte')"><div><div class="beruf-name">Medizinische Fachangestellte</div><div class="beruf-gehalt">2.200 – 3.500€/Monat</div></div><div class="beruf-arrow">→</div></div>
+</div>
+</div>
+</div>
+
+<div class="loading" id="loading">
+<div class="spinner"></div>
+<p style="color: var(--primary); font-size: 1.1rem; font-weight: 600;" id="loadingText">Berufsinformationen werden geladen...</p>
+<p style="color: var(--gray); font-size: 0.9rem; margin-top: 8px;">Die KI sammelt alle Infos zu diesem Beruf</p>
+</div>
+
+<div class="result-section" id="resultSection">
+<div id="resultContent"></div>
+</div>
+
+</div>
+
+<footer>
+<p>© 2025 Dein Karriereweg | <a href="/karriere-impressum.html">Impressum</a> | <a href="/karriere-datenschutz.html">Datenschutz</a></p>
+</footer>
+
+<script>
+const BACKEND_URL = 'https://karriere-berater-backend-production.up.railway.app';
+
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') searchBeruf();
+});
+
+function goToBeruf(beruf) {
+  document.getElementById('searchInput').value = beruf;
+  searchBeruf();
+}
+
+function searchByCategory(kategorie) {
+  document.getElementById('searchInput').value = kategorie;
+  searchBeruf();
+}
+
+async function searchBeruf() {
+  const beruf = document.getElementById('searchInput').value.trim();
+  if (!beruf) return;
+
+  document.getElementById('mainContent').style.display = 'none';
+  document.getElementById('resultSection').style.display = 'none';
+  document.getElementById('loading').style.display = 'block';
+
+  const loadingTexts = [
+    'Berufsinformationen werden geladen...',
+    'Gehaltsdaten werden analysiert...',
+    'Karrierechancen werden berechnet...',
+    'Zukunftsprognose wird erstellt...',
+    'Fast fertig...'
+  ];
+  let i = 0;
+  const interval = setInterval(() => {
+    i = (i + 1) % loadingTexts.length;
+    document.getElementById('loadingText').textContent = loadingTexts[i];
+  }, 2500);
+
+  try {
+    const response = await fetch(`${BACKEND_URL}/berufslexikon`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ beruf })
+    });
+    const result = await response.json();
+    clearInterval(interval);
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('resultSection').style.display = 'block';
+    document.getElementById('resultContent').innerHTML = result.html;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (error) {
+    clearInterval(interval);
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+    alert('Fehler beim Laden. Bitte versuche es erneut.');
+  }
+}
+</script>
+</body>
+</html>

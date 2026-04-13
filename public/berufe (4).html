@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berufslexikon – Gehalt, Ausbildung & Karriere | Dein Karriereweg</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --primary: #0f1f3d; --accent: #c9a84c; --bg: #f7f8fc; --gray: #666; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Work Sans', sans-serif; background: var(--bg); color: var(--primary); }
+header { background: linear-gradient(135deg, #0f1f3d, #1a3a6b); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; }
+.logo { color: white; font-family: 'Crimson Pro', serif; font-size: 1.4rem; font-weight: 700; text-decoration: none; }
+.back-btn { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+.back-btn:hover { color: var(--accent); }
+.hero {
+position: relative;
+padding: 120px 20px 140px;
+text-align: center;
+overflow: hidden;
+background: #0f1f3d;
+}
+.hero-video {
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+object-position: center center;
+opacity: 0.45;
+z-index: 0;
+}
+.hero::after {
+content: '';
+position: absolute;
+bottom: 0; left: 0; right: 0;
+height: 200px;
+background: linear-gradient(to bottom, transparent 0%, #f7f8fc 100%);
+z-index: 1;
+pointer-events: none;
+}
+.hero h1 { font-family: 'Crimson Pro', serif; font-size: 3rem; color: white; margin-bottom: 12px; position: relative; z-index: 2; text-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+.hero p { color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-bottom: 36px; position: relative; z-index: 2; text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
+.search-wrap { max-width: 620px; margin: 0 auto; position: relative; z-index: 2; }
+.search-box { display: flex; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+.search-box input { flex: 1; padding: 18px 24px; border: none; outline: none; font-size: 1.05rem; font-family: 'Work Sans', sans-serif; color: var(--primary); }
+.search-box button { background: linear-gradient(135deg, #c9a84c, #e8c96a); color: #0f1f3d; border: none; padding: 18px 28px; font-size: 1rem; font-weight: 700; cursor: default; font-family: 'Work Sans', sans-serif; white-space: nowrap; }
+.search-hint { color: rgba(255,255,255,0.5); font-size: 0.82rem; margin-top: 12px; }
+.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+.section { padding: 40px 0; }
+.section h2 { font-family: 'Crimson Pro', serif; font-size: 1.8rem; color: var(--primary); margin-bottom: 24px; }
+.cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.cat-card { background: white; border-radius: 10px; padding: 20px; text-align: center; cursor: default; transition: all 0.25s; border: 2px solid transparent; box-shadow: 0 2px 8px rgba(15,31,61,0.06); }
+
+.cat-icon { font-size: 2rem; margin-bottom: 10px; }
+.cat-name { font-weight: 600; font-size: 0.9rem; color: var(--primary); }
+.cat-count { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+.cat-icon-txt { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; color: var(--accent); background: rgba(201,168,76,0.1); padding: 6px 10px; border-radius: 6px; display: inline-block; margin-bottom: 10px; }
+.popular h2 { font-family: 'Crimson Pro', serif; font-size: 1.8rem; color: var(--primary); margin-bottom: 24px; }
+.berufe-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.beruf-card { background: white; border-radius: 10px; padding: 18px 20px; cursor: default; transition: all 0.25s; box-shadow: 0 2px 8px rgba(15,31,61,0.06); border-left: 3px solid var(--accent); display: flex; justify-content: space-between; align-items: center; }
+.beruf-card:hover { transform: translateX(4px); box-shadow: 0 4px 16px rgba(15,31,61,0.12); }
+.beruf-name { font-weight: 600; font-size: 0.95rem; color: var(--primary); }
+.beruf-gehalt { font-size: 0.82rem; color: #10b981; font-weight: 600; margin-top: 3px; }
+.beruf-arrow { color: var(--accent); font-size: 1.1rem; }
+.loading { display: none; text-align: center; padding: 60px 20px; }
+.spinner { width: 48px; height: 48px; border: 4px solid #e0e0e0; border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 20px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.result-section { display: none; padding: 40px 0; }
+.result-nav { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+.btn-back-search { background: white; color: var(--primary); border: 2px solid var(--primary); padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: default; font-family: 'Work Sans', sans-serif; transition: all 0.2s; }
+.btn-back-search:hover { background: var(--primary); color: white; }
+.btn-analyse { background: linear-gradient(135deg, #c9a84c, #e8c96a); color: #0f1f3d; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 700; cursor: default; font-family: 'Work Sans', sans-serif; text-decoration: none; display: inline-block; }
+.category-section { display: none; padding: 40px 0; }
+.category-back { background: white; color: var(--primary); border: 2px solid var(--primary); padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: default; font-family: 'Work Sans', sans-serif; margin-bottom: 24px; transition: all 0.2s; }
+.category-back:hover { background: var(--primary); color: white; }
+footer { background: var(--primary); color: rgba(255,255,255,0.6); text-align: center; padding: 30px; font-size: 0.85rem; margin-top: 60px; }
+footer a { color: var(--accent); text-decoration: none; }
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2rem; }
+  .cat-grid { grid-template-columns: repeat(2, 1fr); }
+  .berufe-grid { grid-template-columns: 1fr; }
+  header { padding: 16px 20px; }
+}
+</style>
+</head>
+<body>
+<header>
+<a href="/" class="logo">Dein Karriereweg</a>
+<a href="/" class="back-btn">← Zurück zur Startseite</a>
+</header>
+
+<div class="hero">
+<video class="hero-video" autoplay muted loop playsinline preload="auto">
+<source src="/6931214-uhd_3840_2160_25fps.mp4" type="video/mp4">
+</video>
+<h1>📚 Berufslexikon</h1>
+<p>Gehalt, Ausbildung, Karrierechancen & Zukunftsprognose – für jeden Beruf in Deutschland</p>
+<div class="search-wrap">
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="z.B. Industriekaufmann, Pflegefachmann, Informatiker..." autocomplete="off">
+<button onclick="searchBeruf()">🔍 Beruf suchen</button>
+</div>
+<p class="search-hint">Einfach Beruf eingeben – die KI erstellt sofort alle Infos</p>
+</div>
+</div>
+
+<div class="container">
+
+<!-- HAUPTINHALT -->
+<div id="mainContent">
+<div class="section">
+<h2>Nach Bereich suchen</h2>
+<div class="cat-grid">
+<div class="cat-card" style="cursor:default;"><div class="cat-icon-txt">KFM</div><div class="cat-name">Kaufmännisch</div><div class="cat-count">Büro, Handel, Verwaltung</div></div>
+<div class="cat-card" style="cursor:default;"><div class="cat-icon-txt">IT</div><div class="cat-name">IT & Technologie</div><div class="cat-count">Software, Netzwerke, KI</div></div>
+<div class="cat-card" style="cursor:default;"><div class="cat-icon-txt">MED</div><div class="cat-name">Gesundheit & Pflege</div><div class="cat-count">Medizin, Pflege, Therapie</div></div>
+<div class="cat-card" style="cursor:default;"><div class="cat-icon-txt">HW</div><div class="cat-name">Handwerk & Technik</div><div class="cat-count">Elektro, Bau, Metall</div></div>
+<div class="cat-card" style="cursor:default;"><div class="cat-icon-txt">SOZ</div><div class="cat-name">Soziales & Bildung</div><div class="cat-count">Erziehung, Sozialarbeit</div></div>
+<div class="cat-card" style="cursor:default;"><div class="cat-icon-txt">BWL</div><div class="cat-name">Wirtschaft & Finanzen</div><div class="cat-count">Banking, Controlling, BWL</div></div>
+<div class="cat-card" style="cursor:default;"><div class="cat-icon-txt">KRE</div><div class="cat-name">Kreativ & Medien</div><div class="cat-count">Design, Marketing, Film</div></div>
+<div class="cat-card" style="cursor:default;"><div class="cat-icon-txt">ÖD</div><div class="cat-name">Öffentlicher Dienst</div><div class="cat-count">Polizei, Verwaltung, Bundeswehr</div></div>
+</div>
+</div>
+
+<div class="popular section">
+<h2>Beliebteste Berufe</h2>
+<div class="berufe-grid">
+<div class="beruf-card" onclick="goToBeruf('Industriekaufmann')"><div><div class="beruf-name">Industriekaufmann/-frau</div><div class="beruf-gehalt">2.800 – 5.500€/Monat</div></div><div class="beruf-arrow">→</div></div>
+<div class="beruf-card" onclick="goToBeruf('Pflegefachmann')"><div><div class="beruf-name">Pflegefachmann/-frau</div><div class="beruf-gehalt">2.800 – 4.200€/Monat</div></div><div class="beruf-arrow">→</div></div>
+<div class="beruf-card" onclick="goToBeruf('Fachinformatiker Anwendungsentwicklung')"><div><div class="beruf-name">Fachinformatiker/-in</div><div class="beruf-gehalt">3.200 – 6.000€/Monat</div></div><div class="beruf-arrow">→</div></div>
+<div class="beruf-card" onclick="goToBeruf('Kfz-Mechatroniker')"><div><div class="beruf-name">Kfz-Mechatroniker/-in</div><div class="beruf-gehalt">2.400 – 4.000€/Monat</div></div><div class="beruf-arrow">→</div></div>
+<div class="beruf-card" onclick="goToBeruf('Erzieher')"><div><div class="beruf-name">Erzieher/-in</div><div class="beruf-gehalt">2.800 – 4.000€/Monat</div></div><div class="beruf-arrow">→</div></div>
+<div class="beruf-card" onclick="goToBeruf('Bankkaufmann')"><div><div class="beruf-name">Bankkaufmann/-frau</div><div class="beruf-gehalt">2.600 – 5.000€/Monat</div></div><div class="beruf-arrow">→</div></div>
+<div class="beruf-card" onclick="goToBeruf('Elektroniker für Energie und Gebäudetechnik')"><div><div class="beruf-name">Elektroniker/-in</div><div class="beruf-gehalt">2.500 – 4.500€/Monat</div></div><div class="beruf-arrow">→</div></div>
+<div class="beruf-card" onclick="goToBeruf('Kaufmann im Einzelhandel')"><div><div class="beruf-name">Kaufmann/-frau Einzelhandel</div><div class="beruf-gehalt">2.000 – 3.500€/Monat</div></div><div class="beruf-arrow">→</div></div>
+<div class="beruf-card" onclick="goToBeruf('Medizinische Fachangestellte')"><div><div class="beruf-name">Medizinische Fachangestellte</div><div class="beruf-gehalt">2.200 – 3.500€/Monat</div></div><div class="beruf-arrow">→</div></div>
+</div>
+</div>
+</div>
+
+<!-- KATEGORIEANSICHT -->
+<div class="category-section" id="categorySection">
+<button class="category-back" onclick="backToMain()">← Zurück zur Übersicht</button>
+<h2 id="categoryTitle" style="font-family:'Crimson Pro',serif; font-size:1.8rem; margin-bottom:24px;"></h2>
+<div class="berufe-grid" id="categoryGrid"></div>
+</div>
+
+<!-- LADEANIMATION -->
+<div class="loading" id="loading">
+<div class="spinner"></div>
+<p style="color:var(--primary);font-size:1.1rem;font-weight:600;" id="loadingText">Berufsinformationen werden geladen...</p>
+<p style="color:var(--gray);font-size:0.9rem;margin-top:8px;">Die KI sammelt alle Infos zu diesem Beruf</p>
+</div>
+
+<!-- ERGEBNIS -->
+<div class="result-section" id="resultSection">
+<div class="result-nav">
+<button class="btn-back-search" onclick="backToMain()">← Zurück zur Berufssuche</button>
+<a href="/" class="btn-analyse">🚀 KI-Analyse starten – 4,99€</a>
+</div>
+<div id="resultContent"></div>
+</div>
+
+</div>
+
+<footer>
+<p>© 2025 Dein Karriereweg | <a href="/karriere-impressum.html">Impressum</a> | <a href="/karriere-datenschutz.html">Datenschutz</a></p>
+</footer>
+
+<script>
+const BACKEND_URL = 'https://karriere-berater-backend-production.up.railway.app';
+
+const kategorien = {
+  kaufmaennisch: {
+    title: '💼 Kaufmännische Berufe',
+    berufe: [
+      { name: 'Industriekaufmann/-frau', gehalt: '2.800 – 5.500€' },
+      { name: 'Kaufmann/-frau im Einzelhandel', gehalt: '2.000 – 3.500€' },
+      { name: 'Bürokaufmann/-frau', gehalt: '2.200 – 3.800€' },
+      { name: 'Groß- und Außenhandelskaufmann/-frau', gehalt: '2.400 – 4.500€' },
+      { name: 'Speditionskaufmann/-frau', gehalt: '2.300 – 4.000€' },
+      { name: 'Steuerfachangestellte/-r', gehalt: '2.400 – 4.500€' },
+      { name: 'Verwaltungsfachangestellte/-r', gehalt: '2.500 – 4.000€' },
+      { name: 'Immobilienkaufmann/-frau', gehalt: '2.500 – 5.000€' },
+      { name: 'Kaufmann/-frau für Versicherungen', gehalt: '2.600 – 5.000€' },
+    ]
+  },
+  it: {
+    title: '💻 IT & Technologie',
+    berufe: [
+      { name: 'Fachinformatiker Anwendungsentwicklung', gehalt: '3.200 – 6.500€' },
+      { name: 'Fachinformatiker Systemintegration', gehalt: '3.000 – 6.000€' },
+      { name: 'IT-Systemkaufmann/-frau', gehalt: '2.800 – 5.500€' },
+      { name: 'Softwareentwickler/-in', gehalt: '3.500 – 8.000€' },
+      { name: 'IT-Security Analyst', gehalt: '4.000 – 8.000€' },
+      { name: 'Data Scientist', gehalt: '4.000 – 9.000€' },
+      { name: 'Netzwerkadministrator/-in', gehalt: '3.000 – 5.500€' },
+      { name: 'UX/UI Designer', gehalt: '3.000 – 6.000€' },
+    ]
+  },
+  gesundheit: {
+    title: '🏥 Gesundheit & Pflege',
+    berufe: [
+      { name: 'Pflegefachmann/-frau', gehalt: '2.800 – 4.200€' },
+      { name: 'Medizinische Fachangestellte', gehalt: '2.200 – 3.500€' },
+      { name: 'Notfallsanitäter/-in', gehalt: '2.800 – 4.000€' },
+      { name: 'Physiotherapeut/-in', gehalt: '2.500 – 4.500€' },
+      { name: 'Ergotherapeut/-in', gehalt: '2.400 – 4.000€' },
+      { name: 'Zahntechniker/-in', gehalt: '2.400 – 4.500€' },
+      { name: 'Arzthelfer/-in', gehalt: '2.000 – 3.200€' },
+      { name: 'Pflegehelfer/-in', gehalt: '2.000 – 3.000€' },
+    ]
+  },
+  handwerk: {
+    title: '🔧 Handwerk & Technik',
+    berufe: [
+      { name: 'Kfz-Mechatroniker/-in', gehalt: '2.400 – 4.500€' },
+      { name: 'Elektroniker für Energie und Gebäudetechnik', gehalt: '2.500 – 4.500€' },
+      { name: 'Anlagenmechaniker/-in SHK', gehalt: '2.400 – 4.500€' },
+      { name: 'Schreiner/-in', gehalt: '2.200 – 3.800€' },
+      { name: 'Maurer/-in', gehalt: '2.400 – 4.000€' },
+      { name: 'Mechatroniker/-in', gehalt: '2.800 – 5.000€' },
+      { name: 'Zerspanungsmechaniker/-in', gehalt: '2.600 – 4.500€' },
+      { name: 'Dachdecker/-in', gehalt: '2.300 – 4.000€' },
+    ]
+  },
+  soziales: {
+    title: '👶 Soziales & Bildung',
+    berufe: [
+      { name: 'Erzieher/-in', gehalt: '2.800 – 4.000€' },
+      { name: 'Sozialarbeiter/-in', gehalt: '2.800 – 4.500€' },
+      { name: 'Heilerziehungspfleger/-in', gehalt: '2.600 – 4.000€' },
+      { name: 'Kinderpfleger/-in', gehalt: '2.000 – 3.200€' },
+      { name: 'Lehrer/-in (Grundschule)', gehalt: '3.500 – 5.500€' },
+      { name: 'Sozialpädagoge/-in', gehalt: '2.800 – 4.500€' },
+      { name: 'Jugend- und Heimerzieher/-in', gehalt: '2.600 – 4.000€' },
+    ]
+  },
+  wirtschaft: {
+    title: '📊 Wirtschaft & Finanzen',
+    berufe: [
+      { name: 'Bankkaufmann/-frau', gehalt: '2.600 – 5.500€' },
+      { name: 'Finanzberater/-in', gehalt: '3.000 – 8.000€' },
+      { name: 'Controller/-in', gehalt: '3.500 – 7.000€' },
+      { name: 'Wirtschaftsprüfer/-in', gehalt: '4.000 – 10.000€' },
+      { name: 'Unternehmensberater/-in', gehalt: '4.000 – 10.000€' },
+      { name: 'Marketing Manager/-in', gehalt: '3.000 – 6.000€' },
+      { name: 'Personalreferent/-in', gehalt: '3.000 – 5.500€' },
+      { name: 'BWL-Studium', gehalt: '3.000 – 7.000€' },
+    ]
+  },
+  kreativ: {
+    title: '🎨 Kreativ & Medien',
+    berufe: [
+      { name: 'Grafik- und Kommunikationsdesigner/-in', gehalt: '2.500 – 5.000€' },
+      { name: 'Mediengestalter/-in Digital und Print', gehalt: '2.300 – 4.500€' },
+      { name: 'Fotograf/-in', gehalt: '2.000 – 5.000€' },
+      { name: 'Veranstaltungskaufmann/-frau', gehalt: '2.400 – 4.500€' },
+      { name: 'Social Media Manager/-in', gehalt: '2.800 – 5.000€' },
+      { name: 'Werbetexter/-in (Copywriter)', gehalt: '2.500 – 5.500€' },
+      { name: 'Filmproduktion / Kameramann/-frau', gehalt: '2.500 – 6.000€' },
+    ]
+  },
+  oeffentlich: {
+    title: '🏛️ Öffentlicher Dienst & Sicherheit',
+    berufe: [
+      { name: 'Polizeibeamter/-beamtin', gehalt: '2.800 – 4.500€' },
+      { name: 'Zollbeamter/-beamtin', gehalt: '2.600 – 4.200€' },
+      { name: 'Berufsfeuerwehrmann/-frau', gehalt: '2.800 – 4.500€' },
+      { name: 'Bundeswehr – Zeitsoldat/-in', gehalt: '1.800 – 4.000€' },
+      { name: 'Verwaltungsfachangestellte/-r', gehalt: '2.500 – 4.000€' },
+      { name: 'Finanzbeamter/-beamtin', gehalt: '2.600 – 4.500€' },
+      { name: 'Notfallsanitäter/-in', gehalt: '2.800 – 4.000€' },
+    ]
+  }
+};
+
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') searchBeruf();
+});
+
+function showCategory(key) {
+  const kat = kategorien[key];
+  document.getElementById('mainContent').style.display = 'none';
+  document.getElementById('categorySection').style.display = 'block';
+  document.getElementById('categoryTitle').textContent = kat.title;
+
+  const grid = document.getElementById('categoryGrid');
+  grid.innerHTML = kat.berufe.map(b => `
+    <div class="beruf-card" onclick="goToBeruf('${b.name}')">
+      <div>
+        <div class="beruf-name">${b.name}</div>
+        <div class="beruf-gehalt">${b.gehalt}/Monat</div>
+      </div>
+      <div class="beruf-arrow">→</div>
+    </div>
+  `).join('');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function backToMain() {
+  document.getElementById('mainContent').style.display = 'block';
+  document.getElementById('categorySection').style.display = 'none';
+  document.getElementById('resultSection').style.display = 'none';
+  document.getElementById('loading').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goToBeruf(beruf) {
+  document.getElementById('searchInput').value = beruf;
+  searchBeruf();
+}
+
+async function searchBeruf() {
+  const beruf = document.getElementById('searchInput').value.trim();
+  if (!beruf) return;
+
+  document.getElementById('mainContent').style.display = 'none';
+  document.getElementById('categorySection').style.display = 'none';
+  document.getElementById('resultSection').style.display = 'none';
+  document.getElementById('loading').style.display = 'block';
+
+  const texts = ['Berufsinformationen werden geladen...','Gehaltsdaten werden analysiert...','Karrierechancen werden berechnet...','Zukunftsprognose wird erstellt...','Fast fertig...'];
+  let i = 0;
+  const interval = setInterval(() => { i = (i+1) % texts.length; document.getElementById('loadingText').textContent = texts[i]; }, 2500);
+
+  try {
+    const response = await fetch(`${BACKEND_URL}/berufslexikon`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ beruf })
+    });
+    const result = await response.json();
+    clearInterval(interval);
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('resultSection').style.display = 'block';
+    document.getElementById('resultContent').innerHTML = result.html;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (error) {
+    clearInterval(interval);
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+    alert('Fehler beim Laden. Bitte versuche es erneut.');
+  }
+}
+</script>
+</body>
+</html>

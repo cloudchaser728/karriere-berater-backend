@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stellensuche – Jobs & Ausbildung in deiner Nähe | Dein Karriereweg</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --primary: #0f1f3d; --accent: #c9a84c; --bg: #f7f8fc; --gray: #666; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { overflow-x: hidden; width: 100%; }
+body { font-family: 'Work Sans', sans-serif; background: var(--bg); color: var(--primary); }
+
+header { background: linear-gradient(135deg, #0f1f3d, #1a3a6b); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; position: relative; }
+.logo { color: white; font-family: 'Crimson Pro', serif; font-size: 1.4rem; font-weight: 700; text-decoration: none; }
+.back-btn { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; }
+.back-btn:hover { color: var(--accent); }
+
+.hero {
+  position: relative;
+  padding: 100px 20px 120px;
+  text-align: center;
+  overflow: hidden;
+  background: #0f1f3d;
+  width: 100%;
+}
+.hero-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center center;
+  opacity: 0.45; z-index: 0;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, transparent 0%, var(--bg) 100%);
+  z-index: 1; pointer-events: none;
+}
+.hero h1 { font-family: 'Crimson Pro', serif; font-size: 2.8rem; color: white; margin-bottom: 10px; position: relative; z-index: 2; text-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+.hero p { color: rgba(255,255,255,0.8); font-size: 1.05rem; margin-bottom: 32px; position: relative; z-index: 2; }
+
+.search-wrap { max-width: 700px; margin: 0 auto; position: relative; z-index: 2; }
+.search-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.search-box input {
+  padding: 18px 20px; border: none; outline: none;
+  font-size: 1rem; font-family: 'Work Sans', sans-serif;
+  color: var(--primary); border-right: 1px solid #eee;
+}
+.search-box button {
+  background: linear-gradient(135deg, #c9a84c, #e8c96a);
+  color: #0f1f3d; border: none; padding: 18px 24px;
+  font-size: 1rem; font-weight: 700; cursor: pointer;
+  font-family: 'Work Sans', sans-serif; white-space: nowrap;
+}
+
+.filters {
+  display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+  position: relative; z-index: 2; margin-top: 14px;
+}
+.filter-btn {
+  background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8);
+  border: 0.5px solid rgba(255,255,255,0.25); padding: 6px 16px;
+  border-radius: 20px; font-size: 0.82rem; cursor: pointer;
+  font-family: 'Work Sans', sans-serif; transition: all 0.2s;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: rgba(255,255,255,0.2); color: white;
+  border-color: rgba(255,255,255,0.5);
+}
+
+.container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+.results-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 0 16px;
+}
+.results-count { font-size: 0.95rem; color: var(--gray); }
+.results-count strong { color: var(--primary); }
+
+.stellen-grid { display: flex; flex-direction: column; gap: 14px; padding-bottom: 40px; }
+
+.stellen-card {
+  background: white; border-radius: 12px; padding: 22px 24px;
+  box-shadow: 0 2px 12px rgba(15,31,61,0.06);
+  border-left: 3px solid var(--accent);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.stellen-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(15,31,61,0.1); }
+.stellen-title { font-family: 'Crimson Pro', serif; font-size: 1.3rem; color: var(--primary); margin-bottom: 6px; }
+.stellen-arbeitgeber { font-weight: 600; font-size: 0.95rem; color: var(--primary); margin-bottom: 8px; }
+.stellen-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.stellen-badge {
+  background: var(--bg); color: var(--gray);
+  padding: 4px 10px; border-radius: 20px; font-size: 0.8rem;
+}
+.stellen-badge.ort { color: var(--primary); font-weight: 500; }
+.stellen-btn {
+  display: inline-block; background: var(--primary); color: white;
+  padding: 9px 20px; border-radius: 8px; font-size: 0.88rem;
+  font-weight: 600; text-decoration: none; transition: background 0.2s;
+}
+.stellen-btn:hover { background: #1a3a6b; }
+
+.loading { display: none; text-align: center; padding: 60px 20px; }
+.spinner { width: 48px; height: 48px; border: 4px solid #e0e0e0; border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 20px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.empty-state { text-align: center; padding: 60px 20px; color: var(--gray); }
+.empty-state h3 { font-family: 'Crimson Pro', serif; font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; }
+
+.cta-box {
+  background: linear-gradient(135deg, #0f1f3d, #1a3a6b);
+  border-radius: 12px; padding: 36px; text-align: center;
+  color: white; margin: 20px 0 40px;
+}
+.cta-box h3 { font-family: 'Crimson Pro', serif; font-size: 1.6rem; margin-bottom: 10px; color: white; }
+.cta-box p { color: rgba(255,255,255,0.8); margin-bottom: 20px; font-size: 0.95rem; }
+.cta-btn {
+  display: inline-block; background: linear-gradient(135deg, #c9a84c, #e8c96a);
+  color: #0f1f3d; padding: 12px 28px; border-radius: 8px;
+  font-weight: 700; text-decoration: none; font-size: 0.95rem;
+}
+
+.pagination { display: flex; gap: 8px; justify-content: center; padding: 20px 0 40px; flex-wrap: wrap; }
+.page-btn { background: white; border: 0.5px solid #ddd; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-family: 'Work Sans', sans-serif; font-size: 0.9rem; transition: all 0.2s; }
+.page-btn:hover { border-color: var(--accent); color: var(--accent); }
+.page-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+footer { background: var(--primary); color: rgba(255,255,255,0.6); text-align: center; padding: 28px; font-size: 0.85rem; }
+footer a { color: var(--accent); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2rem; }
+  .search-box { grid-template-columns: 1fr; }
+  .search-box input { border-right: none; border-bottom: 1px solid #eee; }
+  header { padding: 14px 16px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">Dein Karriereweg</a>
+  <a href="/" class="back-btn">← Zurück</a>
+</header>
+
+<div class="hero">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <source src="/header-video.mp4" type="video/mp4">
+  </video>
+  <h1>🔍 Stellensuche</h1>
+  <p>Echte Stellen direkt aus der Jobbörse der Bundesagentur für Arbeit</p>
+  <div class="search-wrap">
+    <div class="search-box">
+      <input type="text" id="berufInput" placeholder="Beruf, Stelle oder Stichwort..." autocomplete="off">
+      <input type="text" id="ortInput" placeholder="Stadt oder PLZ..." autocomplete="off">
+      <button onclick="suchen(1)">🔍 Suchen</button>
+    </div>
+    <div class="filters">
+      <button class="filter-btn active" onclick="setFilter('1', this)" id="filter-1">Alle Jobs</button>
+      <button class="filter-btn" onclick="setFilter('4', this)" id="filter-4">Ausbildung</button>
+      <button class="filter-btn" onclick="setArbeitszeit('vz', this)">Vollzeit</button>
+      <button class="filter-btn" onclick="setArbeitszeit('tz', this)">Teilzeit</button>
+      <button class="filter-btn" onclick="setArbeitszeit('ho', this)">Homeoffice</button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p style="color: var(--primary); font-size: 1.1rem; font-weight: 600;">Stellen werden gesucht...</p>
+    <p style="color: var(--gray); font-size: 0.9rem; margin-top: 8px;">Direkt aus der Jobbörse der Bundesagentur für Arbeit</p>
+  </div>
+
+  <div id="resultsSection" style="display:none;">
+    <div class="results-header">
+      <div class="results-count" id="resultsCount"></div>
+    </div>
+    <div class="stellen-grid" id="stellenGrid"></div>
+    <div class="pagination" id="pagination"></div>
+    <div class="cta-box">
+      <h3>Nicht sicher welcher Beruf zu DIR passt?</h3>
+      <p>Unsere KI analysiert in 5 Minuten deine Stärken und gibt dir 3 konkrete Karrierewege.</p>
+      <a href="/" class="cta-btn">Jetzt KI-Analyse starten – 4,99€</a>
+    </div>
+  </div>
+
+  <div class="empty-state" id="emptyState" style="display:none;">
+    <h3>Keine Stellen gefunden</h3>
+    <p>Versuche einen anderen Suchbegriff oder erweitere den Umkreis.</p>
+  </div>
+</div>
+
+<footer>
+  <p>Stellenangebote powered by <strong style="color: white;">Bundesagentur für Arbeit</strong> · © 2026 Dein Karriereweg | <a href="/karriere-impressum.html">Impressum</a> | <a href="/karriere-datenschutz.html">Datenschutz</a></p>
+</footer>
+
+<script>
+const BACKEND_URL = 'https://karriere-berater-backend-production.up.railway.app';
+let currentAngebotsart = '1';
+let currentArbeitszeit = '';
+let currentSeite = 1;
+let gesamtStellen = 0;
+
+document.getElementById('berufInput').addEventListener('keypress', e => { if (e.key === 'Enter') suchen(1); });
+document.getElementById('ortInput').addEventListener('keypress', e => { if (e.key === 'Enter') suchen(1); });
+
+function setFilter(art, btn) {
+  currentAngebotsart = art;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function setArbeitszeit(zeit, btn) {
+  if (currentArbeitszeit === zeit) {
+    currentArbeitszeit = '';
+    btn.classList.remove('active');
+  } else {
+    currentArbeitszeit = zeit;
+    document.querySelectorAll('.filter-btn').forEach(b => { if (b.id !== 'filter-1' && b.id !== 'filter-4') b.classList.remove('active'); });
+    btn.classList.add('active');
+  }
+}
+
+async function suchen(seite = 1) {
+  const beruf = document.getElementById('berufInput').value.trim();
+  const ort = document.getElementById('ortInput').value.trim();
+  if (!beruf) { document.getElementById('berufInput').focus(); return; }
+
+  currentSeite = seite;
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('resultsSection').style.display = 'none';
+  document.getElementById('emptyState').style.display = 'none';
+  window.scrollTo({ top: document.querySelector('.hero').offsetHeight, behavior: 'smooth' });
+
+  try {
+    const response = await fetch(`${BACKEND_URL}/stellensuche`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ beruf, ort, umkreis: 25, angebotsart: currentAngebotsart, arbeitszeit: currentArbeitszeit, seite })
+    });
+    const data = await response.json();
+    document.getElementById('loading').style.display = 'none';
+
+    if (!data.stellen || data.stellen.length === 0) {
+      document.getElementById('emptyState').style.display = 'block';
+      return;
+    }
+
+    gesamtStellen = data.gesamt || 0;
+    document.getElementById('resultsCount').innerHTML = `<strong>${gesamtStellen.toLocaleString('de-DE')}</strong> Stellen gefunden für "<strong>${beruf}</strong>"${ort ? ` in <strong>${ort}</strong>` : ''}`;
+    
+    const grid = document.getElementById('stellenGrid');
+    grid.innerHTML = data.stellen.map(s => {
+      const tage = s.aktuelleVeroeffentlichungsdatum ? Math.floor((new Date() - new Date(s.aktuelleVeroeffentlichungsdatum)) / 86400000) : null;
+      const dauerText = tage !== null ? (tage === 0 ? 'Heute' : tage === 1 ? 'Gestern' : `Vor ${tage} Tagen`) : '';
+      const arbeitszeitText = s.arbeitszeit ? s.arbeitszeit.replace('VOLLZEIT','Vollzeit').replace('TEILZEIT','Teilzeit').replace('HEIM_TELEARBEIT','Homeoffice').replace('MINIJOB','Minijob') : '';
+      return `
+        <div class="stellen-card">
+          <div class="stellen-title">${s.titel}</div>
+          <div class="stellen-arbeitgeber">${s.arbeitgeber}</div>
+          <div class="stellen-meta">
+            ${s.ort ? `<span class="stellen-badge ort">📍 ${s.ort}${s.plz ? ` (${s.plz})` : ''}</span>` : ''}
+            ${arbeitszeitText ? `<span class="stellen-badge">${arbeitszeitText}</span>` : ''}
+            ${dauerText ? `<span class="stellen-badge">${dauerText}</span>` : ''}
+          </div>
+          <a href="${s.link}" target="_blank" class="stellen-btn">Zur Stelle →</a>
+        </div>`;
+    }).join('');
+
+    // Pagination
+    const totalPages = Math.min(Math.ceil(gesamtStellen / 10), 10);
+    const pag = document.getElementById('pagination');
+    pag.innerHTML = '';
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.className = 'page-btn' + (i === seite ? ' active' : '');
+      btn.textContent = i;
+      btn.onclick = () => suchen(i);
+      pag.appendChild(btn);
+    }
+
+    document.getElementById('resultsSection').style.display = 'block';
+  } catch (error) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('emptyState').style.display = 'block';
+    console.error('Stellensuche Error:', error);
+  }
+}
+</script>
+</body>
+</html>

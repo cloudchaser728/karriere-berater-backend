@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job-Finder – Minijob, Teilzeit, Ausbildung & Praktikum | Dein Karriereweg</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --primary: #0f1f3d; --accent: #c9a84c; --bg: #f7f8fc; --gray: #666; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { overflow-x: hidden; width: 100%; }
+body { font-family: 'Work Sans', sans-serif; background: var(--bg); color: var(--primary); }
+
+header { background: linear-gradient(135deg, #0f1f3d, #1a3a6b); padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; }
+.logo { color: white; font-family: 'Crimson Pro', serif; font-size: 1.4rem; font-weight: 700; text-decoration: none; }
+.back-btn { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; }
+.back-btn:hover { color: var(--accent); }
+
+.hero {
+  position: relative;
+  padding: 80px 20px 120px;
+  text-align: center;
+  overflow: hidden;
+  background: #0f1f3d;
+  width: 100%;
+}
+.hero-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center center;
+  opacity: 0.4; z-index: 0;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  z-index: 1; pointer-events: none;
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.4);
+  color: var(--accent);
+  padding: 5px 16px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+  position: relative; z-index: 2;
+}
+.hero h1 { font-family: 'Crimson Pro', serif; font-size: 2.8rem; color: white; margin-bottom: 10px; position: relative; z-index: 2; text-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+.hero p { color: rgba(255,255,255,0.75); font-size: 1.05rem; margin-bottom: 32px; position: relative; z-index: 2; }
+
+.search-wrap { max-width: 680px; margin: 0 auto; position: relative; z-index: 2; }
+.search-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+.search-field { padding: 16px 18px; border: none; outline: none; font-size: 0.95rem; font-family: 'Work Sans', sans-serif; color: var(--primary); border-right: 1px solid #eee; width: 100%; }
+.search-field::placeholder { color: #aaa; }
+.search-btn {
+  background: linear-gradient(135deg, #c9a84c, #e8c96a);
+  color: #0f1f3d; border: none; padding: 16px 24px;
+  font-size: 0.95rem; font-weight: 700; cursor: pointer;
+  font-family: 'Work Sans', sans-serif; white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.search-btn:hover { opacity: 0.9; }
+
+.filters {
+  display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+  margin-top: 14px; position: relative; z-index: 2;
+}
+.filter-btn {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.8);
+  border: 0.5px solid rgba(255,255,255,0.25);
+  padding: 6px 16px; border-radius: 20px;
+  font-size: 0.82rem; cursor: pointer;
+  font-family: 'Work Sans', sans-serif;
+  transition: all 0.2s;
+}
+.filter-btn:hover { background: rgba(255,255,255,0.2); color: white; }
+.filter-btn.active {
+  background: rgba(201,168,76,0.25);
+  color: #e8c96a;
+  border-color: rgba(201,168,76,0.5);
+}
+
+.container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+.results-section { padding: 30px 0 60px; }
+
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 30px;
+}
+.info-card {
+  background: white;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(15,31,61,0.06);
+  cursor: pointer;
+  transition: all 0.2s;
+  border-top: 3px solid transparent;
+}
+.info-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(15,31,61,0.1); }
+.info-card.active { border-top-color: var(--accent); }
+.info-card .icon { font-size: 1.6rem; margin-bottom: 8px; }
+.info-card .label { font-size: 0.82rem; font-weight: 600; color: var(--primary); }
+.info-card .desc { font-size: 0.75rem; color: var(--gray); margin-top: 3px; }
+
+.result-hint {
+  background: white;
+  border-radius: 12px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(15,31,61,0.06);
+  margin-bottom: 20px;
+}
+.result-hint h3 { font-family: 'Crimson Pro', serif; font-size: 1.4rem; margin-bottom: 8px; }
+.result-hint p { color: var(--gray); font-size: 0.9rem; margin-bottom: 16px; }
+.btn-ba {
+  display: inline-block;
+  background: var(--primary);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+  margin: 4px;
+}
+.btn-ba:hover { background: #1a3a6b; }
+.btn-ba.gold {
+  background: linear-gradient(135deg, #c9a84c, #e8c96a);
+  color: #0f1f3d;
+}
+
+.cta-box {
+  background: linear-gradient(135deg, #0f1f3d, #1a3a6b);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  margin-top: 24px;
+}
+.cta-box h3 { font-family: 'Crimson Pro', serif; font-size: 1.6rem; color: white; margin-bottom: 10px; }
+.cta-box p { color: rgba(255,255,255,0.75); font-size: 0.9rem; margin-bottom: 20px; }
+.btn-cta {
+  display: inline-block;
+  background: linear-gradient(135deg, #c9a84c, #e8c96a);
+  color: #0f1f3d;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+footer { background: var(--primary); color: rgba(255,255,255,0.5); text-align: center; padding: 28px; font-size: 0.85rem; }
+footer a { color: var(--accent); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2rem; }
+  .search-box { grid-template-columns: 1fr; }
+  .search-field { border-right: none; border-bottom: 1px solid #eee; }
+  .info-cards { grid-template-columns: repeat(2, 1fr); }
+  header { padding: 14px 16px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">Dein Karriereweg</a>
+  <a href="/" class="back-btn">← Zurück</a>
+</header>
+
+<div class="hero">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <source src="/header-video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-badge">DEIN ERSTER JOB</div>
+  <h1>Finde deinen ersten Job</h1>
+  <p>Minijob, Teilzeit, Ausbildung oder Praktikum – direkt in deiner Nähe</p>
+
+  <div class="search-wrap">
+    <div class="search-box">
+      <input type="text" id="berufInput" class="search-field" placeholder="Beruf oder Stichwort... z.B. Verkäufer, Kellner">
+      <input type="text" id="ortInput" class="search-field" placeholder="Stadt oder PLZ... z.B. Köln">
+      <button class="search-btn" onclick="suchen()">🔍 Suchen</button>
+    </div>
+    <div class="filters">
+      <button class="filter-btn active" onclick="setFilter('1', this)">Alle Jobs</button>
+      <button class="filter-btn" onclick="setFilter('minijob', this)">💶 Minijob</button>
+      <button class="filter-btn" onclick="setFilter('teilzeit', this)">⏰ Teilzeit</button>
+      <button class="filter-btn" onclick="setFilter('4', this)">🎓 Ausbildung</button>
+      <button class="filter-btn" onclick="setFilter('praktikum', this)">📋 Praktikum</button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="results-section">
+
+    <div class="result-hint" id="resultHint">
+      <h3>Jetzt auf der Bundesagentur für Arbeit suchen</h3>
+      <p>Gib Beruf und Stadt ein – wir öffnen die offizielle Jobsuche mit über 1 Million freien Stellen direkt für dich.</p>
+      <p style="font-size: 0.82rem; color: #aaa; margin-bottom: 16px;">Oder wähle eine Kategorie um direkt zu starten:</p>
+      <div class="info-cards" style="margin-bottom: 20px;">
+        <div class="info-card active" onclick="setKategorie('minijob', this)">
+          <div class="icon">💶</div>
+          <div class="label">Minijob</div>
+          <div class="desc">bis 520€/Monat</div>
+        </div>
+        <div class="info-card" onclick="setKategorie('teilzeit', this)">
+          <div class="icon">⏰</div>
+          <div class="label">Teilzeit</div>
+          <div class="desc">flexibel & neben der Schule</div>
+        </div>
+        <div class="info-card" onclick="setKategorie('ausbildung', this)">
+          <div class="icon">🎓</div>
+          <div class="label">Ausbildung</div>
+          <div class="desc">starte deine Karriere</div>
+        </div>
+        <div class="info-card" onclick="setKategorie('praktikum', this)">
+          <div class="icon">📋</div>
+          <div class="label">Praktikum</div>
+          <div class="desc">reinschnuppern & testen</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-box">
+      <h3>Nicht sicher welcher Job zu dir passt?</h3>
+      <p>Unsere KI analysiert in 5 Minuten deine Stärken und Interessen – und zeigt dir welcher Beruf wirklich zu dir passt.</p>
+      <a href="/" class="btn-cta">Jetzt KI-Analyse starten – 9,99€</a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>Stellenangebote powered by <strong style="color: white;">Bundesagentur für Arbeit</strong> · © 2026 Dein Karriereweg | <a href="/karriere-impressum.html">Impressum</a> | <a href="/karriere-datenschutz.html">Datenschutz</a></p>
+</footer>
+
+<script>
+let currentFilter = '1';
+
+document.getElementById('berufInput').addEventListener('keypress', e => { if (e.key === 'Enter') suchen(); });
+document.getElementById('ortInput').addEventListener('keypress', e => { if (e.key === 'Enter') suchen(); });
+
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function setKategorie(kat, card) {
+  document.querySelectorAll('.info-card').forEach(c => c.classList.remove('active'));
+  card.classList.add('active');
+  currentFilter = kat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  direktSuchen(kat);
+}
+
+function getBAUrl(beruf, ort, filter) {
+  let url = 'https://www.arbeitsagentur.de/jobsuche/suche?';
+  const params = new URLSearchParams();
+  
+  if (beruf) params.append('was', beruf);
+  if (ort) params.append('wo', ort);
+  
+  switch(filter) {
+    case 'minijob':
+      params.append('was', beruf || 'Minijob');
+      params.append('arbeitszeit', 'mj');
+      break;
+    case 'teilzeit':
+      params.append('arbeitszeit', 'tz');
+      break;
+    case 'praktikum':
+      params.append('angebotsart', '34');
+      break;
+    case '4':
+      params.append('angebotsart', '4');
+      break;
+    default:
+      params.append('angebotsart', '1');
+  }
+  
+  return url + params.toString();
+}
+
+function suchen() {
+  const beruf = document.getElementById('berufInput').value.trim();
+  const ort = document.getElementById('ortInput').value.trim();
+  
+  if (!beruf && !ort) {
+    document.getElementById('berufInput').focus();
+    return;
+  }
+  
+  const url = getBAUrl(beruf, ort, currentFilter);
+  window.open(url, '_blank');
+}
+
+function direktSuchen(filter) {
+  const beruf = document.getElementById('berufInput').value.trim();
+  const ort = document.getElementById('ortInput').value.trim();
+  const url = getBAUrl(beruf, ort, filter);
+  window.open(url, '_blank');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studiengang-Finder – Uni-Studiengänge & Duales Studium | Dein Karriereweg</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --primary: #0f1f3d; --accent: #c9a84c; --bg: #f7f8fc; --gray: #666; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { overflow-x: hidden; width: 100%; }
+body { font-family: 'Work Sans', sans-serif; background: var(--bg); color: var(--primary); line-height: 1.7; }
+header { background: var(--primary); padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; }
+.logo { color: white; font-family: 'Crimson Pro', serif; font-size: 1.4rem; font-weight: 700; text-decoration: none; }
+.back-btn { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; }
+.back-btn:hover { color: var(--accent); }
+.hero { position: relative; padding: 70px 20px 120px; text-align: center; background: var(--primary); overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 400px; height: 400px; border-radius: 50%; background: rgba(201,168,76,0.06); }
+.hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 140px; background: linear-gradient(to bottom, transparent, var(--bg)); pointer-events: none; }
+.hero-badge { display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: var(--accent); padding: 5px 18px; border-radius: 20px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 18px; position: relative; z-index: 1; }
+.hero h1 { font-family: 'Crimson Pro', serif; font-size: 2.8rem; color: white; margin-bottom: 14px; position: relative; z-index: 1; line-height: 1.2; }
+.hero p { color: rgba(255,255,255,0.65); font-size: 1rem; max-width: 560px; margin: 0 auto 32px; position: relative; z-index: 1; }
+.search-wrap { max-width: 680px; margin: 0 auto; position: relative; z-index: 2; }
+.search-box { display: grid; grid-template-columns: 1fr 1fr auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.25); }
+.search-field { padding: 16px 18px; border: none; outline: none; font-size: 0.95rem; font-family: 'Work Sans', sans-serif; color: var(--primary); border-right: 1px solid #eee; width: 100%; }
+.search-field::placeholder { color: #aaa; }
+.search-btn { background: linear-gradient(135deg, #c9a84c, #e8c96a); color: var(--primary); border: none; padding: 16px 24px; font-size: 0.95rem; font-weight: 700; cursor: pointer; font-family: 'Work Sans', sans-serif; white-space: nowrap; }
+.filters { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 14px; position: relative; z-index: 2; }
+.filter-btn { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); border: 0.5px solid rgba(255,255,255,0.25); padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; cursor: pointer; font-family: 'Work Sans', sans-serif; transition: all 0.2s; }
+.filter-btn.active { background: rgba(201,168,76,0.25); color: #e8c96a; border-color: rgba(201,168,76,0.5); }
+.container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+.section { padding: 50px 0 10px; }
+.section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+.section h2 { font-family: 'Crimson Pro', serif; font-size: 2rem; color: var(--primary); margin-bottom: 14px; }
+.section p { color: var(--gray); font-size: 0.95rem; margin-bottom: 28px; }
+.wege-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
+.weg { background: white; border-radius: 12px; padding: 24px; border: 0.5px solid #e0e0e0; border-top: 3px solid var(--accent); }
+.weg h3 { font-family: 'Crimson Pro', serif; font-size: 1.2rem; color: var(--primary); margin-bottom: 8px; }
+.weg p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; margin-bottom: 10px; }
+.weg-tag { display: inline-block; background: rgba(201,168,76,0.1); color: var(--accent); padding: 3px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 500; }
+.faecher-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+.fach-tag { background: white; border: 0.5px solid #e0e0e0; border-radius: 8px; padding: 10px 14px; font-size: 0.82rem; color: var(--primary); text-align: center; }
+.wissen-list { display: flex; flex-direction: column; gap: 12px; }
+.wissen-item { background: white; border-radius: 10px; padding: 20px; border: 0.5px solid #e0e0e0; border-left: 3px solid var(--accent); }
+.wissen-q { font-size: 0.9rem; font-weight: 600; color: var(--primary); margin-bottom: 6px; }
+.wissen-a { font-size: 0.82rem; color: var(--gray); line-height: 1.7; }
+.cta-box { background: linear-gradient(135deg, var(--primary), #1a3a6b); border-radius: 16px; padding: 46px 40px; text-align: center; margin: 50px 0; }
+.cta-box h2 { font-family: 'Crimson Pro', serif; font-size: 1.9rem; color: white; margin-bottom: 10px; }
+.cta-box p { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 24px; }
+.btn-main { display: inline-block; background: linear-gradient(135deg, #c9a84c, #e8c96a); color: var(--primary); padding: 13px 28px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; text-decoration: none; margin: 4px; }
+.btn-sec { display: inline-block; background: transparent; color: rgba(255,255,255,0.65); border: 0.5px solid rgba(255,255,255,0.3); padding: 13px 22px; border-radius: 8px; font-size: 0.88rem; text-decoration: none; margin: 4px; }
+footer { background: var(--primary); color: rgba(255,255,255,0.5); text-align: center; padding: 28px; font-size: 0.85rem; }
+footer a { color: var(--accent); text-decoration: none; }
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2rem; }
+  .search-box { grid-template-columns: 1fr; }
+  .search-field { border-right: none; border-bottom: 1px solid #eee; }
+  .wege-grid { grid-template-columns: 1fr; }
+  .faecher-grid { grid-template-columns: repeat(2, 1fr); }
+  header { padding: 14px 16px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <a href="/" class="logo">Dein Karriereweg</a>
+  <a href="/" class="back-btn">← Zurück</a>
+</header>
+<div class="hero">
+  <div class="hero-badge">Studiengang-Finder</div>
+  <h1>Finde deinen<br>Studiengang</h1>
+  <p>Uni-Studium oder Duales Studium – finde den Studiengang der wirklich zu dir passt.</p>
+  <div class="search-wrap">
+    <div class="search-box">
+      <input type="text" id="studiumInput" class="search-field" placeholder="Studiengang... z.B. Medizin, Psychologie, Informatik">
+      <input type="text" id="ortInput" class="search-field" placeholder="Stadt oder Uni... z.B. Köln, München">
+      <button class="search-btn" onclick="suchen()">🔍 Suchen</button>
+    </div>
+    <div class="filters">
+      <button class="filter-btn active" onclick="setFilter('uni', this)">🎓 Uni-Studium</button>
+      <button class="filter-btn" onclick="setFilter('dual', this)">🔧 Duales Studium</button>
+    </div>
+  </div>
+</div>
+<div class="container">
+
+  <div class="section">
+    <div class="section-label">Deine Wege</div>
+    <h2>Uni-Studium oder Duales Studium?</h2>
+    <p>Beide führen zu einem anerkannten Hochschulabschluss – aber auf unterschiedlichen Wegen.</p>
+    <div class="wege-grid">
+      <div class="weg">
+        <h3>🎓 Uni-Studium</h3>
+        <p>Das klassische Vollzeitstudium an einer Universität. Viel Theorie, viel Freiheit, viel Eigenverantwortung. Ideal wenn du tief in ein Fachgebiet eintauchen willst.</p>
+        <span class="weg-tag">Abitur Voraussetzung</span>
+      </div>
+      <div class="weg">
+        <h3>🔧 Duales Studium</h3>
+        <p>Studium und Ausbildung gleichzeitig. Du studierst an der Hochschule und arbeitest parallel im Betrieb – mit eigenem Gehalt von Tag 1.</p>
+        <span class="weg-tag">Fachabitur / Abitur</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Beliebte Fächer</div>
+    <h2>Was kann man studieren?</h2>
+    <p>Von Medizin bis Mediendesign – die Auswahl ist riesig.</p>
+    <div class="faecher-grid">
+      <div class="fach-tag">Medizin</div>
+      <div class="fach-tag">Psychologie</div>
+      <div class="fach-tag">Informatik</div>
+      <div class="fach-tag">BWL</div>
+      <div class="fach-tag">Jura / Rechtswissenschaften</div>
+      <div class="fach-tag">Maschinenbau</div>
+      <div class="fach-tag">Pädagogik / Lehramt</div>
+      <div class="fach-tag">Kommunikationswissenschaft</div>
+      <div class="fach-tag">Architektur</div>
+      <div class="fach-tag">Biologie / Chemie</div>
+      <div class="fach-tag">Mathematik</div>
+      <div class="fach-tag">Kunstgeschichte</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Das solltest du wissen</div>
+    <h2>Häufige Fragen</h2>
+    <div class="wissen-list">
+      <div class="wissen-item">
+        <div class="wissen-q">Was ist BAföG und bekomme ich es?</div>
+        <div class="wissen-a">BAföG ist staatliche Unterstützung für Studierende die sich das Studium sonst nicht leisten könnten. Ob du BAföG bekommst hängt vom Einkommen deiner Eltern ab. Bis zu 992€ pro Monat sind möglich – die Hälfte davon musst du nach dem Studium zurückzahlen. Informiere dich beim Studentenwerk deiner Stadt.</div>
+      </div>
+      <div class="wissen-item">
+        <div class="wissen-q">Was ist ein NC und wie funktioniert das?</div>
+        <div class="wissen-a">NC steht für Numerus Clausus – eine Zulassungsbeschränkung für besonders beliebte Studiengänge wie Medizin oder Psychologie. Dein Abitur-Durchschnitt entscheidet ob du zugelassen wirst. Viele Fächer haben keinen NC – dort reicht die Hochschulzugangsberechtigung.</div>
+      </div>
+      <div class="wissen-item">
+        <div class="wissen-q">Lohnt sich ein duales Studium?</div>
+        <div class="wissen-a">Ja – du hast von Anfang an ein Gehalt, sammelst Berufserfahrung und hast nach dem Abschluss oft direkt eine Jobzusage vom Partnerunternehmen. Der Nachteil: weniger Zeit für Nebenjobs und Freizeit da du gleichzeitig arbeitest und studierst.</div>
+      </div>
+      <div class="wissen-item">
+        <div class="wissen-q">Wie lange dauert ein Studium?</div>
+        <div class="wissen-a">Bachelor: 6–8 Semester (3–4 Jahre). Master: 2–4 Semester zusätzlich. Duales Studium: meist 6–7 Semester kombiniert mit Ausbildung oder Praxisphasen im Betrieb.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <h2>Welcher Studiengang passt wirklich zu dir?</h2>
+    <p>Viele wählen einen Studiengang der gut klingt – aber nicht zu ihrer Persönlichkeit passt. Unsere KI analysiert in 5 Minuten was wirklich zu dir gehört.</p>
+    <a href="/" class="btn-main">Jetzt KI-Analyse starten – 9,99€</a>
+    <a href="/berufe.html" class="btn-sec">Berufslexikon entdecken</a>
+  </div>
+
+</div>
+<footer>
+  <p>© 2026 Dein Karriereweg | <a href="/karriere-impressum.html">Impressum</a> | <a href="/karriere-datenschutz.html">Datenschutz</a></p>
+</footer>
+<script>
+let currentFilter = 'uni';
+document.getElementById('studiumInput').addEventListener('keypress', e => { if (e.key === 'Enter') suchen(); });
+document.getElementById('ortInput').addEventListener('keypress', e => { if (e.key === 'Enter') suchen(); });
+
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function suchen() {
+  const studium = document.getElementById('studiumInput').value.trim();
+  const ort = document.getElementById('ortInput').value.trim();
+  if (!studium && !ort) { document.getElementById('studiumInput').focus(); return; }
+  let query = '';
+  if (currentFilter === 'uni') query = [studium, ort, 'Studiengang Universität Bachelor'].filter(Boolean).join(' ');
+  if (currentFilter === 'dual') query = [studium, ort, 'Duales Studium Bachelor'].filter(Boolean).join(' ');
+  window.open('https://www.google.com/search?q=' + encodeURIComponent(query), '_blank');
+}
+</script>
+</body>
+</html>

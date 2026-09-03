@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Für Unternehmen – Partner werden | Dein Karriereweg</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --primary: #0f1f3d; --accent: #c9a84c; --accent-light: #e8c96a; --bg: #f7f8fc; --gray: #666; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { overflow-x: hidden; width: 100%; }
+body { font-family: 'Work Sans', sans-serif; background: var(--bg); color: var(--primary); line-height: 1.7; }
+header { background: var(--primary); padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; }
+.logo { color: white; font-family: 'Crimson Pro', serif; font-size: 1.4rem; font-weight: 700; text-decoration: none; }
+.back-btn { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; }
+.back-btn:hover { color: var(--accent); }
+
+.hero { background: var(--primary); padding: 80px 20px 140px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.08), transparent 70%); }
+.hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 160px; background: linear-gradient(to bottom, transparent, var(--bg)); }
+.hero-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+.hero h1 { font-family: 'Crimson Pro', serif; font-size: 3.2rem; color: white; line-height: 1.15; margin-bottom: 20px; font-weight: 700; }
+.hero h1 em { color: var(--accent); font-style: italic; }
+.hero p { color: rgba(255,255,255,0.65); font-size: 1.05rem; max-width: 560px; line-height: 1.75; margin-bottom: 32px; }
+.hero-cta { display: inline-block; background: linear-gradient(135deg, var(--accent), var(--accent-light)); color: var(--primary); padding: 14px 32px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; text-decoration: none; box-shadow: 0 4px 24px rgba(201,168,76,0.3); }
+.hero-note { font-size: 0.78rem; color: rgba(255,255,255,0.3); margin-top: 12px; }
+
+.problem { max-width: 960px; margin: 0 auto; padding: 60px 20px 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.problem-text h2 { font-family: 'Crimson Pro', serif; font-size: 2rem; color: var(--primary); margin-bottom: 14px; line-height: 1.25; }
+.problem-text p { color: var(--gray); font-size: 0.92rem; line-height: 1.8; margin-bottom: 16px; }
+.problem-highlight { background: white; border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 16px 20px; font-size: 0.88rem; color: var(--primary); line-height: 1.7; font-style: italic; }
+.problem-stats { display: flex; flex-direction: column; gap: 16px; }
+.stat-item { background: white; border-radius: 12px; padding: 22px 24px; border: 0.5px solid #e0e0e0; border-left: 4px solid var(--accent); }
+.stat-label { font-size: 0.78rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.stat-text { font-family: 'Crimson Pro', serif; font-size: 1.2rem; color: var(--primary); line-height: 1.4; }
+
+.loesung { background: white; margin: 40px 0; padding: 60px 20px; border-top: 0.5px solid #e8e8e8; border-bottom: 0.5px solid #e8e8e8; }
+.loesung-inner { max-width: 960px; margin: 0 auto; }
+.loesung h2 { font-family: 'Crimson Pro', serif; font-size: 2rem; color: var(--primary); margin-bottom: 8px; }
+.loesung-sub { color: var(--gray); font-size: 0.92rem; margin-bottom: 40px; max-width: 560px; }
+.loesung-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: #e8e8e8; border-radius: 12px; overflow: hidden; }
+.loesung-step { background: white; padding: 32px 28px; }
+.step-marker { font-family: 'Crimson Pro', serif; font-size: 3rem; color: rgba(201,168,76,0.15); font-weight: 700; line-height: 1; margin-bottom: 12px; }
+.step-title { font-size: 0.95rem; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
+.step-desc { font-size: 0.82rem; color: var(--gray); line-height: 1.7; }
+
+.pakete { max-width: 960px; margin: 0 auto; padding: 60px 20px; }
+.pakete h2 { font-family: 'Crimson Pro', serif; font-size: 2rem; color: var(--primary); margin-bottom: 8px; }
+.pakete-sub { color: var(--gray); font-size: 0.92rem; margin-bottom: 32px; }
+.pakete-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.paket { background: white; border-radius: 14px; padding: 32px 26px; border: 0.5px solid #e0e0e0; position: relative; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; }
+.paket-features { flex: 1; }
+.paket:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(15,31,61,0.1); }
+.paket.featured { border: 1.5px solid var(--accent); background: linear-gradient(180deg, #fffdf5, white); }
+.paket-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent); color: var(--primary); font-size: 0.7rem; font-weight: 700; padding: 3px 14px; border-radius: 20px; white-space: nowrap; }
+.paket-name { font-family: 'Crimson Pro', serif; font-size: 1.4rem; color: var(--primary); margin-bottom: 4px; }
+.paket-tagline { font-size: 0.78rem; color: var(--gray); margin-bottom: 20px; padding-bottom: 16px; border-bottom: 0.5px solid #eee; }
+.paket-price { font-family: 'Crimson Pro', serif; font-size: 1.1rem; color: var(--accent); font-weight: 600; text-align: center; margin-bottom: 12px; }
+.paket-features { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 24px; }
+.paket-features li { font-size: 0.82rem; color: var(--primary); display: flex; gap: 8px; align-items: flex-start; }
+.paket-features li::before { content: "✓"; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+.paket-features li.no { color: #bbb; }
+.paket-features li.no::before { content: "–"; color: #ccc; }
+.paket-cta { display: block; text-align: center; padding: 11px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; text-decoration: none; transition: all 0.2s; }
+.paket-cta.primary { background: var(--primary); color: white; }
+.paket-cta.featured-btn { background: linear-gradient(135deg, var(--accent), var(--accent-light)); color: var(--primary); }
+
+.bildung { background: var(--primary); padding: 60px 20px; }
+.bildung-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.bildung h2 { font-family: 'Crimson Pro', serif; font-size: 2rem; color: white; margin-bottom: 8px; }
+.bildung-sub { color: rgba(255,255,255,0.55); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.7; }
+.bildung-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.bildung-tag { background: rgba(255,255,255,0.08); border: 0.5px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); padding: 5px 12px; border-radius: 20px; font-size: 0.78rem; }
+.bildung-cta { display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--accent); padding: 11px 22px; border-radius: 8px; font-weight: 600; font-size: 0.88rem; text-decoration: none; }
+.bildung-right { background: rgba(255,255,255,0.05); border: 0.5px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 28px; }
+.bildung-right-title { font-size: 0.78rem; font-weight: 600; color: var(--accent); margin-bottom: 16px; letter-spacing: 0.08em; }
+.bildung-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.bildung-list li { font-size: 0.82rem; color: rgba(255,255,255,0.65); display: flex; gap: 10px; align-items: flex-start; }
+.bildung-list li::before { content: "→"; color: var(--accent); flex-shrink: 0; }
+
+.kontakt { max-width: 960px; margin: 0 auto; padding: 60px 20px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start; }
+.kontakt-left h2 { font-family: 'Crimson Pro', serif; font-size: 2rem; color: var(--primary); margin-bottom: 12px; line-height: 1.25; }
+.kontakt-left p { color: var(--gray); font-size: 0.88rem; line-height: 1.8; margin-bottom: 20px; }
+.kontakt-benefit { display: flex; align-items: flex-start; gap: 8px; font-size: 0.82rem; color: var(--primary); margin-bottom: 8px; }
+.kontakt-benefit::before { content: "✓"; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+.kontakt-right { background: white; border-radius: 14px; padding: 32px; border: 0.5px solid #e0e0e0; box-shadow: 0 2px 20px rgba(15,31,61,0.06); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.form-input { width: 100%; padding: 12px 14px; border: 0.5px solid #ddd; border-radius: 8px; font-size: 0.85rem; font-family: 'Work Sans', sans-serif; color: var(--primary); background: var(--bg); outline: none; transition: border-color 0.2s; }
+.form-input:focus { border-color: var(--accent); background: white; }
+.form-select { width: 100%; padding: 12px 14px; border: 0.5px solid #ddd; border-radius: 8px; font-size: 0.85rem; font-family: 'Work Sans', sans-serif; color: var(--gray); background: var(--bg); outline: none; margin-bottom: 10px; }
+.form-textarea { width: 100%; padding: 12px 14px; border: 0.5px solid #ddd; border-radius: 8px; font-size: 0.85rem; font-family: 'Work Sans', sans-serif; color: var(--primary); background: var(--bg); outline: none; min-height: 90px; resize: vertical; margin-bottom: 14px; }
+.form-submit { width: 100%; background: linear-gradient(135deg, var(--accent), var(--accent-light)); color: var(--primary); border: none; padding: 14px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; font-family: 'Work Sans', sans-serif; }
+.form-privacy { font-size: 0.72rem; color: #aaa; text-align: center; margin-top: 10px; line-height: 1.6; }
+
+.faq { max-width: 760px; margin: 0 auto; padding: 0 20px 60px; }
+.faq h2 { font-family: 'Crimson Pro', serif; font-size: 1.9rem; color: var(--primary); margin-bottom: 8px; }
+.faq-sub { color: var(--gray); font-size: 0.9rem; margin-bottom: 28px; }
+.faq-list { display: flex; flex-direction: column; gap: 8px; }
+.faq-item { background: white; border-radius: 10px; border: 0.5px solid #e0e0e0; overflow: hidden; }
+.faq-q { padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; font-weight: 600; color: var(--primary); gap: 16px; }
+.faq-icon { color: var(--accent); font-size: 1.1rem; flex-shrink: 0; }
+.faq-a { display: none; padding: 14px 20px 16px; font-size: 0.82rem; color: var(--gray); line-height: 1.75; border-top: 0.5px solid #f0f0f0; }
+
+footer { background: var(--primary); color: rgba(255,255,255,0.5); text-align: center; padding: 28px; font-size: 0.85rem; }
+footer a { color: var(--accent); text-decoration: none; }
+
+@media (max-width: 768px) {
+  header { padding: 14px 16px; }
+  .hero h1 { font-size: 2.2rem; }
+  .problem { grid-template-columns: 1fr; gap: 30px; }
+  .loesung-steps { grid-template-columns: 1fr; }
+  .pakete-grid { grid-template-columns: 1fr; }
+  .bildung-inner { grid-template-columns: 1fr; }
+  .kontakt { grid-template-columns: 1fr; gap: 32px; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">Dein Karriereweg</a>
+  <a href="/" class="back-btn">← Zurück</a>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <h1>Die besten Bewerber<br>wissen schon, <em>wohin sie wollen.</em></h1>
+    <p>Schüler die unsere KI-Analyse machen haben bereits herausgefunden welcher Beruf zu ihnen passt. Wir empfehlen Ihren Betrieb genau diesen Menschen – in dem Moment wo die Entscheidung fällt.</p>
+    <a href="#kontakt" class="hero-cta">Jetzt Partnerschaft anfragen</a>
+    <div class="hero-note">Kein Jahresvertrag · Antwort innerhalb von 24 Stunden</div>
+  </div>
+</div>
+
+<div class="problem">
+  <div class="problem-text">
+    <h2>Das Problem kennen Sie.</h2>
+    <p>Bewerbungen kommen – aber von Menschen die sich für den Beruf nicht wirklich interessieren. Die Auswahl kostet Zeit, die Absagen kosten Nerven, und am Ende bleibt der Ausbildungsplatz oft unbesetzt.</p>
+    <p>Das liegt nicht an Ihrem Betrieb. Es liegt daran, wo und wie Schüler heute Entscheidungen treffen.</p>
+    <div class="problem-highlight">"Der Fachkräftemangel beginnt nicht mit dem Arbeitgeber – er beginnt mit dem Moment der Berufswahl."</div>
+  </div>
+  <div class="problem-stats">
+    <div class="stat-item">
+      <div class="stat-label">Das verändert sich</div>
+      <div class="stat-text">Schüler entscheiden ihren Beruf heute digital – oft ohne je einen Betrieb besucht zu haben.</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">Unser Ansatz</div>
+      <div class="stat-text">Wir analysieren erst den Menschen – dann empfehlen wir Ihren Betrieb. Keine Streuung. Nur Treffer.</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">Das Ergebnis</div>
+      <div class="stat-text">Bewerber die zu Ihrem Beruf passen – und die bereits wissen warum sie sich bewerben.</div>
+    </div>
+  </div>
+</div>
+
+<div class="loesung">
+  <div class="loesung-inner">
+    <h2>Wie Ihr Betrieb sichtbar wird</h2>
+    <div class="loesung-sub">Nicht als Werbung. Sondern als Empfehlung – im richtigen Moment für den richtigen Menschen.</div>
+    <div class="loesung-steps">
+      <div class="loesung-step">
+        <div class="step-marker">01</div>
+        <div class="step-title">Schüler macht die Analyse</div>
+        <div class="step-desc">In 5–10 Minuten analysiert unsere KI Persönlichkeit, Stärken und Interessen. Wissenschaftlich fundiert, persönlich zugeschnitten.</div>
+      </div>
+      <div class="loesung-step">
+        <div class="step-marker">02</div>
+        <div class="step-title">KI empfiehlt passende Berufe</div>
+        <div class="step-desc">Der Schüler bekommt drei konkrete Karrierewege – mit Gehaltsperspektiven, Bildungswegen und Zukunftsaussichten.</div>
+      </div>
+      <div class="loesung-step">
+        <div class="step-marker">03</div>
+        <div class="step-title">Ihr Betrieb erscheint als Empfehlung</div>
+        <div class="step-desc">Direkt nach der Analyse sieht der Schüler passende Betriebe aus seiner Region. Er entscheidet – kein Druck, keine Daten.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pakete">
+  <h2>Drei Wege zur Sichtbarkeit</h2>
+  <div class="pakete-sub">Jedes Paket auf Anfrage – wir beraten Sie ehrlich und ohne Druck.</div>
+  <div class="pakete-grid">
+    <div class="paket">
+      <div class="paket-name">Regional</div>
+      <div class="paket-tagline">Einstieg in die KI-Empfehlung</div>
+      <div class="paket-price">Auf Anfrage</div>
+      <ul class="paket-features">
+        <li>Firmenname in passenden Analysen</li>
+        <li>Link zu Ihrer Karriereseite</li>
+        <li>Region & Ausbildungsberuf wählbar</li>
+        <li>Monatlicher Klickbericht</li>
+
+      </ul>
+      <a href="#kontakt" class="paket-cta primary">Anfragen</a>
+    </div>
+    <div class="paket featured">
+      <div class="paket-badge">Beliebt</div>
+      <div class="paket-name">Premium</div>
+      <div class="paket-tagline">Volle Präsenz in der Analyse</div>
+      <div class="paket-price">Auf Anfrage</div>
+      <ul class="paket-features">
+        <li>Alles aus Regional</li>
+        <li>Logo & Kurzbeschreibung</li>
+        <li>Hervorgehobene Platzierung</li>
+        <li>Direktlink zur Bewerbung</li>
+        <li>Persönlicher Ansprechpartner</li>
+        <li class="no">Exklusive Region</li>
+      </ul>
+      <a href="#kontakt" class="paket-cta featured-btn">Anfragen</a>
+    </div>
+    <div class="paket">
+      <div class="paket-name">Exklusiv</div>
+      <div class="paket-tagline">Marktführer in Ihrer Region</div>
+      <div class="paket-price">Auf Anfrage</div>
+      <ul class="paket-features">
+        <li>Alles aus Premium</li>
+        <li>Exklusive Region pro Branche</li>
+        <li>Erste Platzierung garantiert</li>
+        <li>Co-Branding in der Analyse</li>
+        <li>Quartalsbericht mit Klickzahlen</li>
+        <li>Kein Konkurrent in Ihrer Region</li>
+      </ul>
+      <a href="#kontakt" class="paket-cta primary">Anfragen</a>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="kontakt" id="kontakt">
+  <div class="kontakt-left">
+    <h2></h2>
+    <p>Schreiben Sie uns – wir melden uns innerhalb von 24 Stunden mit einem konkreten Vorschlag für Ihren Betrieb.</p>
+    <div class="kontakt-benefit">Persönliche Beratung zu Ihrem Profil</div>
+    <div class="kontakt-benefit">Maßgeschneidertes Angebot für Ihre Branche & Region</div>
+    <div class="kontakt-benefit">Kein Jahresvertrag – monatlich kündbar</div>
+    <div class="kontakt-benefit">Live in 2–3 Werktagen</div>
+    <div style="margin-top:28px;padding-top:24px;border-top:0.5px solid #e0e0e0;">
+      <p style="font-family:'Crimson Pro',serif;font-size:1.3rem;color:#1a1a1a;line-height:1.5;font-weight:400;font-style:italic;letter-spacing:0.01em;opacity:0.75;">Der richtige Bewerber. Zur richtigen Zeit. Während andere suchen – werden Sie gefunden.</p>
+    </div>
+  </div>
+  <div class="kontakt-right">
+    <div class="form-row">
+      <input type="text" id="p-unternehmen" class="form-input" placeholder="Unternehmen / Institution">
+      <input type="text" id="p-ansprechpartner" class="form-input" placeholder="Ansprechpartner">
+    </div>
+    <div class="form-row">
+      <input type="email" id="p-email" class="form-input" placeholder="E-Mail-Adresse">
+      <input type="tel" id="p-telefon" class="form-input" placeholder="Telefon (optional)">
+    </div>
+    <select id="p-paket" class="form-select">
+      <option value="" disabled selected>Ich interessiere mich für...</option>
+      <option>Ausbildungsbetrieb – Regional</option>
+      <option>Ausbildungsbetrieb – Premium</option>
+      <option>Ausbildungsbetrieb – Exklusiv</option>
+
+    </select>
+    <textarea id="p-nachricht" class="form-textarea" placeholder="Ihre Branche, Region, Ausbildungsberuf und weitere Infos..."></textarea>
+    <button class="form-submit" onclick="partnerAnfrage(this)">Jetzt Partnerschaft anfragen →</button>
+    <div class="form-privacy">Ihre Daten werden vertraulich behandelt und ausschließlich im Rahmen dieser Partnerschaftsanfrage verarbeitet.</div>
+  </div>
+</div>
+
+<div class="faq">
+  <h2>Ihre Fragen – ehrlich beantwortet</h2>
+  <div class="faq-sub">Alles was Sie vor einer Partnerschaft wissen sollten.</div>
+  <div class="faq-list" id="faqList"></div>
+</div>
+
+<footer>
+  <p>© 2026 Dein Karriereweg | <a href="/karriere-impressum.html">Impressum</a> | <a href="/karriere-datenschutz.html">Datenschutz</a></p>
+</footer>
+
+<script>
+const faqs = [
+  { q: "Wie schnell ist mein Betrieb live?", a: "Nach Ihrer Anfrage melden wir uns innerhalb von 24 Stunden. Nach Bestätigung ist Ihr Betrieb in der Regel innerhalb von 2–3 Werktagen in den passenden Analysen sichtbar." },
+  { q: "Wie werden passende Schüler gefunden?", a: "Unsere KI analysiert Persönlichkeit, Interessen und Schulabschluss jedes Nutzers. Nur Schüler die zu Ihrem Beruf und Ihrer Region passen sehen Ihren Betrieb als Empfehlung – keine Streuung." },
+  { q: "Was genau sieht der Schüler von uns?", a: "Je nach Paket sieht der Schüler Ihren Firmennamen, eine kurze Beschreibung, Ihr Logo und einen direkten Link zu Ihrer Karriereseite. Eingebettet in seine persönliche Analyse." },
+  { q: "Werden persönliche Daten der Schüler übermittelt?", a: "Nein – wir übermitteln keine persönlichen Daten. Ihr Betrieb erscheint als Empfehlung. Der Schüler entscheidet selbst ob er klickt. Vollständig DSGVO-konform." },
+  { q: "Wie kann ich kündigen?", a: "Monatlich kündbar – kein Jahresvertrag, keine versteckten Gebühren. Eine einfache E-Mail genügt." },
+  { q: "Für welche Branchen eignet sich das?", a: "Für alle Betriebe die Auszubildende suchen – von Handwerk über IT bis Gesundheit und kaufmännische Berufe. Unsere KI deckt über 325 Ausbildungsberufe ab." },
+  { q: "Was kostet eine Partnerschaft?", a: "Wir erstellen Ihnen nach Ihrer Anfrage ein individuelles Angebot je nach Paket, Region und Branche. Kontaktieren Sie uns – wir melden uns innerhalb von 24 Stunden." }
+];
+
+const list = document.getElementById('faqList');
+faqs.forEach((f, i) => {
+  const item = document.createElement('div');
+  item.className = 'faq-item';
+  item.innerHTML = `<div class="faq-q" onclick="toggleFaq(${i})"><span>${f.q}</span><span class="faq-icon" id="fi${i}">+</span></div><div class="faq-a" id="fa${i}">${f.a}</div>`;
+  list.appendChild(item);
+});
+
+function toggleFaq(i) {
+  const a = document.getElementById('fa'+i);
+  const icon = document.getElementById('fi'+i);
+  const open = a.style.display === 'block';
+  document.querySelectorAll('.faq-a').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.faq-icon').forEach(el => el.textContent = '+');
+  if (!open) { a.style.display = 'block'; icon.textContent = '×'; }
+}
+
+async function partnerAnfrage(btn) {
+  const unternehmen = document.getElementById('p-unternehmen').value.trim();
+  const email = document.getElementById('p-email').value.trim();
+  if (!unternehmen || !email) { alert('Bitte Unternehmen und E-Mail ausfüllen.'); return; }
+  btn.textContent = 'Wird gesendet...';
+  btn.disabled = true;
+  try {
+    const res = await fetch('/partner-kontakt', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        unternehmen,
+        ansprechpartner: document.getElementById('p-ansprechpartner').value,
+        email,
+        telefon: document.getElementById('p-telefon').value,
+        paket: document.getElementById('p-paket').value,
+        nachricht: document.getElementById('p-nachricht').value
+      })
+    });
+    if (res.ok) { btn.textContent = '✓ Anfrage gesendet – wir melden uns bald!'; btn.style.background = '#10b981'; }
+    else throw new Error();
+  } catch {
+    btn.textContent = 'Bitte schreiben Sie uns: kontakt@dein-karriereweg.com';
+    btn.style.background = '#ef4444';
+    btn.style.color = 'white';
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>

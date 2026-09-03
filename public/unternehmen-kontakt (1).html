@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partnerschaft anfragen – Dein Karriereweg</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --primary: #0f1f3d; --accent: #c9a84c; --accent-light: #e8c96a; --bg: #f7f8fc; --gray: #666; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Work Sans', sans-serif; background: var(--bg); color: var(--primary); line-height: 1.7; min-height: 100vh; display: flex; flex-direction: column; }
+header { background: var(--primary); padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; }
+.logo { color: white; font-family: 'Crimson Pro', serif; font-size: 1.4rem; font-weight: 700; text-decoration: none; }
+.back-btn { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; }
+.back-btn:hover { color: var(--accent); }
+
+.main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 20px; }
+
+.kontakt-wrap { width: 100%; max-width: 960px; display: grid; grid-template-columns: 1fr 1.3fr; gap: 60px; align-items: center; }
+
+/* Left side */
+.kontakt-left {}
+.kontakt-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+.kontakt-title { font-family: 'Crimson Pro', serif; font-size: 2rem; color: var(--primary); margin-bottom: 12px; line-height: 1.25; }
+.kontakt-sub { color: var(--gray); font-size: 0.9rem; line-height: 1.8; margin-bottom: 28px; }
+.benefit { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; color: var(--primary); margin-bottom: 10px; }
+.benefit::before { content: "✓"; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+.tagline { margin-top: 28px; padding-top: 24px; border-top: 0.5px solid #e0e0e0; font-family: 'Crimson Pro', serif; font-size: 1.1rem; color: #1a1a1a; line-height: 1.5; font-style: italic; opacity: 0.7; }
+
+/* Right side - form */
+.form-box { background: white; border-radius: 16px; padding: 36px; border: 0.5px solid #e0e0e0; box-shadow: 0 4px 24px rgba(15,31,61,0.08); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.form-input { width: 100%; padding: 13px 16px; border: 0.5px solid #ddd; border-radius: 8px; font-size: 0.88rem; font-family: 'Work Sans', sans-serif; color: var(--primary); background: var(--bg); outline: none; transition: border-color 0.2s, background 0.2s; }
+.form-input:focus { border-color: var(--accent); background: white; }
+.form-select { width: 100%; padding: 13px 16px; border: 0.5px solid #ddd; border-radius: 8px; font-size: 0.88rem; font-family: 'Work Sans', sans-serif; color: var(--gray); background: var(--bg); outline: none; margin-bottom: 12px; cursor: pointer; }
+.form-textarea { width: 100%; padding: 13px 16px; border: 0.5px solid #ddd; border-radius: 8px; font-size: 0.88rem; font-family: 'Work Sans', sans-serif; color: var(--primary); background: var(--bg); outline: none; min-height: 100px; resize: vertical; margin-bottom: 16px; transition: border-color 0.2s; }
+.form-textarea:focus { border-color: var(--accent); background: white; }
+.form-submit { width: 100%; background: linear-gradient(135deg, var(--accent), var(--accent-light)); color: var(--primary); border: none; padding: 15px; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; font-family: 'Work Sans', sans-serif; transition: opacity 0.2s; box-shadow: 0 4px 16px rgba(201,168,76,0.3); }
+.form-submit:hover { opacity: 0.9; }
+.form-privacy { font-size: 0.72rem; color: #aaa; text-align: center; margin-top: 12px; line-height: 1.6; }
+
+footer { background: var(--primary); color: rgba(255,255,255,0.4); text-align: center; padding: 20px; font-size: 0.82rem; }
+footer a { color: var(--accent); text-decoration: none; }
+
+@media (max-width: 768px) {
+  header { padding: 14px 16px; }
+  .kontakt-wrap { grid-template-columns: 1fr; gap: 32px; }
+  .form-row { grid-template-columns: 1fr; }
+  .form-box { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">Dein Karriereweg</a>
+  <a href="/unternehmen.html" class="back-btn">← Zurück</a>
+</header>
+
+<div class="main">
+  <div class="kontakt-wrap">
+
+    <!-- LEFT -->
+    <div class="kontakt-left">
+      <div class="kontakt-label">Partnerschaft anfragen</div>
+      <div class="kontakt-title">Schreiben Sie uns.</div>
+      <div class="kontakt-sub">Wir melden uns innerhalb von 24 Stunden mit einem konkreten Vorschlag für Ihren Betrieb.</div>
+      <div class="benefit">Persönliche Beratung zu Ihrem Profil</div>
+      <div class="benefit">Maßgeschneidertes Angebot für Ihre Branche & Region</div>
+      <div class="benefit">Kein Jahresvertrag – monatlich kündbar</div>
+      <div class="benefit">Live in 2–3 Werktagen</div>
+      <div class="tagline">Der richtige Bewerber. Zur richtigen Zeit.<br>Während andere suchen – werden Sie gefunden.</div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="form-box">
+      <div class="form-row">
+        <input type="text" id="p-unternehmen" class="form-input" placeholder="Unternehmen">
+        <input type="text" id="p-ansprechpartner" class="form-input" placeholder="Ansprechpartner">
+      </div>
+      <div class="form-row">
+        <input type="email" id="p-email" class="form-input" placeholder="E-Mail-Adresse">
+        <input type="tel" id="p-telefon" class="form-input" placeholder="Telefon (optional)">
+      </div>
+      <select id="p-paket" class="form-select">
+        <option value="" disabled selected>Ich interessiere mich für...</option>
+        <option>Ausbildungsbetrieb – Regional</option>
+        <option>Ausbildungsbetrieb – Premium</option>
+        <option>Ausbildungsbetrieb – Exklusiv</option>
+      </select>
+      <textarea id="p-nachricht" class="form-textarea" placeholder="Ihre Branche, Region, Ausbildungsberuf und weitere Infos..."></textarea>
+      <button class="form-submit" onclick="partnerAnfrage(this)">Jetzt Partnerschaft anfragen →</button>
+      <div class="form-privacy">Ihre Daten werden vertraulich behandelt und ausschließlich im Rahmen dieser Partnerschaftsanfrage verarbeitet.</div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Dein Karriereweg | <a href="/karriere-impressum.html">Impressum</a> | <a href="/karriere-datenschutz.html">Datenschutz</a></p>
+</footer>
+
+<script>
+async function partnerAnfrage(btn) {
+  const unternehmen = document.getElementById('p-unternehmen').value.trim();
+  const email = document.getElementById('p-email').value.trim();
+  if (!unternehmen || !email) { alert('Bitte Unternehmen und E-Mail ausfüllen.'); return; }
+  btn.textContent = 'Wird gesendet...';
+  btn.disabled = true;
+  try {
+    const res = await fetch('/partner-kontakt', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        unternehmen,
+        ansprechpartner: document.getElementById('p-ansprechpartner').value,
+        email,
+        telefon: document.getElementById('p-telefon').value,
+        paket: document.getElementById('p-paket').value,
+        nachricht: document.getElementById('p-nachricht').value
+      })
+    });
+    if (res.ok) {
+      btn.textContent = '✓ Anfrage gesendet – wir melden uns bald!';
+      btn.style.background = '#10b981';
+      btn.style.color = 'white';
+    } else throw new Error();
+  } catch {
+    btn.textContent = 'Bitte schreiben Sie uns: kontakt@dein-karriereweg.com';
+    btn.style.background = '#ef4444';
+    btn.style.color = 'white';
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>

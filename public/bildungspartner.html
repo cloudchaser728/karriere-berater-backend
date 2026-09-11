@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Für Bildungspartner – Hochschulen & Universitäten | Dein Karriereweg</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --primary: #0f1f3d; --accent: #c9a84c; --accent-light: #e8c96a; --bg: #f7f8fc; --gray: #666; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { overflow-x: hidden; width: 100%; }
+body { font-family: 'Work Sans', sans-serif; background: var(--bg); color: var(--primary); line-height: 1.7; }
+
+header { background: var(--primary); padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; }
+.logo { color: white; font-family: 'Crimson Pro', serif; font-size: 1.4rem; font-weight: 700; text-decoration: none; }
+.back-btn { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; }
+.back-btn:hover { color: var(--accent); }
+
+/* Hero */
+.hero { background: var(--primary); padding: 80px 20px 140px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.08), transparent 70%); }
+.hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 160px; background: linear-gradient(to bottom, transparent, var(--bg)); }
+.hero-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-label { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+.hero h1 { font-family: 'Crimson Pro', serif; font-size: 3rem; color: white; line-height: 1.15; margin-bottom: 20px; font-weight: 700; }
+.hero h1 em { color: var(--accent); font-style: italic; }
+.hero p { color: rgba(255,255,255,0.65); font-size: 1rem; max-width: 560px; line-height: 1.75; margin-bottom: 32px; }
+.hero-cta { display: inline-block; background: linear-gradient(135deg, var(--accent), var(--accent-light)); color: var(--primary); padding: 14px 32px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; text-decoration: none; box-shadow: 0 4px 24px rgba(201,168,76,0.3); }
+.hero-note { font-size: 0.78rem; color: rgba(255,255,255,0.3); margin-top: 12px; }
+
+/* Problem */
+.problem { max-width: 960px; margin: 0 auto; padding: 60px 20px 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.problem h2 { font-family: 'Crimson Pro', serif; font-size: 2rem; color: var(--primary); margin-bottom: 14px; line-height: 1.25; }
+.problem p { color: var(--gray); font-size: 0.92rem; line-height: 1.8; margin-bottom: 16px; }
+.problem-quote { background: white; border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 16px 20px; font-size: 0.88rem; color: var(--primary); line-height: 1.7; font-style: italic; }
+.problem-stats { display: flex; flex-direction: column; gap: 16px; }
+.stat-item { background: white; border-radius: 12px; padding: 22px 24px; border: 0.5px solid #e0e0e0; border-left: 4px solid var(--accent); }
+.stat-label { font-size: 0.78rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.stat-text { font-family: 'Crimson Pro', serif; font-size: 1.1rem; color: var(--primary); line-height: 1.4; }
+
+/* Wie es funktioniert */
+.wie { background: white; margin: 40px 0; padding: 60px 20px; border-top: 0.5px solid #e8e8e8; border-bottom: 0.5px solid #e8e8e8; }
+.wie-inner { max-width: 960px; margin: 0 auto; }
+.wie h2 { font-family: 'Crimson Pro', serif; font-size: 2rem; color: var(--primary); margin-bottom: 8px; }
+.wie-sub { color: var(--gray); font-size: 0.92rem; margin-bottom: 40px; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: #e8e8e8; border-radius: 12px; overflow: hidden; }
+.step { background: white; padding: 32px 28px; }
+.step-num { font-family: 'Crimson Pro', serif; font-size: 3rem; color: rgba(201,168,76,0.15); font-weight: 700; line-height: 1; margin-bottom: 12px; }
+.step-title { font-size: 0.95rem; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
+.step-desc { font-size: 0.82rem; color: var(--gray); line-height: 1.7; }
+
+/* Pakete */
+.pakete { max-width: 960px; margin: 0 auto; padding: 60px 20px; }
+.pakete h2 { font-family: 'Crimson Pro', serif; font-size: 2rem; color: var(--primary); margin-bottom: 8px; }
+.pakete-sub { color: var(--gray); font-size: 0.92rem; margin-bottom: 32px; }
+.pakete-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.paket { background: white; border-radius: 14px; padding: 32px 26px; border: 0.5px solid #e0e0e0; position: relative; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; }
+.paket:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(15,31,61,0.1); }
+.paket.featured { border: 1.5px solid var(--accent); background: linear-gradient(180deg, #fffdf5, white); }
+.paket-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent); color: var(--primary); font-size: 0.7rem; font-weight: 700; padding: 3px 14px; border-radius: 20px; white-space: nowrap; }
+.paket-name { font-family: 'Crimson Pro', serif; font-size: 1.4rem; color: var(--primary); margin-bottom: 4px; }
+.paket-tag { font-size: 0.78rem; color: var(--gray); margin-bottom: 20px; padding-bottom: 16px; border-bottom: 0.5px solid #eee; }
+.paket-price { font-family: 'Crimson Pro', serif; font-size: 1.1rem; color: var(--accent); font-weight: 600; text-align: center; margin-bottom: 12px; }
+.paket-features { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 24px; flex: 1; }
+.paket-features li { font-size: 0.82rem; color: var(--primary); display: flex; gap: 8px; align-items: flex-start; }
+.paket-features li::before { content: "✓"; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+.paket-btn { display: block; text-align: center; padding: 11px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; text-decoration: none; transition: all 0.2s; }
+.paket-btn-dark { background: var(--primary); color: white; }
+.paket-btn-gold { background: linear-gradient(135deg, var(--accent), var(--accent-light)); color: var(--primary); }
+
+/* CTA */
+.cta-section { max-width: 640px; margin: 0 auto; padding: 20px 20px 60px; text-align: center; }
+.cta-section p { color: var(--gray); font-size: 1rem; line-height: 1.8; margin-bottom: 32px; }
+.cta-btn { display: inline-block; background: linear-gradient(135deg, var(--accent), var(--accent-light)); color: var(--primary); padding: 14px 36px; border-radius: 10px; font-weight: 700; font-size: 1rem; text-decoration: none; box-shadow: 0 4px 20px rgba(201,168,76,0.3); }
+.cta-note { font-size: 0.75rem; color: #aaa; margin-top: 10px; }
+
+footer { background: var(--primary); color: rgba(255,255,255,0.5); text-align: center; padding: 28px; font-size: 0.85rem; }
+footer a { color: var(--accent); text-decoration: none; }
+
+@media (max-width: 768px) {
+  header { padding: 14px 16px; }
+  .hero h1 { font-size: 2.2rem; }
+  .problem { grid-template-columns: 1fr; gap: 30px; }
+  .steps { grid-template-columns: 1fr; }
+  .pakete-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">Dein Karriereweg</a>
+  <a href="/" class="back-btn">← Zurück</a>
+</header>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Für Bildungspartner</div>
+    <h1>Erreichen Sie die<br>Studierenden <em>von morgen.</em></h1>
+    <p>Wenn unsere KI ein Studium empfiehlt erscheinen passende Hochschulen und Universitäten direkt in der Analyse – genau in dem Moment wo die Entscheidung fällt.</p>
+    <a href="/unternehmen-kontakt.html" class="hero-cta">Jetzt Partnerschaft anfragen →</a>
+    <div class="hero-note">Kein Jahresvertrag · Antwort in 24 Stunden</div>
+  </div>
+</div>
+
+<!-- Problem -->
+<div class="problem">
+  <div>
+    <h2>Das Problem kennen Sie.</h2>
+    <p>Tausende Studieninteressierte suchen jeden Tag nach dem richtigen Studiengang. Die meisten verirren sich in Vergleichsportalen – und finden Sie nie.</p>
+    <p>Nicht weil Ihre Hochschule nicht gut ist. Sondern weil der richtige Moment fehlt.</p>
+    <div class="problem-quote">"Die Studienwahl fällt nicht auf einem Messestand – sie fällt in einem stillen Moment mit dem Handy."</div>
+  </div>
+  <div class="problem-stats">
+    <div class="stat-item">
+      <div class="stat-label">Unser Ansatz</div>
+      <div class="stat-text">Wir analysieren erst den Menschen – dann empfehlen wir Ihre Hochschule. Kein Streuverlust.</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">Der Moment</div>
+      <div class="stat-text">Studieninteressierte sehen Ihre Hochschule direkt nach ihrer persönlichen KI-Analyse.</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">Das Ergebnis</div>
+      <div class="stat-text">Interessenten die wirklich zu Ihren Studiengängen passen – nicht zufällige Klicks.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Wie es funktioniert -->
+<div class="wie">
+  <div class="wie-inner">
+    <h2>Wie Ihre Hochschule sichtbar wird</h2>
+    <div class="wie-sub">Nicht als Werbung. Sondern als Empfehlung – im richtigen Moment für den richtigen Menschen.</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Nutzer macht die Analyse</div>
+        <div class="step-desc">In 5–10 Minuten analysiert unsere KI Persönlichkeit, Stärken und Interessen des Studieninteressierten.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">KI empfiehlt Studiengänge</div>
+        <div class="step-desc">Der Nutzer bekommt passende Studiengänge – mit konkreten Hochschulempfehlungen aus seiner Region.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Ihre Hochschule erscheint</div>
+        <div class="step-desc">Direkt in der Analyse sieht der Nutzer Ihr Profil mit Link zu Ihrer Bewerbungsseite. Er entscheidet selbst.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pakete -->
+<div class="pakete">
+  <h2>Drei Wege zur Sichtbarkeit</h2>
+  <div class="pakete-sub">Jedes Paket auf Anfrage – wir beraten Sie ehrlich und ohne Druck.</div>
+  <div class="pakete-grid">
+    <div class="paket">
+      <div class="paket-name">Basis</div>
+      <div class="paket-tag">Einstieg in die KI-Empfehlung</div>
+      <div class="paket-price">Auf Anfrage</div>
+      <ul class="paket-features">
+        <li>Hochschulname in passenden Analysen</li>
+        <li>Link zu Ihrer Bewerbungsseite</li>
+        <li>Region & Studiengänge wählbar</li>
+        <li>Monatlicher Klickbericht</li>
+      </ul>
+      <a href="/unternehmen-kontakt.html" class="paket-btn paket-btn-dark">Anfragen</a>
+    </div>
+    <div class="paket featured">
+      <div class="paket-badge">Beliebt</div>
+      <div class="paket-name">Premium</div>
+      <div class="paket-tag">Volle Präsenz + eigenes Profil</div>
+      <div class="paket-price">Auf Anfrage</div>
+      <ul class="paket-features">
+        <li>Alles aus Basis</li>
+        <li>Logo & Beschreibung in der Analyse</li>
+        <li>Eigene Profilseite auf Karriereweg</li>
+        <li>Hervorgehobene Platzierung</li>
+        <li>Persönlicher Ansprechpartner</li>
+      </ul>
+      <a href="/unternehmen-kontakt.html" class="paket-btn paket-btn-gold">Anfragen</a>
+    </div>
+    <div class="paket">
+      <div class="paket-name">Exklusiv</div>
+      <div class="paket-tag">Marktführer in Ihrer Region</div>
+      <div class="paket-price">Auf Anfrage</div>
+      <ul class="paket-features">
+        <li>Alles aus Premium</li>
+        <li>Exklusive Region pro Fachbereich</li>
+        <li>Erste Platzierung garantiert</li>
+        <li>Co-Branding in der Analyse</li>
+        <li>Kein Konkurrent in Ihrer Region</li>
+      </ul>
+      <a href="/unternehmen-kontakt.html" class="paket-btn paket-btn-dark">Anfragen</a>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <p>Schreiben Sie uns – wir melden uns innerhalb von 24 Stunden mit einem konkreten Vorschlag für Ihre Hochschule.</p>
+  <a href="/unternehmen-kontakt.html" class="cta-btn">Jetzt Partnerschaft anfragen →</a>
+  <div class="cta-note">Kein Jahresvertrag · Monatlich kündbar · Antwort in 24h</div>
+</div>
+
+<footer>
+  <p>© 2026 Dein Karriereweg | <a href="/karriere-impressum.html">Impressum</a> | <a href="/karriere-datenschutz.html">Datenschutz</a></p>
+</footer>
+
+</body>
+</html>

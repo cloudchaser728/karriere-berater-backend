@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Übersicht | Karriereweg</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:#f5f7fa; color:#1e293b; padding:40px 20px; }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  h1 { font-size:1.6rem; margin-bottom:6px; }
+  .sub { color:#64748b; margin-bottom:24px; font-size:0.95rem; }
+  .tabs { display:flex; gap:8px; margin-bottom:24px; }
+  .tab-btn { background:white; border:2px solid #e2e8f0; color:#64748b; padding:10px 20px; border-radius:8px; font-weight:600; font-size:0.9rem; cursor:pointer; font-family:inherit; }
+  .tab-btn.active { background:#0f1f3d; border-color:#0f1f3d; color:white; }
+  .tab-panel { display:none; }
+  .tab-panel.active { display:block; }
+  .config-box { background:white; border-radius:12px; padding:24px; box-shadow:0 2px 12px rgba(0,0,0,0.06); margin-bottom:24px; }
+  .config-box label { display:block; font-size:0.85rem; font-weight:600; color:#334155; margin-bottom:6px; }
+  .config-row { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:16px; }
+  .config-row > div { flex:1; min-width:180px; }
+  input, select { width:100%; padding:10px 14px; border:2px solid #e2e8f0; border-radius:8px; font-size:0.95rem; font-family:inherit; }
+  input:focus, select:focus { outline:none; border-color:#3b82f6; }
+  button.action-btn { background:#0f1f3d; color:white; border:none; padding:12px 28px; border-radius:8px; font-weight:600; font-size:0.95rem; cursor:pointer; font-family:inherit; }
+  button.action-btn:hover { opacity:0.9; }
+  .backend-row { margin-bottom:20px; }
+  .backend-row input { font-size:0.85rem; color:#64748b; }
+  .status { font-size:0.9rem; margin-top:10px; }
+  .status.error { color:#dc2626; }
+  .status.loading { color:#64748b; }
+  table { width:100%; background:white; border-radius:12px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.06); border-collapse:collapse; }
+  th, td { text-align:left; padding:14px 18px; font-size:0.9rem; }
+  th { background:#0f1f3d; color:white; font-weight:600; }
+  tbody tr:nth-child(even) { background:#f8fafc; }
+  tbody tr:hover { background:#eef2f7; }
+  .clicks-cell { font-weight:700; color:#0f1f3d; }
+  .empty { text-align:center; padding:40px; color:#94a3b8; background:white; border-radius:12px; }
+  .total-row { background:#eef2f7 !important; font-weight:700; }
+  .placement-tag { display:inline-block; padding:2px 10px; border-radius:20px; font-size:0.75rem; font-weight:600; }
+  .placement-landingpage { background:#dbeafe; color:#1e40af; }
+  .placement-analyse { background:#dcfce7; color:#166534; }
+  .placement-other { background:#f1f5f9; color:#475569; }
+  .total-card { background:white; border-radius:12px; padding:24px; box-shadow:0 2px 12px rgba(0,0,0,0.06); margin-bottom:20px; text-align:center; }
+  .total-card .num { font-size:2.2rem; font-weight:800; color:#0f1f3d; }
+  .total-card .label { color:#64748b; font-size:0.9rem; margin-top:4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📊 Übersicht</h1>
+  <p class="sub">Interne Auswertung für Sponsor-Klicks und Seitenbesuche.</p>
+
+  <div class="config-box backend-row">
+    <label for="backendUrl">Backend-URL</label>
+    <input type="text" id="backendUrl" value="https://karriere-berater-backend-production.up.railway.app">
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('sponsor')" id="tabBtnSponsor">Sponsor-Klicks</button>
+    <button class="tab-btn" onclick="switchTab('visits')" id="tabBtnVisits">Seitenbesuche</button>
+  </div>
+
+  <div id="panelSponsor" class="tab-panel active">
+    <div class="config-box">
+      <div class="config-row">
+        <div>
+          <label for="companyFilter">Firma (Slug, leer = alle)</label>
+          <input type="text" id="companyFilter" placeholder="z.B. musterfirma-gmbh">
+        </div>
+        <div>
+          <label for="monthFilterSponsor">Monat</label>
+          <input type="month" id="monthFilterSponsor">
+        </div>
+      </div>
+      <button class="action-btn" onclick="loadSponsorStats()">Aktualisieren</button>
+      <div id="statusSponsor" class="status"></div>
+    </div>
+    <div id="resultsAreaSponsor"></div>
+  </div>
+
+  <div id="panelVisits" class="tab-panel">
+    <div class="config-box">
+      <div class="config-row">
+        <div>
+          <label for="pathFilter">Seite (Pfad, leer = alle)</label>
+          <input type="text" id="pathFilter" placeholder="z.B. / oder /schulen.html">
+        </div>
+        <div>
+          <label for="monthFilterVisits">Monat</label>
+          <input type="month" id="monthFilterVisits">
+        </div>
+      </div>
+      <button class="action-btn" onclick="loadVisitStats()">Aktualisieren</button>
+      <div id="statusVisits" class="status"></div>
+    </div>
+    <div id="resultsAreaVisits"></div>
+  </div>
+</div>
+
+<script>
+function switchTab(tab) {
+  document.getElementById('panelSponsor').classList.toggle('active', tab === 'sponsor');
+  document.getElementById('panelVisits').classList.toggle('active', tab === 'visits');
+  document.getElementById('tabBtnSponsor').classList.toggle('active', tab === 'sponsor');
+  document.getElementById('tabBtnVisits').classList.toggle('active', tab === 'visits');
+  if (tab === 'visits') loadVisitStats();
+}
+
+// ── Sponsor-Klicks ──
+async function loadSponsorStats() {
+  const backend = document.getElementById('backendUrl').value.trim().replace(/\/$/, '');
+  const company = document.getElementById('companyFilter').value.trim();
+  const monthInput = document.getElementById('monthFilterSponsor').value;
+  const statusEl = document.getElementById('statusSponsor');
+  const resultsArea = document.getElementById('resultsAreaSponsor');
+
+  statusEl.textContent = 'Lade...';
+  statusEl.className = 'status loading';
+  resultsArea.innerHTML = '';
+
+  try {
+    const params = new URLSearchParams();
+    if (company) params.set('company', company);
+    if (monthInput) params.set('month', monthInput);
+
+    const res = await fetch(`${backend}/sponsor-clicks/stats?${params.toString()}`);
+    if (!res.ok) {
+      const errBody = await res.json().catch(() => ({}));
+      throw new Error(errBody.error || `Serverfehler (${res.status})`);
+    }
+    const data = await res.json();
+    statusEl.textContent = '';
+    renderSponsorResults(data.stats || []);
+  } catch (e) {
+    statusEl.textContent = '❌ ' + e.message;
+    statusEl.className = 'status error';
+  }
+}
+
+function placementTagClass(placement) {
+  if (placement === 'landingpage') return 'placement-landingpage';
+  if (placement === 'analyse') return 'placement-analyse';
+  return 'placement-other';
+}
+
+function renderSponsorResults(rows) {
+  const resultsArea = document.getElementById('resultsAreaSponsor');
+  if (!rows.length) {
+    resultsArea.innerHTML = '<div class="empty">Keine Klicks für diese Auswahl gefunden.</div>';
+    return;
+  }
+  const byCompany = {};
+  rows.forEach(r => {
+    if (!byCompany[r.company_slug]) byCompany[r.company_slug] = [];
+    byCompany[r.company_slug].push(r);
+  });
+
+  let html = '<table><thead><tr><th>Firma</th><th>Platzierung</th><th>Klicks</th></tr></thead><tbody>';
+  Object.keys(byCompany).sort().forEach(company => {
+    const entries = byCompany[company];
+    let total = 0;
+    entries.forEach((r, i) => {
+      total += parseInt(r.clicks, 10);
+      html += `<tr>
+        <td>${i === 0 ? `<strong>${escapeHtml(company)}</strong>` : ''}</td>
+        <td><span class="placement-tag ${placementTagClass(r.placement)}">${escapeHtml(r.placement || 'unbekannt')}</span></td>
+        <td class="clicks-cell">${r.clicks}</td>
+      </tr>`;
+    });
+    if (entries.length > 1) {
+      html += `<tr class="total-row"><td></td><td>Gesamt</td><td class="clicks-cell">${total}</td></tr>`;
+    }
+  });
+  html += '</tbody></table>';
+  resultsArea.innerHTML = html;
+}
+
+// ── Seitenbesuche ──
+async function loadVisitStats() {
+  const backend = document.getElementById('backendUrl').value.trim().replace(/\/$/, '');
+  const path = document.getElementById('pathFilter').value.trim();
+  const monthInput = document.getElementById('monthFilterVisits').value;
+  const statusEl = document.getElementById('statusVisits');
+  const resultsArea = document.getElementById('resultsAreaVisits');
+
+  statusEl.textContent = 'Lade...';
+  statusEl.className = 'status loading';
+  resultsArea.innerHTML = '';
+
+  try {
+    const params = new URLSearchParams();
+    if (path) params.set('path', path);
+    if (monthInput) params.set('month', monthInput);
+
+    const res = await fetch(`${backend}/visits/stats?${params.toString()}`);
+    if (!res.ok) {
+      const errBody = await res.json().catch(() => ({}));
+      throw new Error(errBody.error || `Serverfehler (${res.status})`);
+    }
+    const data = await res.json();
+    statusEl.textContent = '';
+    renderVisitResults(data.stats || [], data.total || 0);
+  } catch (e) {
+    statusEl.textContent = '❌ ' + e.message;
+    statusEl.className = 'status error';
+  }
+}
+
+function renderVisitResults(rows, total) {
+  const resultsArea = document.getElementById('resultsAreaVisits');
+  let html = `<div class="total-card"><div class="num">${total}</div><div class="label">Besuche insgesamt (für diese Auswahl)</div></div>`;
+
+  if (!rows.length) {
+    html += '<div class="empty">Keine Besuche für diese Auswahl gefunden.</div>';
+    resultsArea.innerHTML = html;
+    return;
+  }
+
+  html += '<table><thead><tr><th>Seite</th><th>Besuche</th></tr></thead><tbody>';
+  rows.forEach(r => {
+    html += `<tr><td>${escapeHtml(r.path)}</td><td class="clicks-cell">${r.visits}</td></tr>`;
+  });
+  html += '</tbody></table>';
+  resultsArea.innerHTML = html;
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// Aktuellen Monat als Standard vorbelegen
+const currentMonth = new Date().toISOString().slice(0,7);
+document.getElementById('monthFilterSponsor').value = currentMonth;
+document.getElementById('monthFilterVisits').value = currentMonth;
+loadSponsorStats();
+</script>
+</body>
+</html>
